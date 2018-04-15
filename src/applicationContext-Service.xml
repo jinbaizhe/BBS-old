@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userService" class="serviceImpl.UserServiceImpl">
+        <property name="userDAO" ref="userDAO"></property>
+    </bean>
+    <bean id="postService" class="serviceImpl.PostServiceImpl">
+        <property name="postDAO" ref="postDAO"></property>
+    </bean>
+    <bean id="followpostService" class="serviceImpl.FollowpostServiceImpl">
+        <property name="followpostDAO" ref="followpostDAO"></property>
+    </bean>
+    <bean id="mainForumService" class="serviceImpl.MainForumServiceImpl">
+        <property name="mainForumDAO" ref="mainForumDAO"></property>
+    </bean>
+    <bean id="subForumService" class="serviceImpl.SubForumServiceImpl">
+        <property name="subForumDAO" ref="subForumDAO"></property>
+    </bean>
+    <bean id="pictureService" class="serviceImpl.PictureServiceImpl">
+        <property name="pictureDAO" ref="pictureDAO"></property>
+        <property name="postPictureDAO" ref="postPictureDAO"></property>
+        <property name="followpostPictureDAO" ref="followpostPictureDAO"></property>
+    </bean>
+
+    <bean id="nbaSteamService" class="serviceImpl.NBAStreamServiceImpl">
+        <property name="gameDAO" ref="gameDAO"></property>
+        <property name="gameLinkDAO" ref="gameLinkDAO"></property>
+    </bean>
+</beans>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.objectFactory" value="spring"></constant>
+    <constant name="struts.multipart.maxSize" value="10485760"></constant>
+    
+    <package name="default" extends="struts-default" namespace="/">
+        <action name="login" class="loginAction" method="loginPage">
+            <result name="success">WEB-INF/login.jsp</result>
+        </action>
+        <action name="validateLogin" class="loginAction" method="validateLogin">
+            <result name="success">WEB-INF/OperationStatus/loginSuccess.jsp</result>
+            <result name="error">WEB-INF/login.jsp</result>
+        </action>
+        <action name="register" class="loginAction">
+            <result>WEB-INF/register.jsp</result>
+        </action>
+        <action name="validateRegister" class="loginAction" method="validateRegister">
+            <result name="success">WEB-INF/register.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+        </action>
+        <action name="logout" class="loginAction" method="logout">
+            <result name="success">WEB-INF/login.jsp</result>
+        </action>
+        <action name="mainforum" class="mainForumAction" method="browserMainForum">
+            <result name="all">WEB-INF/allMainForum.jsp</result>
+            <result name="sub">WEB-INF/mainForum.jsp</result>
+        </action>
+        <action name="subforum" class="subForumAction" method="browserSubForum">
+            <result name="success">WEB-INF/subForum.jsp</result>
+        </action>
+        <action name="post" class="postAction" method="browserPost">
+            <result name="success">WEB-INF/post.jsp</result>
+            <result name="error">WEB-INF/error.jsp</result>
+        </action>
+        <action name="posting" class="postAction" method="getAddPostPage">
+            <result name="success">WEB-INF/posting.jsp</result>
+            <result name="notlogin">WEB-INF/OperationStatus/requireLogin.jsp</result>
+        </action>
+        <action name="commitPosting" class="postAction" method="commitAddPost">
+            <result name="success">WEB-INF/OperationStatus/commitPostSuccess.jsp</result>
+            <result name="notlogin">WEB-INF/OperationStatus/requireLogin.jsp</result>
+        </action>
+        <action name="updatePost" class="postAction" method="getUpdatePostPage">
+            <result name="success">WEB-INF/updatePost.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="commitUpdatePost" class="postAction" method="commitUpdatePost">
+            <result name="success" type="redirectAction">post?postid=${post.id}</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="deletePost" class="postAction" method="commitDeletePost">
+            <result name="success" type="redirectAction">subforum?sfid=${post.subForum.id}</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+
+
+        <action name="commitFollowpost" class="followpostAction" method="commitAddFollowpost">
+            <result name="success">WEB-INF/OperationStatus/commitFollowpostSuccess.jsp</result>
+            <result name="notlogin">WEB-INF/OperationStatus/requireLogin.jsp</result>
+        </action>
+        <action name="updateFollowpost" class="followpostAction" method="getUpdateFollowpostPage">
+            <result name="success">WEB-INF/updateFollowpost.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="commitUpdateFollowpost" class="followpostAction" method="commitUpdateFollowpost">
+            <result name="success" type="redirectAction">post?postid=${followpost.post.id}</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="deleteFollowpost" class="followpostAction" method="commitDeleteFollowpost">
+            <result name="success" type="redirectAction">post?postid=${followpost.post.id}</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+
+        <action name="getPicture" class="pictureAction" method="getPictureById">
+            <result type="stream">
+                <param name="contentType">image/jpeg</param>
+                <param name="inputName">attrInputStream</param>
+                <param name="contentDisposition">attachment;filename="${filename}"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+
+        <action name="about">
+            <result>/WEB-INF/about.jsp</result>
+        </action>
+    </package>
+
+    <package name="manage" extends="struts-default" namespace="/manage">
+        <action name="index" class="manageMainForumAction" method="getIndexPage">
+            <result name="success">/WEB-INF/manage/index.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="mainforum" class="manageMainForumAction" method="getAllMainForumPage">
+            <result name="success">/WEB-INF/manage/mainForum.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="deletemainforum" class="manageMainForumAction" method="commitDeleteMainForum">
+            <result name="success" type="redirectAction">mainforum</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="addmainforum" class="manageMainForumAction">
+            <result name="success">/WEB-INF/manage/addMainForum.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="updatemainforum" class="manageMainForumAction" method="getUpdateMainForumPage">
+            <result name="success">/WEB-INF/manage/updateMainForum.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="commitaddmainforum" class="manageMainForumAction" method="commitAddMainForum">
+            <result name="success" type="redirectAction">mainforum</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="commitupdatemainforum" class="manageMainForumAction" method="commitUpdateMainForum">
+            <result name="success" type="redirectAction">mainforum</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+
+        <action name="subforum"  class="manageSubForumAction" method="getSubForumsByMainForumId">
+            <result name="success">/WEB-INF/manage/subForum.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="deletesubforum" class="manageSubForumAction" method="commitDeleteSubForum">
+            <result name="success" type="redirectAction">subforum?mfid=${mfid}</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="addsubforum" class="manageSubForumAction" method="getAddSubForumPage">
+            <result name="success">/WEB-INF/manage/addSubForum.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="updatesubforum" class="manageSubForumAction" method="getUpdateSubForumPage">
+            <result name="success">/WEB-INF/manage/updateSubForum.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="commitaddsubforum" class="manageSubForumAction" method="commitAddSubForum">
+            <result name="success" type="redirectAction">subforum?mfid=${mfid}</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="commitupdatesubforum" class="manageSubForumAction" method="commitUpdateSubForum">
+            <result name="success" type="redirectAction">subforum?mfid=${mfid}</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+
+        <action name="user" class="manageUserAction" method="getUserPage">
+            <result name="success">/WEB-INF/manage/user.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+    </package>
+
+    <package name="user" extends="struts-default" namespace="/user">
+        <action name="setting" class="userAction" method="getSettingPage">
+            <result name="success">/WEB-INF/user/settingInfo.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+        </action>
+        <action name="updateUserPassword" class="userAction" method="updateUserPassword">
+            <result name="success">/WEB-INF/user/settingInfo.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+        </action>
+        <action name="updateUserInfo" class="userAction" method="updateUserInfo">
+            <result name="success">/WEB-INF/user/settingInfo.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+        </action>
+    </package>
+
+    <package name="nbastream" extends="struts-default" namespace="/nbastream">
+        <action name="index" class="nbaStreamAction" method="getAllGamesPage">
+            <result name="success">/WEB-INF/nbastream/index.jsp</result>
+        </action>
+        <action name="gameLink" class="nbaStreamAction" method="getAllGameLinksByGameIdPage">
+            <result name="success">/WEB-INF/nbastream/gameLink.jsp</result>
+        </action>
+    </package>
+</struts>

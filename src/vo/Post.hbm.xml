@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="vo.Post" table="post" schema="bbs">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="title">
+            <column name="title" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="content">
+            <column name="content" sql-type="varchar(255)"/>
+        </property>
+        <property name="sendTime">
+            <column name="send_time" sql-type="datetime"/>
+        </property>
+        <property name="updateTime">
+            <column name="update_time" sql-type="datetime"/>
+        </property>
+        <property name="type">
+            <column name="type" sql-type="int(11)"/>
+        </property>
+        <property name="top">
+            <column name="top" sql-type="int(11)"/>
+        </property>
+        <property name="viewNum">
+            <column name="view_num" sql-type="int(11)"/>
+        </property>
+        <many-to-one name="subForum" class="vo.SubForum" lazy="false">
+            <column name="sub_forum_id"/>
+        </many-to-one>
+        <many-to-one name="user" class="vo.User" fetch="select" lazy="false">
+            <column name="user_id" />
+        </many-to-one>
+        <set name="followposts" inverse="true" lazy="false" order-by="sendTime asc">
+            <key>
+                <column name="post_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="vo.Followpost"/>
+        </set>
+        <set name="postPictures" inverse="true" lazy="false">
+            <key>
+                <column name="post_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="vo.PostPicture"/>
+        </set>
+    </class>
+</hibernate-mapping>

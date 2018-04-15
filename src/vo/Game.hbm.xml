@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="vo.Game" table="game" schema="bbs">
+        <id name="id" column="id"/>
+        <property name="home" column="home"/>
+        <property name="away" column="away"/>
+        <property name="date" column="date"/>
+        <set name="gameLinks" inverse="true" lazy="false">
+            <key>
+                <column name="game_id" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="vo.GameLink"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<component name="libraryTable">
+  <library name="extra">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/extra/commons-dbcp2-2.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/commons-pool2-2.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/dwr.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/log4j-1.2.17.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/log4j-core-2.9.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/mysql-connector-java-5.1.40-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/spring-web-4.3.14.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/spring-webmvc-4.3.14.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/spring-websocket-4.3.14.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/struts2-spring-plugin-2.5.14.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/aspectjrt-1.8.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/aspectjweaver-1.8.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/cglib-3.2.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/jedis-2.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/spring-data-redis-1.8.3.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/spring-data-commons-1.13.3.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

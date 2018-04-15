@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="loginAction" class="action.LoginAction" scope="prototype">
+        <property name="userService" ref="userService"></property>
+    </bean>
+    <bean id="mainForumAction" class="action.MainForumAction" scope="prototype">
+        <property name="mainForumService" ref="mainForumService"></property>
+        <property name="subForumService" ref="subForumService"></property>
+    </bean>
+    <bean id="subForumAction" class="action.SubForumAction" scope="prototype">
+        <property name="postService" ref="postService"></property>
+        <property name="subForumService" ref="subForumService"></property>
+    </bean>
+    <bean id="postAction" class="action.PostAction" scope="prototype">
+        <property name="postService" ref="postService"></property>
+        <property name="subForumService" ref="subForumService"></property>
+        <property name="followpostService" ref="followpostService"></property>
+        <property name="pictureService" ref="pictureService"></property>
+    </bean>
+    <bean id="followpostAction" class="action.FollowpostAction" scope="prototype">
+        <property name="followpostService" ref="followpostService"></property>
+        <property name="postService" ref="postService"></property>
+        <property name="pictureService" ref="pictureService"></property>
+    </bean>
+
+    <bean id="pictureAction" class="action.PictureAction">
+        <property name="pictureService" ref="pictureService"></property>
+    </bean>
+
+    <bean id="manageMainForumAction" class="action.manage.MainForumAction" scope="prototype">
+        <property name="mainForumService" ref="mainForumService"></property>
+    </bean>
+
+    <bean id="manageSubForumAction" class="action.manage.SubForumAction" scope="prototype">
+        <property name="subForumService" ref="subForumService"></property>
+        <property name="mainForumService" ref="mainForumService"></property>
+    </bean>
+
+    <bean id="manageUserAction" class="action.manage.UserAction" scope="prototype">
+        <property name="userService" ref="userService"></property>
+    </bean>
+
+    <bean id="userAction" class="action.UserAction" scope="prototype">
+        <property name="userService" ref="userService"></property>
+    </bean>
+
+    <bean id="nbaStreamAction" class="action.nbastream.NBAGameAction" scope="prototype">
+        <property name="nbaStreamService" ref="nbaSteamService"></property>
+    </bean>
+</beans>

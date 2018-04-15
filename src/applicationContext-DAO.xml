@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="baseDAO" class="dao.BaseDAO">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <bean id="userDAO" class="daoImpl.UserDAOImpl" parent="baseDAO"></bean>
+    <bean id="mainForumDAO" class="daoImpl.MainForumDAOImpl" parent="baseDAO"></bean>
+    <bean id="subForumDAO" class="daoImpl.SubForumDAOImpl" parent="baseDAO"></bean>
+    <bean id="postDAO" class="daoImpl.PostDAOImpl" parent="baseDAO"></bean>
+    <bean id="followpostDAO" class="daoImpl.FollowpostDAOImpl" parent="baseDAO"></bean>
+    <bean id="pictureDAO" class="daoImpl.PictureDAOImpl" parent="baseDAO"></bean>
+    <bean id="postPictureDAO" class="daoImpl.PostPictureDAOImpl" parent="baseDAO"></bean>
+    <bean id="followpostPictureDAO" class="daoImpl.FollowpostPictureDAOImpl" parent="baseDAO"></bean>
+    <bean id="gameDAO" class="daoImpl.GameDAOImpl" parent="baseDAO"></bean>
+    <bean id="gameLinkDAO" class="daoImpl.GameLinkDAOImpl" parent="baseDAO"></bean>
+</beans>

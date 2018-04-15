@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="vo.Followpost" table="followpost" schema="bbs">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="content">
+            <column name="content" sql-type="varchar(255)"/>
+        </property>
+        <property name="sendTime">
+            <column name="send_time" sql-type="datetime"/>
+        </property>
+        <property name="updateTime">
+            <column name="update_time" sql-type="datetime"/>
+        </property>
+        <many-to-one name="post" class="vo.Post" lazy="false">
+            <column name="post_id"/>
+        </many-to-one>
+        <many-to-one name="user" class="vo.User" lazy="false">
+            <column name="user_id"/>
+        </many-to-one>
+        <set name="followpostPictures" inverse="true" lazy="false">
+            <key>
+                <column name="followpost_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="vo.FollowpostPicture"/>
+        </set>
+    </class>
+</hibernate-mapping>

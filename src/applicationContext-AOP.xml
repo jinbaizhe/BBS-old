@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="loginManageAspect" class="aop.LoginManageAspect"></bean>
+    <bean id="loginAspect" class="aop.LoginAspect"></bean>
+    <bean id="updateAspect" class="aop.UpdateAspect">
+        <property name="postService" ref="postService"></property>
+        <property name="followpostService" ref="followpostService"></property>
+    </bean>
+    <bean id="deleteAspect" class="aop.DeleteAspect">
+        <property name="postService" ref="postService"></property>
+        <property name="followpostService" ref="followpostService"></property>
+    </bean>
+
+    <aop:config proxy-target-class="true">
+
+        <aop:pointcut id="needLogin" expression="execution(* action.manage.*.commit*(..))
+        or execution(* action.manage.*.*Page(..)) or execution(* action.*.*Add*(..))
+        or execution(* action.*.*Update*(..)) or execution(* action.*.*Delete*(..))
+        or execution(* action.UserAction.updateUser*(..))
+        or execution(* action.UserAction.getSettingPage(..))"></aop:pointcut>
+        <aop:pointcut id="needManageLogin" expression="execution(* action.manage.*.commit*(..)) or execution(* action.manage.*.*Page(..))"></aop:pointcut>
+        <aop:pointcut id="needUpdatePermission" expression="execution(* action.*.*Update*(..))"></aop:pointcut>
+        <aop:pointcut id="needDeletePermission" expression="execution(* action.*.*Delete*(..))"></aop:pointcut>
+
+        <aop:aspect ref="loginAspect">
+            <aop:around method="around" pointcut-ref="needLogin"></aop:around>
+        </aop:aspect>
+
+        <aop:aspect ref="loginManageAspect">
+            <aop:around method="around" pointcut-ref="needManageLogin"></aop:around>
+        </aop:aspect>
+
+        <aop:aspect ref="updateAspect">
+            <aop:around method="Around" pointcut-ref="needUpdatePermission"></aop:around>
+        </aop:aspect>
+
+        <aop:aspect ref="deleteAspect">
+            <aop:around method="Around" pointcut-ref="needDeletePermission"></aop:around>
+        </aop:aspect>
+
+    </aop:config>
+
+</beans>
