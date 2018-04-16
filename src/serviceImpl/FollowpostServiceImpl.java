@@ -25,8 +25,9 @@ public class FollowpostServiceImpl implements FollowpostService {
     }
 
     @Override
-    public List getFollowpostsByPostId(int postId,int currentPage,int totalItemsPerPage) {
-        return followpostDAO.getFollowpostsByPostId(postId,currentPage, totalItemsPerPage);
+    public List getFollowpostsByPostId(int postId,int currentPage,int totalItemsPerPage,String order) {
+        order="sendTime "+order;
+        return followpostDAO.getFollowpostsByPostId(postId,currentPage, totalItemsPerPage,order);
     }
 
     @Override
@@ -52,5 +53,10 @@ public class FollowpostServiceImpl implements FollowpostService {
     @Override
     public int getFollowpostsNumByPostId(int postId) {
         return followpostDAO.getFollowpostsNumByPostId(postId);
+    }
+
+    @Override
+    public List getFollowpostsByUserId(int userid) {
+        return followpostDAO.getFollowpostsByUserId(userid,"sendTime desc");
     }
 }

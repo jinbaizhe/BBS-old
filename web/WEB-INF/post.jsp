@@ -35,6 +35,20 @@
                 </ol>
             </div>
         </div>
+        <div class="row my-sm-1">
+            <div class="col-sm-12">
+                <div class="float-right">
+                    <s:if test="order=='asc'">
+                        <a class="btn btn-primary btn-sm active" href="/post.action?postid=<s:property value="post.id"></s:property>&order=asc">按回帖时间升序</a>
+                        <a class="btn btn-primary btn-sm" href="/post.action?postid=<s:property value="post.id"></s:property>&order=desc">按回帖时间降序</a>
+                    </s:if>
+                    <s:else>
+                        <a class="btn btn-primary btn-sm" href="/post.action?postid=<s:property value="post.id"></s:property>&order=asc">按回帖时间升序</a>
+                        <a class="btn btn-primary btn-sm active" href="/post.action?postid=<s:property value="post.id"></s:property>&order=desc">按回帖时间降序</a>
+                    </s:else>
+                </div>
+            </div>
+        </div>
 
         <!-- 帖子内容 -->
         <div class="row">
@@ -80,7 +94,33 @@
                             <s:if test="post.user.id==#session.user.id">
                                 <a style="float:right;margin-right: 20px;" href="updatePost?postid=<s:property value="post.id"></s:property>">编辑</a>
                             </s:if>
-                            <a style="float:right;margin-right: 20px;" href="#">收藏</a>
+
+                            <s:if test="">
+                                <a style="float:right;margin-right: 20px;" href="#">收藏</a>
+                            </s:if>
+                            <s:else>
+                                <a style="float:right;margin-right: 20px;" href="#">取消收藏</a>
+                            </s:else>
+
+                            <s:if test="#session.user.type==1">
+                                <s:if test="post.top==0">
+                                    <a style="float:right;margin-right: 20px;" href="/manage/setTop?postid=<s:property value="post.id"></s:property>">置顶</a>
+                                </s:if>
+                                <s:else>
+                                    <a style="float:right;margin-right: 20px;" href="/manage/unsetTop?postid=<s:property value="post.id"></s:property>">取消置顶</a>
+                                </s:else>
+                            </s:if>
+
+                            <s:if test="#session.user.type==1">
+                                <s:if test="post.type==0">
+                                    <a style="float:right;margin-right: 20px;" href="/manage/setPostEssential?postid=<s:property value="post.id"></s:property>">精华</a>
+                                </s:if>
+                                <s:else>
+                                    <a style="float:right;margin-right: 20px;" href="/manage/unsetPostEssential?postid=<s:property value="post.id"></s:property>">取消精华</a>
+                                </s:else>
+                            </s:if>
+
+
                         </div>
                     </div>
                     <div style="margin: 20px">

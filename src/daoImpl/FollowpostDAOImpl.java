@@ -24,9 +24,9 @@ public class FollowpostDAOImpl extends BaseDAO<Followpost> implements Followpost
     }
 
     @Override
-    public List getFollowpostsByPostId(int postId,int currentPage,int totalItemsPerPage) {
+    public List getFollowpostsByPostId(int postId,int currentPage,int totalItemsPerPage,String order) {
         Session session=getSession();
-        String sql="from Followpost f where f.post.id=? order by sendTime asc";
+        String sql="from Followpost f where f.post.id=? order by "+order;
         Query query=session.createQuery(sql);
         query.setParameter(0,postId);
         query.setFirstResult((currentPage-1)*totalItemsPerPage);
@@ -60,5 +60,15 @@ public class FollowpostDAOImpl extends BaseDAO<Followpost> implements Followpost
         int size=query.list().size();
         session.close();
         return size;
+    }
+
+    @Override
+    public List getFollowpostsByUserId(int userid,String order) {
+        Session session=getSession();
+        Query query=session.createQuery("from Followpost f where f.user.id=? order by "+order);
+        query.setParameter(0,userid);
+        List followposts=query.list();
+        session.close();
+        return followposts;
     }
 }

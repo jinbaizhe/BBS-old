@@ -73,37 +73,37 @@ public class SubForumAction extends ActionSupport {
         this.mainForum = mainForum;
     }
 
-    public String getSubForumsByMainForumId()
+    public String getSubForumsByMainForumIdNeedUserLoginNeedManageLogin()
     {
         subForums=subForumService.getSubForumsByMainForumId(mfid);
         return SUCCESS;
     }
-    public String getAddSubForumPage()
+    public String getAddSubForumPageNeedUserLoginNeedManageLogin()
     {
         mainForum=mainForumService.getMainForumById(mfid);
         return SUCCESS;
     }
-    public String commitAddSubForum()
+    public String commitAddSubForumNeedUserLoginNeedManageLogin()
     {
         subForum.setMainForum(mainForumService.getMainForumById(mfid));
         subForumService.addSubForum(subForum);
         return SUCCESS;
     }
 
-    public String getUpdateSubForumPage()
+    public String getUpdateSubForumPageNeedUserLoginNeedManageLogin()
     {
         subForum=subForumService.getSubForumById(sfid);
         return SUCCESS;
     }
 
-    public String commitUpdateSubForum()
+    public String commitUpdateSubForumNeedUserLoginNeedManageLogin()
     {
         subForum.setMainForum(mainForumService.getMainForumById(mfid));
         subForumService.updateSubForum(subForum);
         return SUCCESS;
     }
 
-    public String commitDeleteSubForum()
+    public String commitDeleteSubForumNeedUserLoginNeedManageLogin()
     {
         subForumService.deleteSubForum(subForumService.getSubForumById(sfid));
         return SUCCESS;

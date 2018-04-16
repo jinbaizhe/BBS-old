@@ -63,10 +63,10 @@
                         <td><s:date name="#user.registerTime"  format="yyyy-MM-dd HH:mm:ss"></s:date></td>
                         <td>
                             <s:if test="#user.type==0">
-                                <a class="btn btn-primary btn-sm mr-sm-2" href="#">设为管理员</a>
+                                <a class="btn btn-primary btn-sm mr-sm-2" href="/manage/setAdmin.action?userid=<s:property value="#user.id"></s:property>">设为管理员</a>
                             </s:if>
                             <s:elseif test="#user.type==1">
-                                <a class="btn btn-primary btn-sm mr-sm-2" href="#">撤销管理员</a>
+                                <a class="btn btn-primary btn-sm mr-sm-2" href="/manage/unsetAdmin.action?userid=<s:property value="#user.id"></s:property>">撤销管理员</a>
                             </s:elseif>
                             <!--
                             <a class="btn btn-primary btn-sm mr-sm-2" href="#">删除</a>

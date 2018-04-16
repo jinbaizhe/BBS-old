@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import vo.Post;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
@@ -34,9 +35,13 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
     }
 
     @Override
-    public List getPostsBySubForumId(int subForumId,int currentPage,int totalItemsPerPage) {
+    public List getPostsBySubForumId(int subForumId,int currentPage,int totalItemsPerPage,String order) {
         Session session=getSession();
-        String sql="from Post p where p.subForum.id=? order by sendTime desc";
+        String sql="select p,max(f.sendTime) as lastfollowpost from Post p,Followpost f where p.subForum.id=? and p.id=f.post.id group by p.id order by p.top desc";
+        if(order.equals("lastfollowpost"))
+            sql=sql+",lastfollowpost desc";
+        else if (order.equals("postsend"))
+            sql=sql+",p.sendTime desc";
         Query query=session.createQuery(sql);
         query.setParameter(0,subForumId);
         query.setFirstResult((currentPage-1)*totalItemsPerPage);
@@ -70,5 +75,15 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
         int size=query.list().size();
         session.close();
         return size;
+    }
+
+    @Override
+    public List getPostsByUserId(int userid,String order) {
+        Session session=getSession();
+        Query query=session.createQuery("from Post p where p.user.id=? order by "+order);
+        query.setParameter(0,userid);
+        List posts=query.list();
+        session.close();
+        return posts;
     }
 }

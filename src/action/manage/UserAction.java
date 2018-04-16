@@ -14,6 +14,8 @@ public class UserAction extends ActionSupport {
     private List users;
     private UserService userService;
     private int page=1;
+    private int userid;
+
     public List getUsers() {
         return users;
     }
@@ -38,7 +40,15 @@ public class UserAction extends ActionSupport {
         this.page = page;
     }
 
-    public String getUserPage()
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public String getUserPageNeedUserLoginNeedManageLoginNeedSuperAdmin()
     {
         Map session=(Map)ActionContext.getContext().getSession();
         User user=(User)session.get("user");
@@ -47,6 +57,18 @@ public class UserAction extends ActionSupport {
         Map request=(Map) ActionContext.getContext().get("request");
         Pager pager=new Pager(page, Num.ShowManageUserPerPageNum.getValue(),totalUsersNum);
         request.put("pager",pager);
+        return SUCCESS;
+    }
+
+    public String setAdminNeedUserLoginNeedManageLoginNeedSuperAdmin()
+    {
+        userService.setAdmin(userid);
+        return SUCCESS;
+    }
+
+    public String unsetAdminNeedUserLoginNeedManageLoginNeedSuperAdmin()
+    {
+        userService.unsetAdmin(userid);
         return SUCCESS;
     }
 }

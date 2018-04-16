@@ -23,6 +23,7 @@ public class SubForumAction extends ActionSupport {
     private SubForum subForum;
     private List posts;
     private int totalPostsNum;
+    private String order="lastfollowpost";
 
     public int getPage() {
         return page;
@@ -72,13 +73,29 @@ public class SubForumAction extends ActionSupport {
         this.posts = posts;
     }
 
+    public int getTotalPostsNum() {
+        return totalPostsNum;
+    }
+
+    public void setTotalPostsNum(int totalPostsNum) {
+        this.totalPostsNum = totalPostsNum;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
     public String browserSubForum()
     {
         if(sfid==0)
             return ERROR;
         subForum=subForumService.getSubForumById(sfid);
         totalPostsNum=postService.getPostsNumBySubForumId(sfid);
-        posts=postService.getPostsBySubForumId(sfid,page, Num.ShowPostsPerPageNum.getValue());
+        posts=postService.getPostsBySubForumId(sfid,page, Num.ShowPostsPerPageNum.getValue(),order);
         Map request=(Map) ActionContext.getContext().get("request");
         Pager pager=new Pager(page,Num.ShowPostsPerPageNum.getValue(),totalPostsNum);
         request.put("pager",pager);

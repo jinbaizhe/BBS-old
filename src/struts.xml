@@ -37,46 +37,46 @@
             <result name="success">WEB-INF/post.jsp</result>
             <result name="error">WEB-INF/error.jsp</result>
         </action>
-        <action name="posting" class="postAction" method="getAddPostPage">
+        <action name="posting" class="postAction" method="getAddPostPageNeedUserLogin">
             <result name="success">WEB-INF/posting.jsp</result>
             <result name="notlogin">WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>
-        <action name="commitPosting" class="postAction" method="commitAddPost">
+        <action name="commitPosting" class="postAction" method="commitAddPostNeedUserLogin">
             <result name="success">WEB-INF/OperationStatus/commitPostSuccess.jsp</result>
             <result name="notlogin">WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>
-        <action name="updatePost" class="postAction" method="getUpdatePostPage">
+        <action name="updatePost" class="postAction" method="getUpdatePostPageNeedUserLogin">
             <result name="success">WEB-INF/updatePost.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="commitUpdatePost" class="postAction" method="commitUpdatePost">
+        <action name="commitUpdatePost" class="postAction" method="commitUpdatePostNeedUserLogin">
             <result name="success" type="redirectAction">post?postid=${post.id}</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="deletePost" class="postAction" method="commitDeletePost">
+        <action name="deletePost" class="postAction" method="commitDeletePostNeedUserLogin">
             <result name="success" type="redirectAction">subforum?sfid=${post.subForum.id}</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
 
 
-        <action name="commitFollowpost" class="followpostAction" method="commitAddFollowpost">
+        <action name="commitFollowpost" class="followpostAction" method="commitAddFollowpostNeedUserLogin">
             <result name="success">WEB-INF/OperationStatus/commitFollowpostSuccess.jsp</result>
             <result name="notlogin">WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>
-        <action name="updateFollowpost" class="followpostAction" method="getUpdateFollowpostPage">
+        <action name="updateFollowpost" class="followpostAction" method="getUpdateFollowpostPageNeedUserLogin">
             <result name="success">WEB-INF/updateFollowpost.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="commitUpdateFollowpost" class="followpostAction" method="commitUpdateFollowpost">
+        <action name="commitUpdateFollowpost" class="followpostAction" method="commitUpdateFollowpostNeedUserLogin">
             <result name="success" type="redirectAction">post?postid=${followpost.post.id}</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="deleteFollowpost" class="followpostAction" method="commitDeleteFollowpost">
+        <action name="deleteFollowpost" class="followpostAction" method="commitDeleteFollowpostNeedUserLogin">
             <result name="success" type="redirectAction">post?postid=${followpost.post.id}</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
@@ -97,17 +97,17 @@
     </package>
 
     <package name="manage" extends="struts-default" namespace="/manage">
-        <action name="index" class="manageMainForumAction" method="getIndexPage">
+        <action name="index" class="manageMainForumAction" method="getIndexPageNeedUserLoginNeedManageLogin">
             <result name="success">/WEB-INF/manage/index.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="mainforum" class="manageMainForumAction" method="getAllMainForumPage">
+        <action name="mainforum" class="manageMainForumAction" method="getAllMainForumPageNeedUserLoginNeedManageLogin">
             <result name="success">/WEB-INF/manage/mainForum.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="deletemainforum" class="manageMainForumAction" method="commitDeleteMainForum">
+        <action name="deletemainforum" class="manageMainForumAction" method="commitDeleteMainForumNeedUserLoginNeedManageLogin">
             <result name="success" type="redirectAction">mainforum</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
@@ -117,70 +117,118 @@
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="updatemainforum" class="manageMainForumAction" method="getUpdateMainForumPage">
+        <action name="updatemainforum" class="manageMainForumAction" method="getUpdateMainForumPageNeedUserLoginNeedManageLogin">
             <result name="success">/WEB-INF/manage/updateMainForum.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="commitaddmainforum" class="manageMainForumAction" method="commitAddMainForum">
+        <action name="commitaddmainforum" class="manageMainForumAction" method="commitAddMainForumNeedUserLoginNeedManageLogin">
             <result name="success" type="redirectAction">mainforum</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="commitupdatemainforum" class="manageMainForumAction" method="commitUpdateMainForum">
+        <action name="commitupdatemainforum" class="manageMainForumAction" method="commitUpdateMainForumNeedUserLoginNeedManageLogin">
             <result name="success" type="redirectAction">mainforum</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
 
-        <action name="subforum"  class="manageSubForumAction" method="getSubForumsByMainForumId">
+        <action name="subforum"  class="manageSubForumAction" method="getSubForumsByMainForumIdNeedUserLoginNeedManageLogin">
             <result name="success">/WEB-INF/manage/subForum.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="deletesubforum" class="manageSubForumAction" method="commitDeleteSubForum">
+        <action name="deletesubforum" class="manageSubForumAction" method="commitDeleteSubForumNeedUserLoginNeedManageLogin">
             <result name="success" type="redirectAction">subforum?mfid=${mfid}</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="addsubforum" class="manageSubForumAction" method="getAddSubForumPage">
+        <action name="addsubforum" class="manageSubForumAction" method="getAddSubForumPageNeedUserLoginNeedManageLogin">
             <result name="success">/WEB-INF/manage/addSubForum.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="updatesubforum" class="manageSubForumAction" method="getUpdateSubForumPage">
+        <action name="updatesubforum" class="manageSubForumAction" method="getUpdateSubForumPageNeedUserLoginNeedManageLogin">
             <result name="success">/WEB-INF/manage/updateSubForum.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="commitaddsubforum" class="manageSubForumAction" method="commitAddSubForum">
+        <action name="commitaddsubforum" class="manageSubForumAction" method="commitAddSubForumNeedUserLoginNeedManageLogin">
             <result name="success" type="redirectAction">subforum?mfid=${mfid}</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="commitupdatesubforum" class="manageSubForumAction" method="commitUpdateSubForum">
+        <action name="commitupdatesubforum" class="manageSubForumAction" method="commitUpdateSubForumNeedUserLoginNeedManageLogin">
             <result name="success" type="redirectAction">subforum?mfid=${mfid}</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
 
-        <action name="user" class="manageUserAction" method="getUserPage">
+        <action name="user" class="manageUserAction" method="getUserPageNeedUserLoginNeedManageLoginNeedSuperAdmin">
             <result name="success">/WEB-INF/manage/user.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
+
+        <action name="setAdmin" class="manageUserAction" method="setAdminNeedUserLoginNeedManageLoginNeedSuperAdmin">
+            <result name="success" type="redirectAction">user</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="unsetAdmin" class="manageUserAction" method="unsetAdminNeedUserLoginNeedManageLoginNeedSuperAdmin">
+            <result name="success" type="redirectAction">user</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="setTop" class="managePostAction" method="setPostTopNeedUserLoginNeedManageLogin">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">post</param>
+                <param name="postid">${postid}</param>
+            </result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="unsetTop" class="managePostAction" method="unsetPostTopNeedUserLoginNeedManageLogin">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">post</param>
+                <param name="postid">${postid}</param>
+            </result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="setPostEssential" class="managePostAction" method="setPostEssentialNeedUserLoginNeedManageLogin">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">post</param>
+                <param name="postid">${postid}</param>
+            </result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+        <action name="unsetPostEssential" class="managePostAction" method="unsetPostEssentialNeedUserLoginNeedManageLogin">
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">post</param>
+                <param name="postid">${postid}</param>
+            </result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+            <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
+        </action>
+
     </package>
 
     <package name="user" extends="struts-default" namespace="/user">
-        <action name="setting" class="userAction" method="getSettingPage">
+        <action name="setting" class="userAction" method="getSettingPageNeedUserLogin">
             <result name="success">/WEB-INF/user/settingInfo.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>
-        <action name="updateUserPassword" class="userAction" method="updateUserPassword">
+        <action name="updateUserPassword" class="userAction" method="updateUserPasswordNeedUserLogin">
             <result name="success">/WEB-INF/user/settingInfo.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>
-        <action name="updateUserInfo" class="userAction" method="updateUserInfo">
+        <action name="updateUserInfo" class="userAction" method="updateUserInfoNeedUserLogin">
             <result name="success">/WEB-INF/user/settingInfo.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>

@@ -43,36 +43,36 @@ public class MainForumAction extends ActionSupport {
         this.mfid = mfid;
     }
 
-    public String getIndexPage()
+    public String getIndexPageNeedUserLoginNeedManageLogin()
     {
         return SUCCESS;
     }
 
-    public String getAllMainForumPage()
+    public String getAllMainForumPageNeedUserLoginNeedManageLogin()
     {
         mainForums=mainForumService.getAllMainForums();
         return SUCCESS;
     }
 
-    public String commitAddMainForum()
+    public String commitAddMainForumNeedUserLoginNeedManageLogin()
     {
         mainForumService.addMainForum(mainForum);
         return SUCCESS;
     }
 
-    public String getUpdateMainForumPage()
+    public String getUpdateMainForumPageNeedUserLoginNeedManageLogin()
     {
         mainForum=mainForumService.getMainForumById(mfid);
         return SUCCESS;
     }
 
-    public String commitUpdateMainForum()
+    public String commitUpdateMainForumNeedUserLoginNeedManageLogin()
     {
         mainForumService.updateMainForum(mainForum);
         return SUCCESS;
     }
 
-    public String commitDeleteMainForum()
+    public String commitDeleteMainForumNeedUserLoginNeedManageLogin()
     {
         mainForumService.deleteMainForum(mainForumService.getMainForumById(mfid));
         return SUCCESS;

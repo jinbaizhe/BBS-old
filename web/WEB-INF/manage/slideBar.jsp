@@ -35,9 +35,11 @@
                     <span class="nav-link-text">用户管理</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="userManage">
+                <s:if test="#session.user.type==2">
                     <li>
                         <a href="/manage/user.action">用户设置</a>
                     </li>
+                </s:if>
                 </ul>
             </li>
 
@@ -49,8 +51,8 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="userSetting">
                     <li>
-                        <a href="#">修改个人信息</a>
-                        <a href="#">修改密码</a>
+                        <a href="/user/setting.action?type=info">修改个人信息</a>
+                        <a href="/user/setting.action?type=password">修改密码</a>
                     </li>
                 </ul>
             </li>

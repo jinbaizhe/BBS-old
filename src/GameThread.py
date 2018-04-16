@@ -48,14 +48,14 @@ class CurrentAllGame:
                 else:
                     home_team = find_team[1][0]
                     away_team = find_team[0][0]
-                result_list.append((home_team ,away_team, 'https://www.reddit.com' + item[0]))
+                result_list.append((home_team, away_team, 'https://www.reddit.com' + item[0]))
         return result_list
 
     def getGameInfo(self, gameUrl):
         result = openURL(gameUrl)
         streamList = []
         for item in re.findall(r'<form action="#" class="usertext warn-on-unload"[^>]+>.*?<p>(.*?)</p>.*?</form>', result, re.DOTALL):
-            if re.search(r'(?:HD|hd|SD|sd)', item) and item.lower().find("<a") != -1:
+            if re.search(r'(?:HD|hd|SD|sd)', item) and item.lower().find("<a") != -1 and item.lower().find("</a>") != -1:
                 streamList.append(item)
         return streamList
 

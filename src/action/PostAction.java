@@ -32,6 +32,8 @@ public class PostAction extends ActionSupport {
     private List pictures;
     private int page=1;
     private List<File> files;
+    private String order="asc";
+
     public PostService getPostService() {
         return postService;
     }
@@ -128,12 +130,20 @@ public class PostAction extends ActionSupport {
         this.files = files;
     }
 
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
     public String browserPost() throws Exception {
         if(postid==0)
             return ERROR;
         post=postService.getPostById(postid);
         int totalFollowpostsNum=followpostService.getFollowpostsNumByPostId(postid);
-        followposts=followpostService.getFollowpostsByPostId(postid,page, Num.ShowFollowpostsPerPageNum.getValue());
+        followposts=followpostService.getFollowpostsByPostId(postid,page, Num.ShowFollowpostsPerPageNum.getValue(),order);
         pictures=pictureService.getPicturesByPostId(post.getId());
         Map request=(Map)ActionContext.getContext().get("request");
         Pager pager=new Pager(page,Num.ShowFollowpostsPerPageNum.getValue(),totalFollowpostsNum);
@@ -141,7 +151,7 @@ public class PostAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String getAddPostPage() throws Exception
+    public String getAddPostPageNeedUserLogin() throws Exception
     {
         if(subforumid==0)
             return ERROR;
@@ -149,7 +159,7 @@ public class PostAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String commitAddPost() throws Exception
+    public String commitAddPostNeedUserLogin() throws Exception
     {
         if(post==null)
             return ERROR;
@@ -173,20 +183,20 @@ public class PostAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String getUpdatePostPage() throws Exception
+    public String getUpdatePostPageNeedUserLogin() throws Exception
     {
         post=postService.getPostById(postid);
         return SUCCESS;
     }
 
-    public String commitUpdatePost() throws Exception
+    public String commitUpdatePostNeedUserLogin() throws Exception
     {
         postService.updatePost(post);
         post=postService.getPostById(post.getId());
         return SUCCESS;
     }
 
-    public String commitDeletePost() throws Exception
+    public String commitDeletePostNeedUserLogin() throws Exception
     {
         post=postService.getPostById(postid);
         postService.deletePost(post);

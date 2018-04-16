@@ -3,7 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean id="loginManageAspect" class="aop.LoginManageAspect"></bean>
+    <bean id="loginManageAspect" class="aop.LoginManageAspect">
+        <property name="userService" ref="userService"></property>
+    </bean>
     <bean id="loginAspect" class="aop.LoginAspect"></bean>
     <bean id="updateAspect" class="aop.UpdateAspect">
         <property name="postService" ref="postService"></property>
@@ -13,24 +15,28 @@
         <property name="postService" ref="postService"></property>
         <property name="followpostService" ref="followpostService"></property>
     </bean>
+    <bean id="superAdminAspect" class="aop.SuperAdminAspect">
+        <property name="userService" ref="userService"></property>
+    </bean>
 
     <aop:config proxy-target-class="true">
 
-        <aop:pointcut id="needLogin" expression="execution(* action.manage.*.commit*(..))
-        or execution(* action.manage.*.*Page(..)) or execution(* action.*.*Add*(..))
-        or execution(* action.*.*Update*(..)) or execution(* action.*.*Delete*(..))
-        or execution(* action.UserAction.updateUser*(..))
-        or execution(* action.UserAction.getSettingPage(..))"></aop:pointcut>
-        <aop:pointcut id="needManageLogin" expression="execution(* action.manage.*.commit*(..)) or execution(* action.manage.*.*Page(..))"></aop:pointcut>
+        <aop:pointcut id="needUserLogin" expression="execution(* action.*.*NeedUserLogin*(..)) or execution(* action.*.*.*NeedUserLogin*(..))"></aop:pointcut>
+        <aop:pointcut id="needManageLogin" expression="execution(* action.manage.*.*NeedManageLogin*(..))"></aop:pointcut>
+        <aop:pointcut id="needSuperAdmin" expression="execution(* action.manage.*.*NeedSuperAdmin*(..))"></aop:pointcut>
         <aop:pointcut id="needUpdatePermission" expression="execution(* action.*.*Update*(..))"></aop:pointcut>
         <aop:pointcut id="needDeletePermission" expression="execution(* action.*.*Delete*(..))"></aop:pointcut>
 
         <aop:aspect ref="loginAspect">
-            <aop:around method="around" pointcut-ref="needLogin"></aop:around>
+            <aop:around method="around" pointcut-ref="needUserLogin"></aop:around>
         </aop:aspect>
 
         <aop:aspect ref="loginManageAspect">
             <aop:around method="around" pointcut-ref="needManageLogin"></aop:around>
+        </aop:aspect>
+
+        <aop:aspect ref="superAdminAspect">
+            <aop:around method="around" pointcut-ref="needSuperAdmin"></aop:around>
         </aop:aspect>
 
         <aop:aspect ref="updateAspect">

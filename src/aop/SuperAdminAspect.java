@@ -1,6 +1,5 @@
 package aop;
 
-
 import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.ServletActionContext;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,7 +9,7 @@ import vo.User;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-public class LoginManageAspect {
+public class SuperAdminAspect {
     private UserService userService;
 
     public UserService getUserService() {
@@ -27,7 +26,7 @@ public class LoginManageAspect {
         Map session=context.getSession();
         User user=userService.getUserByid(((User)session.get("user")).getId());
         String s=null;
-        if(user.getType()>=1)
+        if(user.getType()==2)
         {
             s=(String) jp.proceed();
             return "success";

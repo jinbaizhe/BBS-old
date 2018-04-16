@@ -45,12 +45,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List getAllUsersExceptSelf(User user,int currentPage,int totalItemsPerPage) {
-        return userDAO.getAllUsersExceptSelf(user,currentPage,totalItemsPerPage);
+        return userDAO.getAllUsersExceptSuperAdmin(user,currentPage,totalItemsPerPage);
     }
 
     @Override
     public int getAllUsersNumExceptSelf(User user) {
-        return userDAO.getAllUsersExceptSelf(user).size();
+        return userDAO.getAllUsersExceptSuperAdmin(user).size();
     }
 
     @Override
@@ -68,4 +68,25 @@ public class UserServiceImpl implements UserService {
         temp_user.setSex(user.getSex());
         userDAO.updateUser(temp_user);
     }
+
+    @Override
+    public void setAdmin(int userid) {
+        User temp_user=userDAO.getUser(userid);
+        temp_user.setType(1);
+        updateUser(temp_user);
+    }
+
+    @Override
+    public void unsetAdmin(int userid) {
+        User temp_user=userDAO.getUser(userid);
+        temp_user.setType(0);
+        updateUser(temp_user);
+    }
+
+    @Override
+    public User getUserByid(int userid) {
+        return userDAO.getUser(userid);
+    }
+
+
 }

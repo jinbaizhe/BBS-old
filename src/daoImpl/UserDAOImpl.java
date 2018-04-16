@@ -56,11 +56,10 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
     }
 
     @Override
-    public List getAllUsersExceptSelf(User user,int currentPage,int totalItemsPerPage) {
+    public List getAllUsersExceptSuperAdmin(User user,int currentPage,int totalItemsPerPage) {
         Session session=getSession();
-        String sql="from User u where u.id!=? order by u.registerTime desc ";
+        String sql="from User u where u.type<2 order by u.registerTime desc ";
         Query query=session.createQuery(sql);
-        query.setParameter(0,user.getId());
         query.setFirstResult((currentPage-1)*totalItemsPerPage);
         query.setMaxResults(totalItemsPerPage);
         List users=query.list();
@@ -69,11 +68,10 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
     }
 
     @Override
-    public List getAllUsersExceptSelf(User user) {
+    public List getAllUsersExceptSuperAdmin(User user) {
         Session session=getSession();
-        String sql="from User u where u.id!=? order by u.registerTime desc ";
+        String sql="from User u where u.type<2 order by u.registerTime desc ";
         Query query=session.createQuery(sql);
-        query.setParameter(0,user.getId());
         List users=query.list();
         session.close();
         return users;
@@ -91,4 +89,5 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
             user=(User)users.get(0);
         return user;
     }
+
 }

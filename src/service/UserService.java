@@ -13,4 +13,7 @@ public interface UserService {
     public int getAllUsersNumExceptSelf(User user);
     public void updateUserPassword(User user);
     public void updateUserInfo(User user);
+    public void setAdmin(int userid);
+    public void unsetAdmin(int userid);
+    public User getUserByid(int userid);
 }

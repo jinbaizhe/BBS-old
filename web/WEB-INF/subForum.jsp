@@ -30,6 +30,16 @@
             <div class="float-right mb-sm-2">
                 <a class="btn btn-primary" href="posting.action?subforumid=<s:property value="subForum.id"></s:property>">发帖</a>
             </div>
+            <div>
+                <s:if test="order=='postsend'">
+                    <a class="btn btn-primary btn-sm" href="/subforum.action?sfid=<s:property value="subForum.id"></s:property>&order=lastfollowpost">按最后回复时间排序</a>
+                    <a class="btn btn-primary btn-sm active" href="/subforum.action?sfid=<s:property value="subForum.id"></s:property>&order=postsend">按发帖时间排序</a>
+                </s:if>
+                <s:else>
+                    <a class="btn btn-primary btn-sm active" href="/subforum.action?sfid=<s:property value="subForum.id"></s:property>&order=lastfollowpost">按最后回复时间排序</a>
+                    <a class="btn btn-primary btn-sm" href="/subforum.action?sfid=<s:property value="subForum.id"></s:property>&order=postsend">按发帖时间排序</a>
+                </s:else>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -40,19 +50,29 @@
                     <th scope="col">标题</th>
                     <th scope="col">作者</th>
                     <th scope="col">发帖时间</th>
+                    <th scope="col">最后回复时间</th>
                     <th scope="col">回复/查看</th>
                 </tr>
                 </thead>
                 <tbody>
-                <s:iterator value="posts" var="post">
+                <s:iterator value="posts" var="temp">
+                    <s:set var="post" value="#temp[0]"></s:set>
+                    <s:set var="lastfollowpostsendtime" value="#temp[1]"></s:set>
                     <tr>
                         <th scope="row">
+                            <s:if test="#post.type==1">
+                                [<span style="color: indigo">精华</span>]
+                            </s:if>
+                            <s:if test="#post.top==1">
+                                [<span style="color: red">置顶</span>]
+                            </s:if>
                             <a href="post.action?postid=<s:property value="#post.id"></s:property>">
                                 <s:property value="#post.title"></s:property>
                             </a>
                         </th>
                         <td><s:property value="#post.user.username"></s:property></td>
                         <td><s:date name="#post.sendTime" format="yyyy-MM-dd HH:mm:ss"></s:date></td>
+                        <td><s:date name="#lastfollowpostsendtime" format="yyyy-MM-dd HH:mm:ss"></s:date></td>
                         <td><s:property value="#post.followposts.size" default="0"></s:property>/<s:property value="#post.viewNum"></s:property></td>
                     </tr>
                 </s:iterator>

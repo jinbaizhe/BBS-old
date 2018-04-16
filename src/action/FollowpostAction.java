@@ -79,7 +79,7 @@ public class FollowpostAction extends ActionSupport {
         this.pictureService = pictureService;
     }
 
-    public String commitAddFollowpost() throws Exception
+    public String commitAddFollowpostNeedUserLogin() throws Exception
     {
         followpost.setPost(postService.getPostById(postid));
         followpost.setUser((User)ActionContext.getContext().getSession().get("user"));
@@ -99,20 +99,20 @@ public class FollowpostAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String getUpdateFollowpostPage()
+    public String getUpdateFollowpostPageNeedUserLogin()
     {
         followpost=followpostService.getFollowpostById(followpostid);
         return SUCCESS;
     }
 
-    public String commitUpdateFollowpost()
+    public String commitUpdateFollowpostNeedUserLogin()
     {
         followpostService.updateFollowpost(followpost);
         followpost=followpostService.getFollowpostById(followpost.getId());
         return SUCCESS;
     }
 
-    public String commitDeleteFollowpost()
+    public String commitDeleteFollowpostNeedUserLogin()
     {
         followpost=followpostService.getFollowpostById(followpostid);
         followpostService.deleteFollowpost(followpost);

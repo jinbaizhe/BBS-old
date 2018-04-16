@@ -26,14 +26,23 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <div class="text-center">
-                <div class="my-sm-5">
+            <div>
+                <div class="my-sm-2 text-center">
                     <h1>关于</h1>
                 </div>
                 <div class="my-sm-5">
                     <h3>历史更新</h3>
+                    <p class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.1.1</h5>
+                        1.新增可通过排序查看帖子、回帖功能。<br>
+                        2.添加设置、撤销管理员功能。<br>
+                        3.添加置顶、高亮帖子功能。<br>
+                        4.修复用户修改个人信息后无法及时更新session中相关个人信息的问题。<br>
+                        5.修改部分AOP切点。<br>
+                        6.修改部分权限的验证方式。<br>
+                    </p>
                 </div>
-                <div class="my-sm-5">
+                <div class="my-sm-5 text-center">
                     <h5>Powered by Parker</h5>
                 </div>
             </div>

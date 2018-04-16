@@ -2,7 +2,6 @@ package serviceImpl;
 
 import dao.PostDAO;
 import service.PostService;
-import util.Num;
 import util.Util;
 import vo.Post;
 
@@ -45,17 +44,28 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public void updatePostAllAttr(Post post) {
+        postDAO.updatePost(post);
+    }
+
+    @Override
     public void deletePost(Post post) {
         postDAO.deletePost(post);
     }
 
     @Override
-    public List getPostsBySubForumId(int subForumId,int currentPage,int totalItemsPerPage) {
-        return postDAO.getPostsBySubForumId(subForumId, currentPage, totalItemsPerPage);
+    public List getPostsBySubForumId(int subForumId,int currentPage,int totalItemsPerPage,String order)
+    {
+        return postDAO.getPostsBySubForumId(subForumId, currentPage, totalItemsPerPage,order);
     }
 
     @Override
     public int getPostsNumBySubForumId(int subForumId) {
         return postDAO.getPostsNumBySubForumId(subForumId);
+    }
+
+    @Override
+    public List getPostsByUserId(int userid) {
+        return postDAO.getPostsByUserId(userid,"sendTime desc");
     }
 }
