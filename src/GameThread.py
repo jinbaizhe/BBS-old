@@ -64,7 +64,7 @@ def updateDB():
     currentAllGame = CurrentAllGame()
     while True:
         try:
-            conn = mysql.connector.connect(user='parker', password='parker123456', database='bbs')
+            conn = mysql.connector.connect(user='test', password='parker123456', database='bbs')
             cursor = conn.cursor()
             game_list = currentAllGame.getCurrentAllGame()
             #game_list=[("hometeam", "awayteam", "https://www.reddit.com/r/nbastreams/comments/8cb76k/game_thread_miami_heat_philadelphia_76ers_200000/")]

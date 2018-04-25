@@ -2,11 +2,11 @@ package action.manage;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
 import service.UserService;
-import util.Num;
 import util.Pager;
 import vo.User;
-
+import javax.servlet.ServletContext;
 import java.util.List;
 import java.util.Map;
 
@@ -52,10 +52,15 @@ public class UserAction extends ActionSupport {
     {
         Map session=(Map)ActionContext.getContext().getSession();
         User user=(User)session.get("user");
-        users=userService.getAllUsersExceptSelf(user,page,Num.ShowManageUserPerPageNum.getValue());
+
+        //读取web.xml获取ShowFollowpostsPerPageNum参数
+        ServletContext servletContext =ServletActionContext.getServletContext();
+        final int ShowManageUserPerPageNum=Integer.valueOf(servletContext.getInitParameter("ShowManageUserPerPageNum"));
+
+        users=userService.getAllUsersExceptSelf(user,page,ShowManageUserPerPageNum);
         int totalUsersNum=userService.getAllUsersNumExceptSelf(user);
         Map request=(Map) ActionContext.getContext().get("request");
-        Pager pager=new Pager(page, Num.ShowManageUserPerPageNum.getValue(),totalUsersNum);
+        Pager pager=new Pager(page, ShowManageUserPerPageNum,totalUsersNum);
         request.put("pager",pager);
         return SUCCESS;
     }

@@ -52,7 +52,7 @@ create table main_forum
 (
    id                   int not null auto_increment  comment '',
    name                 varchar(30)  comment '',
-   info                 varchar(50)  comment '',
+   info                 varchar(100)  comment '',
    create_time          datetime  comment '',
    primary key (id)
 );
@@ -105,7 +105,7 @@ create table sub_forum
    id                   int not null auto_increment  comment '',
    main_forum_id        int  comment '',
    name                 varchar(30)  comment '',
-   info                 varchar(50)  comment '',
+   info                 varchar(100)  comment '',
    create_time          datetime  comment '',
    primary key (id)
 );

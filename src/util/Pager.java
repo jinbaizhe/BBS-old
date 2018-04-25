@@ -1,5 +1,7 @@
 package util;
 
+import org.apache.struts2.ServletActionContext;
+import javax.servlet.ServletContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,14 +69,16 @@ public class Pager {
 
     public List getPageList()
     {
+        //读取web.xml获取ShowFollowpostsPerPageNum参数
+        ServletContext servletContext =ServletActionContext.getServletContext();
+        final int ShowPageListSize=Integer.valueOf(servletContext.getInitParameter("ShowPageListSize"));
 
-        int showPageListSize=Num.ShowPageListSize.getValue();
         List<String> list=new ArrayList();
         int start_pos=1,end_pos=totalPageNum;
-        if(totalPageNum>showPageListSize)
+        if(totalPageNum>ShowPageListSize)
         {
-            start_pos=currentPage-showPageListSize/2;
-            end_pos=currentPage+showPageListSize/2;
+            start_pos=currentPage-ShowPageListSize/2;
+            end_pos=currentPage+ShowPageListSize/2;
         }
         if(start_pos<1)
         {

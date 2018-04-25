@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%@include file="/WEB-INF/head.jsp"%>
+    <%@include file="/WEB-INF/web/head.jsp"%>
+    <title>NBA直播</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/web/header.jsp"></jsp:include>
 
 <div class="container">
     <div class="row">
@@ -15,7 +16,7 @@
             <h1 style="text-align: center">NBA直播</h1>
             <h3 style="text-align: center">(比赛前一小时左右更新直播信息)</h3>
             <s:if test="games.size==0">
-                <h2 style="text-align: center">暂无比赛信息</h2>
+                <h2 style="text-align: center">暂无今日比赛信息</h2>
             </s:if>
             <s:iterator value="games" var="game">
             <div class="card my-sm-5">
@@ -32,7 +33,7 @@
     </div>
 </div>
 
-<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
-<%@include file="/WEB-INF/foot.jsp"%>
+<jsp:include page="/WEB-INF/web/footer.jsp"></jsp:include>
+<%@include file="/WEB-INF/web/foot.jsp"%>
 </body>
 </html>

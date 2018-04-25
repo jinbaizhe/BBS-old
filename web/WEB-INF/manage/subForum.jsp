@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <%@include file="head.jsp"%>
-    <title></title>
+    <title>子版块管理</title>
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <%@ include file="slideBar.jsp"%>
@@ -16,7 +16,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">后台管理系统</a>
+                <a href="/manage/index.action">后台管理系统</a>
             </li>
             <li class="breadcrumb-item">
                 <a href="/manage/mainforum.action">主板块管理</a>
@@ -32,7 +32,7 @@
 
         <div class="row">
             <s:iterator value="subForums" var="forum" status="forumStatus">
-            <div class="col-sm-4 mt-sm-3">
+            <div class="col-sm-4 my-sm-3">
                 <div class="card">
                     <div class="card-header"><s:property value="#forum.name"></s:property></div>
                     <div class="card-body">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <s:if test="#forumStatus.index!=0&&#forumStatus.index%2==0">
+            <s:if test="(#forumStatus.index+1)%3==0">
                 </div>
                 <div class="row">
             </s:if>

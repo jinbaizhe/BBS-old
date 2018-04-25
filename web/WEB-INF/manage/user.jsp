@@ -10,7 +10,7 @@
 <html>
 <head>
     <%@include file="head.jsp"%>
-    <title>Title</title>
+    <title>用户管理</title>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -20,7 +20,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/">后台管理系统</a>
+                <a href="/manage/index.action">后台管理系统</a>
             </li>
             <li class="breadcrumb-item active">用户设置</li>
         </ol>

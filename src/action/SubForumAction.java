@@ -2,14 +2,12 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-
+import org.apache.struts2.ServletActionContext;
 import service.PostService;
 import service.SubForumService;
-import util.Num;
 import util.Pager;
-import vo.MainForum;
 import vo.SubForum;
-
+import javax.servlet.ServletContext;
 import java.util.List;
 import java.util.Map;
 
@@ -95,9 +93,14 @@ public class SubForumAction extends ActionSupport {
             return ERROR;
         subForum=subForumService.getSubForumById(sfid);
         totalPostsNum=postService.getPostsNumBySubForumId(sfid);
-        posts=postService.getPostsBySubForumId(sfid,page, Num.ShowPostsPerPageNum.getValue(),order);
+
+        //读取web.xml获取ShowFollowpostsPerPageNum参数
+        ServletContext servletContext =ServletActionContext.getServletContext();
+        final int ShowPostsPerPageNum=Integer.valueOf(servletContext.getInitParameter("ShowPostsPerPageNum"));
+
+        posts=postService.getPostsBySubForumId(sfid,page, ShowPostsPerPageNum,order);
         Map request=(Map) ActionContext.getContext().get("request");
-        Pager pager=new Pager(page,Num.ShowPostsPerPageNum.getValue(),totalPostsNum);
+        Pager pager=new Pager(page,ShowPostsPerPageNum,totalPostsNum);
         request.put("pager",pager);
         return SUCCESS;
     }

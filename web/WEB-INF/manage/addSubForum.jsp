@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <%@include file="head.jsp"%>
-    <title></title>
+    <title>添加子版块</title>
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <%@ include file="slideBar.jsp"%>

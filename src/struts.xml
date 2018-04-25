@@ -10,35 +10,35 @@
     
     <package name="default" extends="struts-default" namespace="/">
         <action name="login" class="loginAction" method="loginPage">
-            <result name="success">WEB-INF/login.jsp</result>
+            <result name="success">/WEB-INF/web/login.jsp</result>
         </action>
         <action name="validateLogin" class="loginAction" method="validateLogin">
             <result name="success">WEB-INF/OperationStatus/loginSuccess.jsp</result>
-            <result name="error">WEB-INF/login.jsp</result>
+            <result name="error">/WEB-INF/web/login.jsp</result>
         </action>
         <action name="register" class="loginAction">
-            <result>WEB-INF/register.jsp</result>
+            <result>/WEB-INF/web/register.jsp</result>
         </action>
         <action name="validateRegister" class="loginAction" method="validateRegister">
-            <result name="success">WEB-INF/register.jsp</result>
-            <result name="error">WEB-INF/error.jsp</result>
+            <result name="success">/WEB-INF/web/register.jsp</result>
+            <result name="error">/WEB-INF/web/error.jsp</result>
         </action>
         <action name="logout" class="loginAction" method="logout">
-            <result name="success">WEB-INF/login.jsp</result>
+            <result name="success">/WEB-INF/web/login.jsp</result>
         </action>
         <action name="mainforum" class="mainForumAction" method="browserMainForum">
-            <result name="all">WEB-INF/allMainForum.jsp</result>
-            <result name="sub">WEB-INF/mainForum.jsp</result>
+            <result name="all">/WEB-INF/web/allMainForum.jsp</result>
+            <result name="sub">/WEB-INF/web/mainForum.jsp</result>
         </action>
         <action name="subforum" class="subForumAction" method="browserSubForum">
-            <result name="success">WEB-INF/subForum.jsp</result>
+            <result name="success">/WEB-INF/web/subForum.jsp</result>
         </action>
         <action name="post" class="postAction" method="browserPost">
-            <result name="success">WEB-INF/post.jsp</result>
-            <result name="error">WEB-INF/error.jsp</result>
+            <result name="success">/WEB-INF/web/post.jsp</result>
+            <result name="error">/WEB-INF/web/error.jsp</result>
         </action>
         <action name="posting" class="postAction" method="getAddPostPageNeedUserLogin">
-            <result name="success">WEB-INF/posting.jsp</result>
+            <result name="success">/WEB-INF/web/posting.jsp</result>
             <result name="notlogin">WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>
         <action name="commitPosting" class="postAction" method="commitAddPostNeedUserLogin">
@@ -46,7 +46,7 @@
             <result name="notlogin">WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>
         <action name="updatePost" class="postAction" method="getUpdatePostPageNeedUserLogin">
-            <result name="success">WEB-INF/updatePost.jsp</result>
+            <result name="success">/WEB-INF/web/updatePost.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
@@ -67,7 +67,7 @@
             <result name="notlogin">WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>
         <action name="updateFollowpost" class="followpostAction" method="getUpdateFollowpostPageNeedUserLogin">
-            <result name="success">WEB-INF/updateFollowpost.jsp</result>
+            <result name="success">/WEB-INF/web/updateFollowpost.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
@@ -92,7 +92,7 @@
         </action>
 
         <action name="about">
-            <result>/WEB-INF/about.jsp</result>
+            <result>/WEB-INF/web/about.jsp</result>
         </action>
     </package>
 

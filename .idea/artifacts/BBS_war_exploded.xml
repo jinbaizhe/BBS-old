@@ -2,7 +2,6 @@
   <artifact type="exploded-war" name="BBS:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/BBS_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="BBS/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="BBS" />
@@ -14,8 +13,11 @@
           <element id="library" level="project" name="extra" />
           <element id="file-copy" path="$PROJECT_DIR$/lib/extra/aspectjrt-1.6.6.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/lib/extra/aspectjweaver-1.6.6.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/extra/aspectjrt-1.8.10.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/extra/aspectjweaver-1.8.10.jar" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="BBS/web/Web" />
     </root>
   </artifact>
 </component>

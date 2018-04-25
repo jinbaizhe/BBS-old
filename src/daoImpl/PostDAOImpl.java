@@ -37,11 +37,13 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
     @Override
     public List getPostsBySubForumId(int subForumId,int currentPage,int totalItemsPerPage,String order) {
         Session session=getSession();
-        String sql="select p,max(f.sendTime) as lastfollowpost from Post p,Followpost f where p.subForum.id=? and p.id=f.post.id group by p.id order by p.top desc";
+        String sql="select p, coalesce(max(f.sendTime),p.sendTime) as lastfollowpost " +
+                " from Post p left join Followpost f on p.id=f.post.id where p.subForum.id=? " +
+                "group by p.id order by p.top desc,";
         if(order.equals("lastfollowpost"))
-            sql=sql+",lastfollowpost desc";
+            sql=sql+"lastfollowpost desc";
         else if (order.equals("postsend"))
-            sql=sql+",p.sendTime desc";
+            sql=sql+"p.sendTime desc";
         Query query=session.createQuery(sql);
         query.setParameter(0,subForumId);
         query.setFirstResult((currentPage-1)*totalItemsPerPage);

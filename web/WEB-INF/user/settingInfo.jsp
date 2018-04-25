@@ -3,10 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%@include file="/WEB-INF/head.jsp"%>
+    <%@include file="/WEB-INF/web/head.jsp"%>
+    <title>个人信息</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/web/header.jsp"></jsp:include>
 
 <div class="container">
     <div class="row">
@@ -152,7 +153,7 @@
                             <s:iterator value="posts" var="post">
                                 <div class="card my-sm-3">
                                     <div class="card-body">
-                                        <h5 class="card-title"><a href="/post.action?postid=<s:property value="#post.id"></s:property>"><s:property value="#post.title"></s:property></a></h5>
+                                        <h5 class="card-title">帖子标题：<a href="/post.action?postid=<s:property value="#post.id"></s:property>"><s:property value="#post.title"></s:property></a></h5>
                                         <p class="card-text">
                                             <s:property value="#post.content" escapeHtml="false"></s:property>
                                         </p>
@@ -174,7 +175,7 @@
                                 <s:iterator value="followposts" var="followpost">
                                     <div class="card my-sm-3">
                                         <div class="card-body">
-                                            <h5 class="card-title">回复：<a href="/post.action?postid=<s:property value="#followpost.post.id"></s:property>"><s:property value="#followpost.post.title"></s:property></a></h5>
+                                            <h5 class="card-title">回复帖子：<a href="/post.action?postid=<s:property value="#followpost.post.id"></s:property>"><s:property value="#followpost.post.title"></s:property></a></h5>
                                             <p class="card-text">
                                                 <s:property value="#followpost.content" escapeHtml="false"></s:property>
                                             </p>
@@ -200,7 +201,7 @@
     </div>
 </div>
 
-<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
-<%@include file="/WEB-INF/foot.jsp"%>
+<jsp:include page="/WEB-INF/web/footer.jsp"></jsp:include>
+<%@include file="/WEB-INF/web/foot.jsp"%>
 </body>
 </html>

@@ -29,7 +29,7 @@ public class SuperAdminAspect {
         if(user.getType()==2)
         {
             s=(String) jp.proceed();
-            return "success";
+            return s;
         }
         else
         {

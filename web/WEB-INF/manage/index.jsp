@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <%@include file="head.jsp"%>
-    <title></title>
+    <title>首页</title>
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <%@ include file="slideBar.jsp"%>
@@ -15,7 +15,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="/">后台管理系统</a>
+                <a href="/manage/index.action">后台管理系统</a>
             </li>
             <li class="breadcrumb-item active">留言板管理</li>
         </ol>

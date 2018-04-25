@@ -7,13 +7,10 @@ import service.FollowpostService;
 import service.PictureService;
 import service.PostService;
 import service.SubForumService;
-import util.Num;
 import util.Pager;
 import vo.*;
-
+import javax.servlet.ServletContext;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
@@ -143,10 +140,19 @@ public class PostAction extends ActionSupport {
             return ERROR;
         post=postService.getPostById(postid);
         int totalFollowpostsNum=followpostService.getFollowpostsNumByPostId(postid);
-        followposts=followpostService.getFollowpostsByPostId(postid,page, Num.ShowFollowpostsPerPageNum.getValue(),order);
+
+        //读取web.xml获取ShowFollowpostsPerPageNum参数
+        ServletContext servletContext =ServletActionContext.getServletContext();
+        final int ShowFollowpostsPerPageNum=Integer.valueOf(servletContext.getInitParameter("ShowFollowpostsPerPageNum"));
+
+        followposts=followpostService.getFollowpostsByPostId(postid,page, ShowFollowpostsPerPageNum,order);
         pictures=pictureService.getPicturesByPostId(post.getId());
         Map request=(Map)ActionContext.getContext().get("request");
-        Pager pager=new Pager(page,Num.ShowFollowpostsPerPageNum.getValue(),totalFollowpostsNum);
+
+        //读取web.xml获取ShowPostsPerPageNum参数
+        final int ShowPostsPerPageNum=Integer.valueOf(servletContext.getInitParameter("ShowPostsPerPageNum"));
+
+        Pager pager=new Pager(page,ShowPostsPerPageNum,totalFollowpostsNum);
         request.put("pager",pager);
         return SUCCESS;
     }

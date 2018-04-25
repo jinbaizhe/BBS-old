@@ -1,0 +1,10 @@
+insert into main_forum(name,info,create_time) values("运动&amp;装备","运动&amp;装备来自虎扑装备社区.","2018-04-24 22:31:27");
+insert into sub_forum(name,info,main_forum_id,create_time) values ("运动装备","篮球鞋，Sneaker文化，球星卡，各种篮球用品，前瞻与交流，经典收藏赏析，禁止交流晒假厂货，交易纠纷曝光骗子请发意见区受理，发布广告和售卖物品一律按广告处理永封。禁止一图流","3","2018-04-24 22:31:27");
+insert into sub_forum(name,info,main_forum_id,create_time) values ("球衣区","★ 发鉴定、咨询、问价、求购、出售、假球衣、青年版球衣帖，一律转水 + 小黑屋！！ ★  欢迎展示收藏，分享心得，讨论话题，开展活动！","3","2018-04-24 22:31:27");
+insert into sub_forum(name,info,main_forum_id,create_time) values ("潮流区","严禁任何形式的广告宣传交易转让，taobao卖家止步。支持原创，禁止纯转载的帖子。请初接触这个板块的同学发问询帖详细避免变成水帖。","3","2018-04-24 22:31:27");
+insert into sub_forum(name,info,main_forum_id,create_time) values ("交易区(新品)","小心狗皮膏药假货卖家，特征;进入微店售卖，无意义id及实拍id图,码数全,价过低。出售厂、假货永久封禁,禁售物品:具体查阅置顶版规","3","2018-04-24 22:31:28");
+insert into sub_forum(name,info,main_forum_id,create_time) values ("二手交易区","【禁止先款】仅限交易版规限定物品，物品必须实物图明码标价带ID。禁止打出“试穿成色或9.99新等旗号”在二手区发布！售厂售假者一律永久封禁。禁止恶性竞争不满七天重复发帖。禁止出售禁售物品。禁止二手贩子打广告","3","2018-04-24 22:31:28");
+insert into sub_forum(name,info,main_forum_id,create_time) values ("求购区","禁止先款，让你先款的一律让他滚蛋！求购区的一切都与虎扑官方无关，请各位买家三思再下手，发帖请注明选择类别，标题请规范，禁止在求购区发交易帖或广告及变相广告，发现者永久封禁！","3","2018-04-24 22:31:28");
+insert into sub_forum(name,info,main_forum_id,create_time) values ("鉴定中心","欢迎各位JRS来到鉴定区。首先请阅读鉴定区版规，鉴定所需图片格式已更新。需注意回帖留联系方式帮助鉴定的均为骗子。","3","2018-04-24 22:31:28");
+insert into sub_forum(name,info,main_forum_id,create_time) values ("装备咨询问答","装备问题咨询专区，帮助大家解决运动装备的各种疑问，与咨询无关的内容禁止讨论，情节严重者封禁处理","3","2018-04-24 22:31:28");
+insert into sub_forum(name,info,main_forum_id,create_time) values ("球鞋手稿","球鞋设计，DIY交流，一切对设计有爱的同鞋！！！","3","2018-04-24 22:31:29");

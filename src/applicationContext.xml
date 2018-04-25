@@ -11,8 +11,8 @@
        http://www.springframework.org/schema/aop/spring-aop.xsd">
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://localhost:3306/BBS"></property>
-        <property name="username" value="parker"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/bbs"></property>
+        <property name="username" value="test"></property>
         <property name="password" value="parker123456"></property>
         <property name="minIdle" value="8"></property>
         <property name="maxIdle" value="15"></property>
@@ -28,7 +28,6 @@
                 <prop key="hibernate.dialect">
                     org.hibernate.dialect.MySQLDialect
                 </prop>
-                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/BBS</prop>
                 <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
                 <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.format_sql">false</prop>

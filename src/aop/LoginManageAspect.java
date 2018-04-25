@@ -30,7 +30,7 @@ public class LoginManageAspect {
         if(user.getType()>=1)
         {
             s=(String) jp.proceed();
-            return "success";
+            return s;
         }
         else
         {
