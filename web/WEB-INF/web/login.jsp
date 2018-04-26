@@ -32,8 +32,8 @@
                     <!--<small class="form-text text-muted" name=""></small>-->
                 </div>
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="autologin" checked>
-                    <label class="form-check-label">下次自动登录</label>
+                    <input type="checkbox" class="form-check-input" name="autoLogin" checked  value="true">
+                    <label class="form-check-label">七日内自动登录</label>
                 </div>
                 <div class="form-group text-center mt-sm-4">
                     <input class="btn btn-primary btn-block" type="submit" value="登录">

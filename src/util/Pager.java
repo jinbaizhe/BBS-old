@@ -10,6 +10,7 @@ public class Pager {
     private int showItemsPerPageNum;
     private int totalPageNum;
     private int totalItemNum;
+    private int beginIndex;
     public Pager(int currentPage,int showItemsPerPageNum,int totalItemNum)
     {
         this.currentPage=currentPage;
@@ -20,6 +21,7 @@ public class Pager {
         else
             this.totalPageNum=totalItemNum/showItemsPerPageNum
                     +(totalItemNum%showItemsPerPageNum==0?0:1);
+        beginIndex=(currentPage-1)*showItemsPerPageNum+1;
     }
 
     public int getCurrentPage() {
@@ -53,6 +55,15 @@ public class Pager {
     public int getTotalPageNum() {
         return totalPageNum;
     }
+
+    public int getBeginIndex() {
+        return beginIndex;
+    }
+
+    public void setBeginIndex(int beginIndex) {
+        this.beginIndex = beginIndex;
+    }
+
     public boolean isFirstPage()
     {
         if(currentPage==1)

@@ -152,7 +152,7 @@ public class PostAction extends ActionSupport {
         //读取web.xml获取ShowPostsPerPageNum参数
         final int ShowPostsPerPageNum=Integer.valueOf(servletContext.getInitParameter("ShowPostsPerPageNum"));
 
-        Pager pager=new Pager(page,ShowPostsPerPageNum,totalFollowpostsNum);
+        Pager pager=new Pager(page,ShowFollowpostsPerPageNum,totalFollowpostsNum);
         request.put("pager",pager);
         return SUCCESS;
     }

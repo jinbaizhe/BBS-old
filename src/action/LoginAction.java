@@ -7,6 +7,7 @@ import service.UserService;
 import vo.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public class LoginAction extends ActionSupport {
@@ -14,6 +15,7 @@ public class LoginAction extends ActionSupport {
 	private User user;
 	private String registerInfo;
 	private String loginInfo;
+	private String autoLogin;
 	public UserService getUserService() {
 		return userService;
 	}
@@ -46,6 +48,14 @@ public class LoginAction extends ActionSupport {
 		this.loginInfo = loginInfo;
 	}
 
+	public String getAutoLogin() {
+		return autoLogin;
+	}
+
+	public void setAutoLogin(String autoLogin) {
+		this.autoLogin = autoLogin;
+	}
+
 	public String loginPage() throws Exception
     {
         ActionContext context=ActionContext.getContext();
@@ -64,6 +74,11 @@ public class LoginAction extends ActionSupport {
 		{
 			Map session= ActionContext.getContext().getSession();
 			session.put("user",user);
+			if(autoLogin!=null&&autoLogin.equals("true"))
+			{
+				//当用户勾选自动登录时
+				//暂未实现
+			}
 			return SUCCESS;
 		}
 		else{

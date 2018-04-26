@@ -92,7 +92,6 @@
                             <s:if test="post.user.id==#session.user.id||#session.user.type==1">
                                 <a style="float:right;margin-right: 20px;" href="deletePost.action?postid=<s:property value="post.id"></s:property>">删除</a>
                             </s:if>
-
                             <s:if test="post.user.id==#session.user.id">
                                 <a style="float:right;margin-right: 20px;" href="updatePost?postid=<s:property value="post.id"></s:property>">编辑</a>
                             </s:if>
@@ -137,7 +136,7 @@
             </div>
         </div>
 
-        <s:iterator value="followposts" var="followpost">
+        <s:iterator value="followposts" var="followpost" status="st">
             <!-- 回复内容 -->
             <div class="row" style="margin-top: 5px">
                 <div class="col-sm-2" style="padding-right: 0px;">
@@ -166,7 +165,7 @@
                         <div class="reply-time">
                             <span style="color: gray">回复于:<s:date name="#followpost.sendTime" format="yyyy-MM-dd HH:mm:ss"></s:date></span>
                             <div style="float:right;margin-right:10px">
-                                <span class="badge" style="float:right;margin-right:10px;background: #4b9ded;width: 50px;">X楼</span>
+                                <span class="badge" style="float:right;margin-right:10px;background: #4b9ded;width: 50px;"><s:property value="#st.index+#request.pager.beginIndex"></s:property>楼</span>
                             </div>
                             <s:if test="#followpost.user.id==#session.user.id||#session.user.type==1">
                                 <a style="float:right;margin-right: 20px;" href="deleteFollowpost.action?followpostid=<s:property value="#followpost.id"></s:property>">删除</a>
@@ -178,9 +177,9 @@
                         </div>
                         <div style="margin: 20px;">
                                 ${followpost.content}
-                                    <s:iterator value="#followpost.followpostPictures" var="picture">
-                                        <img src="getPicture.action?id=<s:property value="#picture.id"></s:property>" width="200" height="150" alt="无法显示图片">
-                                    </s:iterator>
+                                <s:iterator value="#followpost.followpostPictures" var="picture">
+                                    <img src="getPicture.action?id=<s:property value="#picture.id"></s:property>" width="200" height="150" alt="无法显示图片">
+                                </s:iterator>
                         </div>
                     </div>
                 </div>
