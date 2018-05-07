@@ -1,6 +1,8 @@
 package serviceImpl;
 
 import dao.SubForumDAO;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import service.SubForumService;
 import util.Util;
 import vo.SubForum;
@@ -32,7 +34,17 @@ public class SubForumServiceImpl implements SubForumService {
     @Override
     public void addSubForum(SubForum subForum) {
         subForum.setCreateTime(Timestamp.valueOf(Util.getCurrentDateTime()));
-        subForumDAO.addSubForum(subForum);
+        Session session=subForumDAO.getSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            subForumDAO.addSubForum(subForum);
+            session.flush();
+            transaction.commit();
+        }catch (Exception e)
+        {
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override
@@ -40,11 +52,31 @@ public class SubForumServiceImpl implements SubForumService {
         SubForum temp_subForum=getSubForumById(subForum.getId());
         temp_subForum.setName(subForum.getName());
         temp_subForum.setInfo(subForum.getInfo());
-        subForumDAO.updateSubForum(temp_subForum);
+        Session session=subForumDAO.getSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            subForumDAO.updateSubForum(temp_subForum);
+            session.flush();
+            transaction.commit();
+        }catch (Exception e)
+        {
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override
     public void deleteSubForum(SubForum subForum) {
-        subForumDAO.deleteSubForum(subForum);
+        Session session=subForumDAO.getSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            subForumDAO.deleteSubForum(subForum);
+            session.flush();
+            transaction.commit();
+        }catch (Exception e)
+        {
+            transaction.rollback();
+            throw e;
+        }
     }
 }

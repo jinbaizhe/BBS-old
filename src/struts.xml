@@ -21,7 +21,6 @@
         </action>
         <action name="validateRegister" class="loginAction" method="validateRegister">
             <result name="success">/WEB-INF/web/register.jsp</result>
-            <result name="error">/WEB-INF/web/error.jsp</result>
         </action>
         <action name="logout" class="loginAction" method="logout">
             <result name="success">/WEB-INF/web/login.jsp</result>

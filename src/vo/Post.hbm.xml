@@ -7,6 +7,7 @@
     <class name="vo.Post" table="post" schema="bbs">
         <id name="id">
             <column name="id" sql-type="int(11)"/>
+            <generator class="increment"></generator>
         </id>
         <property name="title">
             <column name="title" sql-type="varchar(50)" length="50"/>

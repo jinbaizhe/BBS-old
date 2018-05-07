@@ -19,7 +19,7 @@ public class BaseDAO<T> {
 
     public Session getSession()
     {
-        return getSessionFactory().openSession();
+        return getSessionFactory().getCurrentSession();
     }
 
     public T get(Class<T> entityClass, Serializable id)
@@ -30,27 +30,21 @@ public class BaseDAO<T> {
     public void create(T entity)
     {
         Session session=getSession();
-        Transaction transaction=session.beginTransaction();
         session.save(entity);
-        transaction.commit();
-        session.close();
+//        session.close();
     }
 
     public void update(T entity)
     {
         Session session=getSession();
-        Transaction transaction=session.beginTransaction();
         session.update(entity);
-        transaction.commit();
-        session.close();
+//        session.close();
     }
 
     public void delete(T entity)
     {
         Session session=getSession();
-        Transaction transaction=session.beginTransaction();
         session.delete(entity);
-        transaction.commit();
-        session.close();
+//        session.close();
     }
 }

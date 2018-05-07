@@ -26,7 +26,7 @@
         <property name="pictureService" ref="pictureService"></property>
     </bean>
 
-    <bean id="pictureAction" class="action.PictureAction">
+    <bean id="pictureAction" class="action.PictureAction" scope="prototype">
         <property name="pictureService" ref="pictureService"></property>
     </bean>
 

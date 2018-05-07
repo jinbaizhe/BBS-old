@@ -177,8 +177,8 @@
                         </div>
                         <div style="margin: 20px;">
                                 ${followpost.content}
-                                <s:iterator value="#followpost.followpostPictures" var="picture">
-                                    <img src="getPicture.action?id=<s:property value="#picture.id"></s:property>" width="200" height="150" alt="无法显示图片">
+                                <s:iterator value="#followpost.followpostPictures" var="item">
+                                    <img src="getPicture.action?id=<s:property value="#item.picture.id"></s:property>" width="200" height="150" alt="无法显示图片">
                                 </s:iterator>
                         </div>
                     </div>

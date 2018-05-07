@@ -1,6 +1,8 @@
 package serviceImpl;
 
 import dao.UserDAO;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import service.UserService;
 import util.Util;
 import vo.User;
@@ -25,17 +27,39 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(User user) {
+    public void createUser(User user) throws Exception {
         user.setLevel(0);
         user.setStatus(0);
         user.setType(0);
         user.setRegisterTime(Timestamp.valueOf(Util.getCurrentDateTime()));
-        userDAO.createUser(user);
+        Session session=userDAO.getSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            if(userDAO.isExistUser(user.getUsername()))
+                throw new Exception("用户名已被注册");
+            userDAO.createUser(user);
+            session.flush();
+            transaction.commit();
+        }catch (Exception e)
+        {
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override
     public void updateUser(User user) {
-        userDAO.updateUser(user);
+        Session session=userDAO.getSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            userDAO.updateUser(user);
+            session.flush();
+            transaction.commit();
+        }catch (Exception e)
+        {
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override
@@ -67,6 +91,7 @@ public class UserServiceImpl implements UserService {
         temp_user.setInfo(user.getInfo());
         temp_user.setSex(user.getSex());
         userDAO.updateUser(temp_user);
+
     }
 
     @Override
@@ -87,6 +112,4 @@ public class UserServiceImpl implements UserService {
     public User getUserByid(int userid) {
         return userDAO.getUser(userid);
     }
-
-
 }

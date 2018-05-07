@@ -3,6 +3,8 @@ package serviceImpl;
 import dao.FollowpostPictureDAO;
 import dao.PictureDAO;
 import dao.PostPictureDAO;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import service.PictureService;
 import util.Util;
 import vo.*;
@@ -39,32 +41,9 @@ public class PictureServiceImpl implements PictureService {
         this.followpostPictureDAO = followpostPictureDAO;
     }
 
-    public void createPicture(Picture picture)
-    {
-        picture.setUploadTime(Timestamp.valueOf(Util.getCurrentDateTime()));
-        pictureDAO.createPicture(picture);
-    }
     public void deletePicture(Picture picture)
     {
         pictureDAO.deletePicture(picture);
-    }
-
-    @Override
-    public void createPictureFromPost(Picture picture, Post post) {
-        createPicture(picture);
-        PostPicture postPicture=new PostPicture();
-        postPicture.setPicture(picture);
-        postPicture.setPost(post);
-        postPictureDAO.createPostPicture(postPicture);
-    }
-
-    @Override
-    public void createPictureFromFollowpost(Picture picture, Followpost followpost) {
-        createPicture(picture);
-        FollowpostPicture followpostPicture=new FollowpostPicture();
-        followpostPicture.setPicture(picture);
-        followpostPicture.setFollowpost(followpost);
-        followpostPictureDAO.createFollowpostPicture(followpostPicture);
     }
 
     @Override
@@ -72,7 +51,17 @@ public class PictureServiceImpl implements PictureService {
         PostPicture postPicture=new PostPicture();
         postPicture.setPicture(picture);
         postPicture.setPost(post);
-        postPictureDAO.deletePostPicture(postPicture);
+        Session session=postPictureDAO.getSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            postPictureDAO.deletePostPicture(postPicture);
+            session.flush();
+            transaction.commit();
+        }catch (Exception e)
+        {
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override
@@ -80,7 +69,17 @@ public class PictureServiceImpl implements PictureService {
         FollowpostPicture followpostPicture=new FollowpostPicture();
         followpostPicture.setPicture(picture);
         followpostPicture.setFollowpost(followpost);
-        followpostPictureDAO.deleteFollowpostPicture(followpostPicture);
+        Session session=postPictureDAO.getSession();
+        Transaction transaction=session.beginTransaction();
+        try{
+            followpostPictureDAO.deleteFollowpostPicture(followpostPicture);
+            session.flush();
+            transaction.commit();
+        }catch (Exception e)
+        {
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override

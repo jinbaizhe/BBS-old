@@ -83,19 +83,7 @@ public class FollowpostAction extends ActionSupport {
     {
         followpost.setPost(postService.getPostById(postid));
         followpost.setUser((User)ActionContext.getContext().getSession().get("user"));
-        followpostService.createFollowpost(followpost);
-
-        String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload/");
-        if(files!=null) {
-            for (File source_file : files) {
-                File dest_file = new File(path + followpost.hashCode() + "" + source_file.hashCode() + ".jpg");
-                Files.copy(source_file.toPath(), dest_file.toPath());
-                source_file.delete();
-                Picture picture = new Picture();
-                picture.setPicture(dest_file.getName());
-                pictureService.createPictureFromFollowpost(picture, followpost);
-            }
-        }
+        followpostService.createFollowpost(followpost,files);
         return SUCCESS;
     }
 

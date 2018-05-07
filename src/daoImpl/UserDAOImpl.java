@@ -19,7 +19,7 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
         query.setParameter(0, username);
         query.setParameter(1, password);
         List users=query.list();
-        session.close();
+//        session.close();
         User user=null;
         if(users.size()!=0)
             user=(User)users.get(0);
@@ -48,7 +48,7 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
         Query query=session.createQuery(sql);
         query.setParameter(0, username);
         List users=query.list();
-        session.close();
+//        session.close();
         if (users.size()!=0)
             return true;
         else
@@ -63,7 +63,7 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
         query.setFirstResult((currentPage-1)*totalItemsPerPage);
         query.setMaxResults(totalItemsPerPage);
         List users=query.list();
-        session.close();
+//        session.close();
         return users;
     }
 
@@ -73,7 +73,7 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
         String sql="from User u where u.type<2 order by u.registerTime desc ";
         Query query=session.createQuery(sql);
         List users=query.list();
-        session.close();
+//        session.close();
         return users;
     }
 
@@ -83,7 +83,7 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
         Query query=session.createQuery("from User u where u.id=?");
         query.setParameter(0,id);
         List users=query.list();
-        session.close();
+//        session.close();
         User user=null;
         if(users.size()!=0)
             user=(User)users.get(0);

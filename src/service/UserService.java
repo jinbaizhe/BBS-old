@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
     public User validateUser(String username, String password);
-    public void createUser(User user);
+    public void createUser(User user) throws Exception;
     public void updateUser(User user);
     public boolean isExistUser(String username);
     public List getAllUsersExceptSelf(User user,int currentPage,int totalItemsPerPage);

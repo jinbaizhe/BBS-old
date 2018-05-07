@@ -5,7 +5,10 @@
 <hibernate-mapping>
 
     <class name="vo.Game" table="game" schema="bbs">
-        <id name="id" column="id"/>
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+            <generator class="increment"></generator>
+        </id>
         <property name="home" column="home"/>
         <property name="away" column="away"/>
         <property name="date" column="date"/>

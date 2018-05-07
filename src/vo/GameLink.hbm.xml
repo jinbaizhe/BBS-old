@@ -5,7 +5,10 @@
 <hibernate-mapping>
 
     <class name="vo.GameLink" table="game_link" schema="bbs">
-        <id name="id" column="id"/>
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+            <generator class="increment"></generator>
+        </id>
         <property name="info" column="info"/>
         <property name="orderNum" column="order_num"/>
         <many-to-one name="game" class="vo.Game" lazy="false">

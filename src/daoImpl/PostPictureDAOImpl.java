@@ -6,7 +6,8 @@ import vo.PostPicture;
 
 public class PostPictureDAOImpl extends BaseDAO<PostPicture> implements PostPictureDAO {
     @Override
-    public void createPostPicture(PostPicture postPicture) {
+    public void createPostPicture(PostPicture postPicture)
+    {
         create(postPicture);
     }
 

@@ -11,7 +11,6 @@ import util.Pager;
 import vo.*;
 import javax.servlet.ServletContext;
 import java.io.File;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +29,7 @@ public class PostAction extends ActionSupport {
     private int page=1;
     private List<File> files;
     private String order="asc";
+
 
     public PostService getPostService() {
         return postService;
@@ -172,20 +172,9 @@ public class PostAction extends ActionSupport {
         post.setSubForum(subForumService.getSubForumById(subforumid));
         Map session=ActionContext.getContext().getSession();
         post.setUser((User)session.get("user"));
-        postService.createPost(post);
-        String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload/");
-        if(files!=null)
-        {
-            for(File source_file:files)
-            {
-                File dest_file=new File(path+post.hashCode()+""+source_file.hashCode()+".jpg");
-                Files.copy(source_file.toPath(),dest_file.toPath());
-                source_file.delete();
-                Picture picture=new Picture();
-                picture.setPicture(dest_file.getName());
-                pictureService.createPictureFromPost(picture,post);
-            }
-        }
+
+        postService.createPost(post,files);
+
         return SUCCESS;
     }
 

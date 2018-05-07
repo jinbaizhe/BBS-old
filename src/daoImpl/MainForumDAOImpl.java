@@ -17,7 +17,7 @@ public class MainForumDAOImpl extends BaseDAO<MainForum> implements MainForumDAO
         String sql="from MainForum mf order by createTime";
         Query query=session.createQuery(sql);
         List mainForums=query.list();
-        session.close();
+//        session.close();
         return mainForums;
     }
 
@@ -31,7 +31,7 @@ public class MainForumDAOImpl extends BaseDAO<MainForum> implements MainForumDAO
         MainForum mainForum=null;
         if(mainForums.size()!=0)
             mainForum=(MainForum) mainForums.get(0);
-        session.close();
+//        session.close();
         return mainForum;
     }
 

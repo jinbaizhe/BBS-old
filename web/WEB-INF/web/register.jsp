@@ -61,7 +61,7 @@
                 </div>
                 <div class="form-group">
                     <label>再次确认密码</label>
-                    <input type="password" class="form-control" name="password2" placeholder="请再次输入密码">
+                    <input type="password" class="form-control" name="password_repeat" placeholder="请再次输入密码">
                     <!--<small class="form-text text-muted" name=""></small>-->
                 </div>
 

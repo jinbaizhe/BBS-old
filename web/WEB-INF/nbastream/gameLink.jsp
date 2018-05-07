@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <%@include file="/WEB-INF/web/head.jsp"%>
-    <title><strong><s:property value="game.away"></s:property></strong>&nbsp;VS&nbsp;<strong><s:property value="game.home"></s:property></strong></title>
+    <title><s:property value="game.away"></s:property>&nbsp;VS&nbsp;<s:property value="game.home"></s:property></title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/web/header.jsp"></jsp:include>

@@ -16,7 +16,7 @@ public class SubForumDAOImpl extends BaseDAO<SubForum> implements SubForumDAO {
         Query query=session.createQuery(sql);
         query.setParameter(0,mainForumId);
         List subForums=query.list();
-        session.close();
+//        session.close();
         return subForums;
     }
 
@@ -30,7 +30,7 @@ public class SubForumDAOImpl extends BaseDAO<SubForum> implements SubForumDAO {
         SubForum subForum=null;
         if (subForums.size()!=0)
             subForum=(SubForum) subForums.get(0);
-        session.close();
+//        session.close();
         return subForum;
     }
 

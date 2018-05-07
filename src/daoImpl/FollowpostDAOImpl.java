@@ -17,7 +17,7 @@ public class FollowpostDAOImpl extends BaseDAO<Followpost> implements Followpost
         query.setParameter(0,id);
         List followposts=query.list();
         Followpost followpost=null;
-        session.close();
+//        session.close();
         if (followposts.size()!=0)
             followpost=(Followpost) followposts.get(0);
         return followpost;
@@ -32,7 +32,7 @@ public class FollowpostDAOImpl extends BaseDAO<Followpost> implements Followpost
         query.setFirstResult((currentPage-1)*totalItemsPerPage);
         query.setMaxResults(totalItemsPerPage);
         List followposts=query.list();
-        session.close();
+//        session.close();
         return followposts;
     }
 
@@ -58,7 +58,7 @@ public class FollowpostDAOImpl extends BaseDAO<Followpost> implements Followpost
         Query query=session.createQuery(sql);
         query.setParameter(0,postId);
         int size=query.list().size();
-        session.close();
+//        session.close();
         return size;
     }
 
@@ -68,7 +68,7 @@ public class FollowpostDAOImpl extends BaseDAO<Followpost> implements Followpost
         Query query=session.createQuery("from Followpost f where f.user.id=? order by "+order);
         query.setParameter(0,userid);
         List followposts=query.list();
-        session.close();
+//        session.close();
         return followposts;
     }
 }

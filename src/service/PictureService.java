@@ -8,8 +8,6 @@ import vo.Post;
 import java.util.List;
 
 public interface PictureService {
-    public void createPictureFromPost(Picture picture, Post post);
-    public void createPictureFromFollowpost(Picture picture, Followpost followpost);
     public void deletePictureFromPost(Picture picture, Post post);
     public void deletePictureFromFollowpost(Picture picture, Followpost followpost);
     public Picture getPictureById(int id);

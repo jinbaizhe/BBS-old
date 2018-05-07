@@ -5,8 +5,6 @@ import dao.PostDAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import vo.Post;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
@@ -28,7 +26,7 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
         query.setParameter(0,Integer.valueOf(id));
         List posts=query.list();
         Post post=null;
-        session.close();
+//        session.close();
         if (posts.size()!=0)
             post=(Post) posts.get(0);
         return post;
@@ -49,7 +47,7 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
         query.setFirstResult((currentPage-1)*totalItemsPerPage);
         query.setMaxResults(totalItemsPerPage);
         List posts=query.list();
-        session.close();
+//        session.close();
         return posts;
     }
 
@@ -75,7 +73,7 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
         Query query=session.createQuery(sql);
         query.setParameter(0,subForumId);
         int size=query.list().size();
-        session.close();
+//        session.close();
         return size;
     }
 
@@ -85,7 +83,7 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
         Query query=session.createQuery("from Post p where p.user.id=? order by "+order);
         query.setParameter(0,userid);
         List posts=query.list();
-        session.close();
+//        session.close();
         return posts;
     }
 }

@@ -1,10 +1,14 @@
 package dao;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import vo.Post;
 
 import java.util.List;
 
 public interface PostDAO {
+    public Session getSession();
+    public SessionFactory getSessionFactory();
     public Post getPostById(int id);
     public List getPostsBySubForumId(int subForumId,int currentPage,int totalItemsPerPage,String order);
     public int getPostsNumBySubForumId(int subForumId);

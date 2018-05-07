@@ -16,6 +16,7 @@ public class LoginAction extends ActionSupport {
 	private String registerInfo;
 	private String loginInfo;
 	private String autoLogin;
+	private String password_repeat;
 	public UserService getUserService() {
 		return userService;
 	}
@@ -54,6 +55,14 @@ public class LoginAction extends ActionSupport {
 
 	public void setAutoLogin(String autoLogin) {
 		this.autoLogin = autoLogin;
+	}
+
+	public String getPassword_repeat() {
+		return password_repeat;
+	}
+
+	public void setPassword_repeat(String password_repeat) {
+		this.password_repeat = password_repeat;
 	}
 
 	public String loginPage() throws Exception
@@ -98,15 +107,19 @@ public class LoginAction extends ActionSupport {
 
 	public String validateRegister() throws Exception
 	{
-		try{
-			userService.createUser(user);
-		}
-		catch (Exception e)
+		if(!password_repeat.equals(user.getPassword()))
+			registerInfo="注册失败：密码两次输入不一致";
+		else
 		{
-			registerInfo="注册失败";
-			return "error";
+			try{
+				userService.createUser(user);
+				registerInfo="注册成功";
+			}
+			catch (Exception e)
+			{
+				registerInfo="注册失败";
+			}
 		}
-		registerInfo="注册成功";
 		return SUCCESS;
 	}
 }

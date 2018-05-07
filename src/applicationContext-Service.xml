@@ -8,9 +8,13 @@
     </bean>
     <bean id="postService" class="serviceImpl.PostServiceImpl">
         <property name="postDAO" ref="postDAO"></property>
+        <property name="postPictureDAO" ref="postPictureDAO"></property>
+        <property name="pictureDAO" ref="pictureDAO"></property>
     </bean>
     <bean id="followpostService" class="serviceImpl.FollowpostServiceImpl">
         <property name="followpostDAO" ref="followpostDAO"></property>
+        <property name="followpostPictureDAO" ref="followpostPictureDAO"></property>
+        <property name="pictureDAO" ref="pictureDAO"></property>
     </bean>
     <bean id="mainForumService" class="serviceImpl.MainForumServiceImpl">
         <property name="mainForumDAO" ref="mainForumDAO"></property>

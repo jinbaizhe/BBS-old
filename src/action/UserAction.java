@@ -20,6 +20,8 @@ public class UserAction extends ActionSupport {
     private String type="info";
     private List posts;
     private List followposts;
+    private String password_old;
+    private String password_repeat;
     public User getUser() {
         return user;
     }
@@ -92,6 +94,22 @@ public class UserAction extends ActionSupport {
         this.followpostService = followpostService;
     }
 
+    public String getPassword_old() {
+        return password_old;
+    }
+
+    public void setPassword_old(String password_old) {
+        this.password_old = password_old;
+    }
+
+    public String getPassword_repeat() {
+        return password_repeat;
+    }
+
+    public void setPassword_repeat(String password_repeat) {
+        this.password_repeat = password_repeat;
+    }
+
     private User getSessionUser()
     {
         Map session= ActionContext.getContext().getSession();
@@ -111,18 +129,20 @@ public class UserAction extends ActionSupport {
         user.setId(session_user.getId());
         userService.updateUserInfo(user);
         message_info="修改信息成功";
-        getSettingPageNeedUserLogin();
-        type="info";
         //user更新保存到session中
         Map session= ActionContext.getContext().getSession();
         session.put("user",userService.getUserByid(user.getId()));
+        getSettingPageNeedUserLogin();
+        type="info";
         return SUCCESS;
     }
 
     public String updateUserPasswordNeedUserLogin()
     {
         User session_user=getSessionUser();
-        if(!user.getPassword().equals(session_user.getPassword()))
+        if(!password_repeat.equals(user.getPassword()))
+            message_password="修改失败：两次密码输入不一致";
+        else if(!password_old.equals(session_user.getPassword()))
             message_password="修改失败：旧密码输入错误";
         else
          {

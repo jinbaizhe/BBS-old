@@ -2,11 +2,12 @@ package service;
 
 import vo.Post;
 
+import java.io.File;
 import java.util.List;
 
 public interface PostService {
     public Post getPostById(int id);
-    public void createPost(Post post);
+    public void createPost(Post post, List<File> files);
     public void updatePost(Post post);
     public void deletePost(Post post);
     public List getPostsBySubForumId(int subForumId,int currentPage,int totalItemsPerPage,String order);

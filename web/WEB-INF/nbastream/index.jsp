@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-sm-10" style="margin-left: auto;margin-right: auto">
             <h1 style="text-align: center">NBA直播</h1>
-            <h3 style="text-align: center">(比赛前一小时左右更新直播信息)</h3>
+            <h3 style="text-align: center">（比赛前一小时左右更新直播信息）</h3>
             <s:if test="games.size==0">
                 <h2 style="text-align: center">暂无今日比赛信息</h2>
             </s:if>
