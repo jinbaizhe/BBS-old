@@ -17,7 +17,7 @@ public class GameDAOImpl extends BaseDAO<Game> implements GameDAO{
         Query query=session.createQuery("from Game g where g.date=?");
         query.setParameter(0,new Date());
         List list=query.list();
-        session.close();
+//        session.close();
         return list;
     }
 
@@ -31,7 +31,7 @@ public class GameDAOImpl extends BaseDAO<Game> implements GameDAO{
         Game game=null;
         if (list.size()!=0)
             game=(Game)list.get(0);
-        session.close();
+//        session.close();
         return game;
     }
 }

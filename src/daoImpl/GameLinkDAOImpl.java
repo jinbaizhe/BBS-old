@@ -14,7 +14,7 @@ public class GameLinkDAOImpl extends BaseDAO<GameLink> implements GameLinkDAO {
         Query query=session.createQuery("from GameLink gl where gl.game.id=?");
         query.setParameter(0,id);
         List list=query.list();
-        session.close();
+//        session.close();
         return list;
     }
 }

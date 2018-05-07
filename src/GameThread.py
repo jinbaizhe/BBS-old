@@ -64,8 +64,11 @@ def updateDB():
     currentAllGame = CurrentAllGame()
     while True:
         try:
-            conn = mysql.connector.connect(user='test', password='parker123456', database='bbs')
+            conn = mysql.connector.connect(host='106.15.177.154', user='test', password='parker123456', database='bbs')
             cursor = conn.cursor()
+            cursor.execute("set names utf8mb4;")
+            cursor.execute("SET COLLATION_CONNECTION = utf8mb4_unicode_ci;")
+
             game_list = currentAllGame.getCurrentAllGame()
             #game_list=[("hometeam", "awayteam", "https://www.reddit.com/r/nbastreams/comments/8cb76k/game_thread_miami_heat_philadelphia_76ers_200000/")]
             for home_team, away_team, url in game_list:
@@ -96,14 +99,14 @@ def updateDB():
                         print(str(e))
         except Exception as e:
             print(str(e))
-            time.sleep(60)
             continue
         else:
             print('success')
-        cursor.close()
-        conn.commit()
-        conn.close()
-        time.sleep(60*5)
+        finally:
+            cursor.close()
+            conn.commit()
+            conn.close()
+            time.sleep(60*5)
 
 
 t = threading.Thread(target=updateDB, daemon=True)

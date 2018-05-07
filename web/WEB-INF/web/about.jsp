@@ -34,6 +34,11 @@
                 <div class="my-sm-5">
                     <h3>历史更新</h3>
                     <p class="my-sm-3" style="text-align: left">
+                    <h5>版本：0.1.4</h5>
+                    1.修复查看直播链接时页面无法显示的问题。<br>
+                    2.更新后台Python爬虫脚本，支持表情字符。<br>
+                    </p>
+                    <p class="my-sm-3" style="text-align: left">
                     <h5>版本：0.1.3</h5>
                     1.使用事务管理。<br>
                     2.修复用户发帖、回帖时无法附带图片的问题。<br>
