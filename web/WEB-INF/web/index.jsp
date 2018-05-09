@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE>
 <html>
   <head>
     <META HTTP-EQUIV="Refresh" CONTENT="0;URL=mainforum.action">

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<!DOCTYPE>
 <html>
 <head>
     <%@include file="head.jsp"%>
@@ -24,6 +25,18 @@
                 </div>
                 <div class="my-sm-5">
                     <h3>历史更新</h3>
+                    <p class="my-sm-3" style="text-align: left">
+                    <h5>版本：0.2.1</h5>
+                    1.修复在IE11下无法加载CSS文件的问题。<br>
+                    </p>
+                    <p class="my-sm-3" style="text-align: left">
+                    <h5>版本：0.2.0</h5>
+                    1.添加验证码功能。<br>
+                    2.添加收藏帖子功能。<br>
+                    3.完善个人中心页面。<br>
+                    4.添加查看他人资料页面。<br>
+                    5.修复仍旧显示失效的直播链接的问题。<br>
+                    </p>
                     <p class="my-sm-3" style="text-align: left">
                     <h5>版本：0.1.4</h5>
                     1.修复查看直播链接时页面无法显示的问题。<br>

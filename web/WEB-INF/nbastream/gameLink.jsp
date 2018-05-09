@@ -1,7 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 
-<!DOCTYPE html>
+<!DOCTYPE>
 <html lang="en">
 <head>
     <%@include file="/WEB-INF/web/head.jsp"%>
