@@ -5,6 +5,7 @@
 
     <bean id="userService" class="serviceImpl.UserServiceImpl">
         <property name="userDAO" ref="userDAO"></property>
+        <property name="collectionDAO" ref="collectionDAO"></property>
     </bean>
     <bean id="postService" class="serviceImpl.PostServiceImpl">
         <property name="postDAO" ref="postDAO"></property>
@@ -27,7 +28,6 @@
         <property name="postPictureDAO" ref="postPictureDAO"></property>
         <property name="followpostPictureDAO" ref="followpostPictureDAO"></property>
     </bean>
-
     <bean id="nbaSteamService" class="serviceImpl.NBAStreamServiceImpl">
         <property name="gameDAO" ref="gameDAO"></property>
         <property name="gameLinkDAO" ref="gameLinkDAO"></property>

@@ -11,7 +11,7 @@ public class GameLinkDAOImpl extends BaseDAO<GameLink> implements GameLinkDAO {
     @Override
     public List getAllGameLinksByGameId(int id) {
         Session session=getSession();
-        Query query=session.createQuery("from GameLink gl where gl.game.id=?");
+        Query query=session.createQuery("from GameLink gl where gl.game.id=? and gl.orderNum>0 order by gl.orderNum asc");
         query.setParameter(0,id);
         List list=query.list();
 //        session.close();

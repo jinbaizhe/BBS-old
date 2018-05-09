@@ -90,6 +90,15 @@
             </result>
         </action>
 
+        <action name="getVerifyCode" class="pictureAction" method="getVerifyCode">
+            <result type="stream">
+                <param name="contentType">image/jpeg</param>
+                <param name="inputName">verifyCodeInputStream</param>
+                <param name="contentDisposition">attachment;filename="${filename}"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+
         <action name="about">
             <result>/WEB-INF/web/about.jsp</result>
         </action>
@@ -219,6 +228,9 @@
     </package>
 
     <package name="user" extends="struts-default" namespace="/user">
+        <action name="userInfo" class="userAction" method="getUserInfoPage">
+            <result name="success">/WEB-INF/user/userInfo.jsp</result>
+        </action>
         <action name="setting" class="userAction" method="getSettingPageNeedUserLogin">
             <result name="success">/WEB-INF/user/settingInfo.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
@@ -229,6 +241,14 @@
         </action>
         <action name="updateUserInfo" class="userAction" method="updateUserInfoNeedUserLogin">
             <result name="success">/WEB-INF/user/settingInfo.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+        </action>
+        <action name="starPost" class="userAction" method="starPostNeedUserLogin">
+            <result name="success">/WEB-INF/OperationStatus/operationSuccess.jsp</result>
+            <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
+        </action>
+        <action name="unstarPost" class="userAction" method="unstarPostNeedUserLogin">
+            <result name="success">/WEB-INF/OperationStatus/operationSuccess.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>
     </package>

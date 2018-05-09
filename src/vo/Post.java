@@ -15,13 +15,14 @@ public class Post {
     private Integer type;
     private Integer top;
     private Integer viewNum;
+    private Set<Collection> collections;
     private Set<Followpost> followposts;
-    private SubForum subForum;
     private User user;
+    private SubForum subForum;
     private Set<PostPicture> postPictures;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -31,7 +32,7 @@ public class Post {
     }
 
     @Basic
-    @Column(name = "title", nullable = true, length = 50)
+    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -41,7 +42,7 @@ public class Post {
     }
 
     @Basic
-    @Column(name = "content", nullable = true, length = 255)
+    @Column(name = "content")
     public String getContent() {
         return content;
     }
@@ -51,7 +52,7 @@ public class Post {
     }
 
     @Basic
-    @Column(name = "send_time", nullable = true)
+    @Column(name = "send_time")
     public Timestamp getSendTime() {
         return sendTime;
     }
@@ -61,7 +62,7 @@ public class Post {
     }
 
     @Basic
-    @Column(name = "update_time", nullable = true)
+    @Column(name = "update_time")
     public Timestamp getUpdateTime() {
         return updateTime;
     }
@@ -71,7 +72,7 @@ public class Post {
     }
 
     @Basic
-    @Column(name = "type", nullable = true)
+    @Column(name = "type")
     public Integer getType() {
         return type;
     }
@@ -81,7 +82,7 @@ public class Post {
     }
 
     @Basic
-    @Column(name = "top", nullable = true)
+    @Column(name = "top")
     public Integer getTop() {
         return top;
     }
@@ -91,7 +92,7 @@ public class Post {
     }
 
     @Basic
-    @Column(name = "view_num", nullable = true)
+    @Column(name = "view_num")
     public Integer getViewNum() {
         return viewNum;
     }
@@ -122,22 +123,21 @@ public class Post {
     }
 
     @OneToMany(mappedBy = "post")
+    public Set<Collection> getCollections() {
+        return collections;
+    }
+
+    public void setCollections(Set<Collection> collections) {
+        this.collections = collections;
+    }
+
+    @OneToMany(mappedBy = "post")
     public Set<Followpost> getFollowposts() {
         return followposts;
     }
 
     public void setFollowposts(Set<Followpost> followposts) {
         this.followposts = followposts;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "sub_forum_id", referencedColumnName = "id")
-    public SubForum getSubForum() {
-        return subForum;
-    }
-
-    public void setSubForum(SubForum subForum) {
-        this.subForum = subForum;
     }
 
     @ManyToOne
@@ -148,6 +148,16 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "sub_forum_id", referencedColumnName = "id")
+    public SubForum getSubForum() {
+        return subForum;
+    }
+
+    public void setSubForum(SubForum subForum) {
+        this.subForum = subForum;
     }
 
     @OneToMany(mappedBy = "post")

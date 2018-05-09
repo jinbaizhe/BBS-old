@@ -5,28 +5,21 @@
 <hibernate-mapping>
 
     <class name="vo.Followpost" table="followpost" schema="bbs">
-        <id name="id">
-            <column name="id" sql-type="int(11)"/>
+        <id name="id" column="id">
             <generator class="increment"></generator>
         </id>
-        <property name="content">
-            <column name="content" sql-type="varchar(255)"/>
-        </property>
-        <property name="sendTime">
-            <column name="send_time" sql-type="datetime"/>
-        </property>
-        <property name="updateTime">
-            <column name="update_time" sql-type="datetime"/>
-        </property>
+        <property name="content" column="content"/>
+        <property name="sendTime" column="send_time"/>
+        <property name="updateTime" column="update_time"/>
         <many-to-one name="post" class="vo.Post" lazy="false">
-            <column name="post_id"/>
+            <column name="post_id" />
         </many-to-one>
         <many-to-one name="user" class="vo.User" lazy="false">
-            <column name="user_id"/>
+            <column name="user_id" />
         </many-to-one>
         <set name="followpostPictures" inverse="true" lazy="false">
             <key>
-                <column name="followpost_id"/>
+                <column name="followpost_id" />
             </key>
             <one-to-many not-found="ignore" class="vo.FollowpostPicture"/>
         </set>

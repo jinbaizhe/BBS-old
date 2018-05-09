@@ -17,5 +17,4 @@ public interface UserDAO  {
     public List getAllUsersExceptSuperAdmin(User user,int currentPage,int totalItemsPerPage);
     public List getAllUsersExceptSuperAdmin(User user);
     public User getUser(int id);
-
 }

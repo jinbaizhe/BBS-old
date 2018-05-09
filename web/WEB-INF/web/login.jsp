@@ -31,6 +31,12 @@
                     <input type="password" class="form-control" name="user.password" placeholder="请输入密码">
                     <!--<small class="form-text text-muted" name=""></small>-->
                 </div>
+                <div class="form-group">
+                    <label>验证码</label>
+                    <img src="getVerifyCode.action" width="100" height="30" alt="无法显示验证码">
+                    <input type="text" class="form-control" name="verifyCode" placeholder="请输入验证码">
+                    <!--<small class="form-text text-muted" name=""></small>-->
+                </div>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" name="autoLogin" checked  value="true">
                     <label class="form-check-label">七日内自动登录</label>

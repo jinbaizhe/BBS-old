@@ -15,7 +15,7 @@ public class Picture {
     private Set<User> users;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -25,7 +25,7 @@ public class Picture {
     }
 
     @Basic
-    @Column(name = "picture", nullable = true, length = 30)
+    @Column(name = "picture")
     public String getPicture() {
         return picture;
     }
@@ -35,7 +35,7 @@ public class Picture {
     }
 
     @Basic
-    @Column(name = "upload_time", nullable = true)
+    @Column(name = "upload_time")
     public Timestamp getUploadTime() {
         return uploadTime;
     }
@@ -78,7 +78,7 @@ public class Picture {
         this.postPictures = postPictures;
     }
 
-    @OneToMany(mappedBy = "pictureByPictureId")
+    @OneToMany(mappedBy = "picture")
     public Set<User> getUsers() {
         return users;
     }

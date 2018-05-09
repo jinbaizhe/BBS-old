@@ -5,49 +5,36 @@
 <hibernate-mapping>
 
     <class name="vo.User" table="user" schema="bbs">
-        <id name="id">
-            <column name="id" sql-type="int(11)"/>
+        <id name="id" column="id">
             <generator class="increment"></generator>
         </id>
-        <property name="username">
-            <column name="username" sql-type="varchar(20)" length="20"/>
-        </property>
-        <property name="password">
-            <column name="password" sql-type="varchar(20)" length="20"/>
-        </property>
-        <property name="info">
-            <column name="info" sql-type="varchar(50)" length="50"/>
-        </property>
-        <property name="sex">
-            <column name="sex" sql-type="char(4)" length="4"/>
-        </property>
-        <property name="email">
-            <column name="email" sql-type="varchar(30)" length="30"/>
-        </property>
-        <property name="status">
-            <column name="status" sql-type="int(11)"/>
-        </property>
-        <property name="type">
-            <column name="type" sql-type="int(11)"/>
-        </property>
-        <property name="level">
-            <column name="level" sql-type="int(11)"/>
-        </property>
-        <property name="registerTime">
-            <column name="register_time" sql-type="datetime"/>
-        </property>
-        <many-to-one name="pictureByPictureId" class="vo.Picture" lazy="false">
-            <column name="picture_id"/>
+        <property name="username" column="username"/>
+        <property name="password" column="password"/>
+        <property name="info" column="info"/>
+        <property name="sex" column="sex"/>
+        <property name="email" column="email"/>
+        <property name="status" column="status"/>
+        <property name="type" column="type"/>
+        <property name="level" column="level"/>
+        <property name="registerTime" column="register_time"/>
+        <many-to-one name="picture" class="vo.Picture" lazy="false">
+            <column name="picture_id" />
         </many-to-one>
-        <set name="followposts" inverse="true" lazy="false">
+        <set name="collections" inverse="true" lazy="false">
             <key>
                 <column name="user_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="vo.Collection"/>
+        </set>
+        <set name="followposts" inverse="true" lazy="false">
+            <key>
+                <column name="user_id" />
             </key>
             <one-to-many not-found="ignore" class="vo.Followpost"/>
         </set>
         <set name="posts" inverse="true" lazy="false">
             <key>
-                <column name="user_id"/>
+                <column name="user_id" />
             </key>
             <one-to-many not-found="ignore" class="vo.Post"/>
         </set>

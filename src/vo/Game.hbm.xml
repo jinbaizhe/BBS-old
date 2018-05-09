@@ -5,8 +5,7 @@
 <hibernate-mapping>
 
     <class name="vo.Game" table="game" schema="bbs">
-        <id name="id">
-            <column name="id" sql-type="int(11)"/>
+        <id name="id" column="id">
             <generator class="increment"></generator>
         </id>
         <property name="home" column="home"/>
@@ -14,7 +13,7 @@
         <property name="date" column="date"/>
         <set name="gameLinks" inverse="true" lazy="false">
             <key>
-                <column name="game_id" not-null="true"/>
+                <column name="game_id" />
             </key>
             <one-to-many not-found="ignore" class="vo.GameLink"/>
         </set>

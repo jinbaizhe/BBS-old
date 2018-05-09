@@ -17,12 +17,13 @@ public class User {
     private Integer type;
     private Integer level;
     private Timestamp registerTime;
+    private Set<Collection> collections;
     private Set<Followpost> followposts;
     private Set<Post> posts;
-    private Picture pictureByPictureId;
+    private Picture picture;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -32,7 +33,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "username", nullable = true, length = 20)
+    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -42,7 +43,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "password", nullable = true, length = 20)
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -52,7 +53,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "info", nullable = true, length = 50)
+    @Column(name = "info")
     public String getInfo() {
         return info;
     }
@@ -62,7 +63,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "sex", nullable = true, length = 4)
+    @Column(name = "sex")
     public String getSex() {
         return sex;
     }
@@ -72,7 +73,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "email", nullable = true, length = 30)
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -82,7 +83,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "status", nullable = true)
+    @Column(name = "status")
     public Integer getStatus() {
         return status;
     }
@@ -92,7 +93,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "type", nullable = true)
+    @Column(name = "type")
     public Integer getType() {
         return type;
     }
@@ -102,7 +103,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "level", nullable = true)
+    @Column(name = "level")
     public Integer getLevel() {
         return level;
     }
@@ -112,7 +113,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "register_time", nullable = true)
+    @Column(name = "register_time")
     public Timestamp getRegisterTime() {
         return registerTime;
     }
@@ -145,6 +146,15 @@ public class User {
     }
 
     @OneToMany(mappedBy = "user")
+    public Set<Collection> getCollections() {
+        return collections;
+    }
+
+    public void setCollections(Set<Collection> collections) {
+        this.collections = collections;
+    }
+
+    @OneToMany(mappedBy = "user")
     public Set<Followpost> getFollowposts() {
         return followposts;
     }
@@ -153,7 +163,7 @@ public class User {
         this.followposts = followposts;
     }
 
-    @OneToMany(mappedBy = "userByUserId")
+    @OneToMany(mappedBy = "user")
     public Set<Post> getPosts() {
         return posts;
     }
@@ -164,11 +174,11 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "picture_id", referencedColumnName = "id")
-    public Picture getPictureByPictureId() {
-        return pictureByPictureId;
+    public Picture getPicture() {
+        return picture;
     }
 
-    public void setPictureByPictureId(Picture pictureByPictureId) {
-        this.pictureByPictureId = pictureByPictureId;
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 }

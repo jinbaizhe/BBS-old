@@ -1,10 +1,14 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import service.PictureService;
-
-import java.io.InputStream;
+import util.VerifyCode;
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
+import java.io.*;
+import java.util.Map;
 
 public class PictureAction extends ActionSupport{
     private PictureService pictureService;
@@ -43,5 +47,33 @@ public class PictureAction extends ActionSupport{
     {
         String path="/WEB-INF/upload/";
         return ServletActionContext.getServletContext().getResourceAsStream(path+filename);
+    }
+
+
+    public String getVerifyCode()
+    {
+        filename="VerifyCode.jpg";
+        return SUCCESS;
+    }
+    public InputStream getVerifyCodeInputStream()
+    {
+        Map session=ActionContext.getContext().getSession();
+        VerifyCode verify = (VerifyCode)session.get("verify");
+        if(verify==null)
+        {
+            verify=new VerifyCode(100,30,5);
+            session.put("verify",verify);
+        }
+        verify.change();
+        ByteArrayOutputStream bs = new ByteArrayOutputStream();
+        InputStream is = null;
+        try {
+            ImageOutputStream imageOutputStream=ImageIO.createImageOutputStream(bs);
+            ImageIO.write(verify.getImage(),"jpg",imageOutputStream);
+            is=new ByteArrayInputStream(bs.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return is;
     }
 }

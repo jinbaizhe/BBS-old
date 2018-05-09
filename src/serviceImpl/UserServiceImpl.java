@@ -1,10 +1,12 @@
 package serviceImpl;
 
+import dao.CollectionDAO;
 import dao.UserDAO;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import service.UserService;
 import util.Util;
+import vo.Collection;
 import vo.User;
 
 import java.sql.Timestamp;
@@ -12,6 +14,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
+    private CollectionDAO collectionDAO;
 
     public UserDAO getUserDAO() {
         return userDAO;
@@ -19,6 +22,14 @@ public class UserServiceImpl implements UserService {
 
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
+    }
+
+    public CollectionDAO getCollectionDAO() {
+        return collectionDAO;
+    }
+
+    public void setCollectionDAO(CollectionDAO collectionDAO) {
+        this.collectionDAO = collectionDAO;
     }
 
     @Override
@@ -81,7 +92,7 @@ public class UserServiceImpl implements UserService {
     public void updateUserPassword(User user) {
         User temp_user=userDAO.getUser(user.getId());
         temp_user.setPassword(user.getPassword());
-        userDAO.updateUser(temp_user);
+        updateUser(temp_user);
     }
 
     @Override
@@ -90,7 +101,7 @@ public class UserServiceImpl implements UserService {
         temp_user.setEmail(user.getEmail());
         temp_user.setInfo(user.getInfo());
         temp_user.setSex(user.getSex());
-        userDAO.updateUser(temp_user);
+        updateUser(temp_user);
 
     }
 
@@ -111,5 +122,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByid(int userid) {
         return userDAO.getUser(userid);
+    }
+
+    @Override
+    public List getCollectionsByUserId(int userid, int currentPage, int totalItemsPerPage, String order) {
+        return collectionDAO.getCollectionsByUserId(userid,currentPage,totalItemsPerPage,order) ;
+    }
+
+    @Override
+    public void createCollection(Collection collection) {
+        Session session=userDAO.getSession();
+        Transaction transaction=session.beginTransaction();
+        collectionDAO.createCollection(collection);
+        session.flush();
+        transaction.commit();
+    }
+
+    @Override
+    public void deleteCollection(int userid, int postid)
+    {
+        Session session=userDAO.getSession();
+        Transaction transaction=session.beginTransaction();
+        collectionDAO.deleteCollection(userid,postid);
+        session.flush();
+        transaction.commit();
+    }
+
+    @Override
+    public Collection getCollection(int userid, int postid) {
+        return collectionDAO.getCollection(userid,postid);
     }
 }

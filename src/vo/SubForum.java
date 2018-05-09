@@ -16,7 +16,7 @@ public class SubForum {
     private MainForum mainForum;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -26,7 +26,7 @@ public class SubForum {
     }
 
     @Basic
-    @Column(name = "name", nullable = true, length = 30)
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -36,7 +36,7 @@ public class SubForum {
     }
 
     @Basic
-    @Column(name = "info", nullable = true, length = 50)
+    @Column(name = "info")
     public String getInfo() {
         return info;
     }
@@ -46,7 +46,7 @@ public class SubForum {
     }
 
     @Basic
-    @Column(name = "create_time", nullable = true)
+    @Column(name = "create_time")
     public Timestamp getCreateTime() {
         return createTime;
     }

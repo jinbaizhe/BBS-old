@@ -16,7 +16,7 @@ public class Followpost {
     private Set<FollowpostPicture> followpostPictures;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -26,7 +26,7 @@ public class Followpost {
     }
 
     @Basic
-    @Column(name = "content", nullable = true, length = 255)
+    @Column(name = "content")
     public String getContent() {
         return content;
     }
@@ -36,7 +36,7 @@ public class Followpost {
     }
 
     @Basic
-    @Column(name = "send_time", nullable = true)
+    @Column(name = "send_time")
     public Timestamp getSendTime() {
         return sendTime;
     }
@@ -46,7 +46,7 @@ public class Followpost {
     }
 
     @Basic
-    @Column(name = "update_time", nullable = true)
+    @Column(name = "update_time")
     public Timestamp getUpdateTime() {
         return updateTime;
     }

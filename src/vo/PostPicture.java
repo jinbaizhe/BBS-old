@@ -11,7 +11,7 @@ public class PostPicture {
     private Picture picture;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     public int getId() {
         return id;
     }

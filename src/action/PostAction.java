@@ -3,10 +3,7 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
-import service.FollowpostService;
-import service.PictureService;
-import service.PostService;
-import service.SubForumService;
+import service.*;
 import util.Pager;
 import vo.*;
 import javax.servlet.ServletContext;
@@ -21,6 +18,7 @@ public class PostAction extends ActionSupport {
     private SubForumService subForumService;
     private FollowpostService followpostService;
     private PictureService pictureService;
+    private UserService userService;
     private Post post;
     private int subforumid;
     private SubForum subForum;
@@ -29,7 +27,15 @@ public class PostAction extends ActionSupport {
     private int page=1;
     private List<File> files;
     private String order="asc";
+    private Collection collection;
 
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
 
     public PostService getPostService() {
         return postService;
@@ -37,6 +43,14 @@ public class PostAction extends ActionSupport {
 
     public void setPostService(PostService postService) {
         this.postService = postService;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
     public void setPost(Post post) {
@@ -154,6 +168,11 @@ public class PostAction extends ActionSupport {
 
         Pager pager=new Pager(page,ShowFollowpostsPerPageNum,totalFollowpostsNum);
         request.put("pager",pager);
+
+        Map session=ActionContext.getContext().getSession();
+        User user=(User) session.get("user");
+        if(user!=null)
+            collection=userService.getCollection(user.getId(),postid);
         return SUCCESS;
     }
 
@@ -197,4 +216,5 @@ public class PostAction extends ActionSupport {
         postService.deletePost(post);
         return SUCCESS;
     }
+
 }

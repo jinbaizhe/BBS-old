@@ -58,7 +58,7 @@
                 <div class="post-head">
                     <div class="text-center">
                         <div>
-                            <a href="#">
+                            <a href="/user/userInfo.action?userid=<s:property value="post.user.id"></s:property>">
                                 <img  alt="" class="img-responsive img-circle" src="/static/default.jpg"
                                       style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
                             </a>
@@ -97,11 +97,11 @@
                             </s:if>
 
 
-                            <s:if test="">
-                                <a style="float:right;margin-right: 20px;" href="#">取消收藏</a>
+                            <s:if test="collection!=null">
+                                <a style="float:right;margin-right: 20px;" href="/user/unstarPost.action?postid=<s:property value="post.id"></s:property>">取消收藏</a>
                             </s:if>
                             <s:else>
-                                <a style="float:right;margin-right: 20px;" href="#">收藏</a>
+                                <a style="float:right;margin-right: 20px;" href="/user/starPost.action?postid=<s:property value="post.id"></s:property>">收藏</a>
                             </s:else>
 
 
@@ -143,7 +143,7 @@
                     <div class="reply-head">
                         <div class="text-center">
                             <div>
-                                <a href="#">
+                                <a href="/user/userInfo.action?userid=<s:property value="#followpost.user.id"></s:property>">
                                     <img  alt="" class="img-responsive img-circle" src="/static/default.jpg"
                                           style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
                                 </a>

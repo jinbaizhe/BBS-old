@@ -86,5 +86,9 @@
         <param-name>ShowPageListSize</param-name>
         <param-value>20</param-value>
     </context-param>
+    <context-param>
+        <param-name>ShowCollectionsPerPageNum</param-name>
+        <param-value>10</param-value>
+    </context-param>
     
 </web-app>

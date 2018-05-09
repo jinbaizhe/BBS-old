@@ -4,6 +4,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import service.UserService;
+import util.VerifyCode;
 import vo.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ public class LoginAction extends ActionSupport {
 	private String loginInfo;
 	private String autoLogin;
 	private String password_repeat;
+	private String verifyCode;
 	public UserService getUserService() {
 		return userService;
 	}
@@ -65,6 +67,14 @@ public class LoginAction extends ActionSupport {
 		this.password_repeat = password_repeat;
 	}
 
+	public String getVerifyCode() {
+		return verifyCode;
+	}
+
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
+	}
+
 	public String loginPage() throws Exception
     {
         ActionContext context=ActionContext.getContext();
@@ -79,9 +89,10 @@ public class LoginAction extends ActionSupport {
 		String username=user.getUsername();
 		String password=user.getPassword();
 		user=userService.validateUser(username,password);
-		if(user!=null)
+		Map session=ActionContext.getContext().getSession();
+		VerifyCode verify=(VerifyCode)session.get("verify");
+		if(verify!=null&&verifyCode.toLowerCase().equals(verify.getCode().toLowerCase())&&user!=null)
 		{
-			Map session= ActionContext.getContext().getSession();
 			session.put("user",user);
 			if(autoLogin!=null&&autoLogin.equals("true"))
 			{
@@ -95,8 +106,6 @@ public class LoginAction extends ActionSupport {
             return ERROR;
         }
 	}
-
-
 
 	public String logout() throws Exception
 	{

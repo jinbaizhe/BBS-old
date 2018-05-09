@@ -20,15 +20,7 @@
                 <s:else>
                     <a class="nav-link" id="v-pills-info-tab" data-toggle="pill" href="#v-pills-info" role="tab" aria-controls="v-pills-info" aria-selected="false">
                 </s:else>
-                    修改资料
-                </a>
-                <s:if test="type=='password'">
-                    <a class="nav-link active" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="true">
-                </s:if>
-                <s:else>
-                    <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="false">
-                </s:else>
-                    修改密码
+                    查看ta的资料
                 </a>
 
                 <s:if test="type=='post'">
@@ -37,7 +29,7 @@
                 <s:else>
                     <a class="nav-link" id="v-pills-post-tab" data-toggle="pill" href="#v-pills-post" role="tab" aria-controls="v-pills-post" aria-selected="false">
                 </s:else>
-                    我的发帖
+                    查看ta的发帖
                 </a>
 
                 <s:if test="type=='followpost'">
@@ -46,7 +38,7 @@
                 <s:else>
                     <a class="nav-link" id="v-pills-followpost-tab" data-toggle="pill" href="#v-pills-followpost" role="tab" aria-controls="v-pills-followpost" aria-selected="false">
                 </s:else>
-                    我的回帖
+                    查看ta的回帖
                 </a>
 
 
@@ -56,7 +48,7 @@
                 <s:else>
                     <a class="nav-link" id="v-pills-star-tab" data-toggle="pill" href="#v-pills-star" role="tab" aria-controls="v-pills-star" aria-selected="false">
                 </s:else>
-                    我的收藏
+                    查看ta的收藏
                 </a>
             </div>
         </div>
@@ -71,7 +63,6 @@
                 </s:else>
                     <div class="row">
                         <div class="col-sm-6">
-                            <form action="updateUserInfo.action" method="post">
                                 <div class="form-group">
                                     <p class="text-danger"><s:property value="message_info"></s:property></p>
                                 </div>
@@ -88,18 +79,18 @@
                                 <div class="form-group">
                                     <label>性别</label>
                                     <s:if test='user.sex=="男"'>
-                                        <input type="radio" class="" name="user.sex" value="男" checked>男
-                                        <input type="radio" class="" name="user.sex" value="女">女
+                                        <input type="radio" class="" name="user.sex" value="男" checked disabled>男
+                                        <input type="radio" class="" name="user.sex" value="女" disabled>女
                                     </s:if>
                                     <s:elseif test='user.sex=="女"'>
-                                        <input type="radio" class="" name="user.sex" value="男">男
-                                        <input type="radio" class="" name="user.sex" value="女" checked>女
+                                        <input type="radio" class="" name="user.sex" value="男" disabled>男
+                                        <input type="radio" class="" name="user.sex" value="女" checked disabled>女
                                     </s:elseif>
                                     <!--<small class="form-text text-muted" name=""></small>-->
                                 </div>
                                 <div class="form-group">
                                     <label>邮箱</label>
-                                    <input type="email" class="form-control" name="user.email" placeholder="请输入邮箱" value="<s:property value="user.email"></s:property>">
+                                    <input type="email" class="form-control" name="user.email" placeholder="请输入邮箱" value="<s:property value="user.email"></s:property>" disabled>
                                     <!--<small class="form-text text-muted" name=""></small>-->
                                 </div>
 
@@ -108,51 +99,10 @@
                                     <input type="text" class="form-control" name="user.registerTime" readonly value="<s:date name="user.registerTime" format="yyyy-MM-dd HH:mm:ss"></s:date>">
                                 </div>
 
-                                <div class="form-group text-center mt-sm-4">
-                                    <input class="btn btn-primary btn-block" type="submit" value="保存">
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
 
-                <s:if test="type=='password'">
-                    <div class="tab-pane fade show active" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
-                </s:if>
-                <s:else>
-                    <div class="tab-pane fade show" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
-                </s:else>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <form action="updateUserPassword.action" method="post">
-
-                                <div class="form-group">
-                                    <p class="text-danger"><s:property value="message_password"></s:property></p>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>旧密码</label>
-                                    <input type="password" class="form-control" name="password_old" placeholder="请输入密码">
-                                    <!--<small class="form-text text-muted" name=""></small>-->
-                                </div>
-                                <div class="form-group">
-                                    <label>新密码</label>
-                                    <input type="password" class="form-control" name="user.password" placeholder="请输入密码">
-                                    <!--<small class="form-text text-muted" name=""></small>-->
-                                </div>
-                                <div class="form-group">
-                                    <label>再次确认密码</label>
-                                    <input type="password" class="form-control" name="password_repeat" placeholder="请再次输入密码">
-                                    <!--<small class="form-text text-muted" name=""></small>-->
-                                </div>
-
-                                <div class="form-group text-center mt-sm-4">
-                                    <input class="btn btn-primary btn-block" type="submit" value="保存">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
 
                 <s:if test="type=='post'">
                     <div class="tab-pane fade show active" id="v-pills-post" role="tabpanel" aria-labelledby="v-pills-post-tab">
@@ -221,7 +171,6 @@
                                             <h5 class="card-title">帖子标题：<a href="/post.action?postid=<s:property value="#collection.post.id"></s:property>"><s:property value="#collection.post.title"></s:property></a></h5>
                                             <p class="card-text">
                                                 <span>收藏时间：<s:date format="yyyy-MM-dd hh:mm:ss" name="#collection.time"></s:date></span>
-                                                <a href="/user/unstarPost.action?postid=<s:property value="#collection.post.id"></s:property>" class="btn btn-primary float-right">取消收藏</a>
                                             </p>
                                         </div>
                                     </div>

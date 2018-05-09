@@ -4,14 +4,16 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="vo.GameLink" table="game_link" schema="bbs">
+    <class name="vo.Collection" table="collection" schema="bbs">
         <id name="id" column="id">
             <generator class="increment"></generator>
         </id>
-        <property name="info" column="info"/>
-        <property name="orderNum" column="order_num"/>
-        <many-to-one name="game" class="vo.Game" lazy="false">
-            <column name="game_id" />
+        <property name="time" column="time"/>
+        <many-to-one name="user" class="vo.User" lazy="false">
+            <column name="user_id"/>
+        </many-to-one>
+        <many-to-one name="post" class="vo.Post" lazy="false">
+            <column name="post_id"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

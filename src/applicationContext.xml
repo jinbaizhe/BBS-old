@@ -32,35 +32,39 @@
                 <prop key="hibernate.format_sql">false</prop>
                 <prop key="hibernate.use_sql_comments">false</prop>
                 <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/BBS</prop>
             </props>
         </property>
         <property name="mappingLocations">
             <list>
+
+                <value>classpath:vo/Collection.hbm.xml</value>
                 <value>classpath:vo/Followpost.hbm.xml</value>
                 <value>classpath:vo/FollowpostPicture.hbm.xml</value>
+                <value>classpath:vo/Game.hbm.xml</value>
+                <value>classpath:vo/GameLink.hbm.xml</value>
                 <value>classpath:vo/MainForum.hbm.xml</value>
                 <value>classpath:vo/Picture.hbm.xml</value>
                 <value>classpath:vo/Post.hbm.xml</value>
                 <value>classpath:vo/PostPicture.hbm.xml</value>
                 <value>classpath:vo/SubForum.hbm.xml</value>
                 <value>classpath:vo/User.hbm.xml</value>
-                <value>classpath:vo/Game.hbm.xml</value>
-                <value>classpath:vo/GameLink.hbm.xml</value>
             </list>
         </property>
         <property name="annotatedClasses">
             <list>
 
+                <value>vo.Collection</value>
                 <value>vo.Followpost</value>
                 <value>vo.FollowpostPicture</value>
+                <value>vo.Game</value>
+                <value>vo.GameLink</value>
                 <value>vo.MainForum</value>
                 <value>vo.Picture</value>
                 <value>vo.Post</value>
                 <value>vo.PostPicture</value>
                 <value>vo.SubForum</value>
                 <value>vo.User</value>
-                <value>vo.Game</value>
-                <value>vo.GameLink</value>
             </list>
         </property>
     </bean>

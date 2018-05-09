@@ -9,11 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="../web/head.jsp"%>
+    <%@include file="/WEB-INF/web/head.jsp"%>
     <title>请先登录</title>
 </head>
 <body>
-<jsp:include page="../web/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/web/header.jsp"></jsp:include>
 
 <div class="container">
     <div class="row">
@@ -34,7 +34,7 @@
         </div>
     </div>
 </div>
-<jsp:include page="../web/footer.jsp"></jsp:include>
-<%@include file="../web/foot.jsp"%>
+<jsp:include page="/WEB-INF/web/footer.jsp"></jsp:include>
+<%@include file="/WEB-INF/web/foot.jsp"%>
 </body>
 </html>

@@ -14,4 +14,5 @@ public interface PostService {
     public int getPostsNumBySubForumId(int subForumId);
     public List getPostsByUserId(int userid);
     public void updatePostAllAttr(Post post);
+
 }
