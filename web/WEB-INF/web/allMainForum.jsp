@@ -42,7 +42,7 @@
                                             </a>
                                         </td>
                                         <td><s:property value="#subforum.info"></s:property></td>
-                                        <td><s:date name="#subforum.createTime" format="yyyy-MM-dd HH:mm:ss"></s:date></td>
+                                        <td>帖数：<s:property value="#subforum.posts.size"></s:property></td>
                                     </tr>
                                 </s:if>
                             </s:iterator>

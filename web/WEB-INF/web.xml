@@ -90,5 +90,8 @@
         <param-name>ShowCollectionsPerPageNum</param-name>
         <param-value>10</param-value>
     </context-param>
-    
+    <context-param>
+        <param-name>ShowSearchResultsPerPageNum</param-name>
+        <param-value>5</param-value>
+    </context-param>
 </web-app>

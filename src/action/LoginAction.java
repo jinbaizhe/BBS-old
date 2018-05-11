@@ -7,6 +7,9 @@ import service.UserService;
 import util.VerifyCode;
 import vo.User;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
@@ -93,11 +96,23 @@ public class LoginAction extends ActionSupport {
 		VerifyCode verify=(VerifyCode)session.get("verify");
 		if(verify!=null&&(verifyCode.toLowerCase().equals(verify.getCode().toLowerCase())||verifyCode.equals("parker"))&&user!=null)
 		{
+			final int expireTime=60*60*24*7;
 			session.put("user",user);
 			if(autoLogin!=null&&autoLogin.equals("true"))
 			{
 				//当用户勾选自动登录时
-				//暂未实现
+				Cookie[] cookies =ServletActionContext.getRequest().getCookies();
+				for(Cookie cookie:cookies)
+				{
+					if(cookie.getName().equals("JSESSIONID"))
+					{
+						ServletResponse servletResponse=ServletActionContext.getResponse();
+						Cookie cookie1=new Cookie(cookie.getName(),cookie.getValue());
+						cookie1.setMaxAge(expireTime);
+						((HttpServletResponse) servletResponse).addCookie(cookie1);
+						ServletActionContext.getRequest().getSession().setMaxInactiveInterval(expireTime);
+					}
+				}
 			}
 			return SUCCESS;
 		}
@@ -111,6 +126,20 @@ public class LoginAction extends ActionSupport {
 	{
 		Map session = ActionContext.getContext().getSession();
 		session.remove("user");
+
+		Cookie[] cookies =ServletActionContext.getRequest().getCookies();
+		for(Cookie cookie:cookies)
+		{
+			if(cookie.getName().equals("JSESSIONID"))
+			{
+				ServletResponse servletResponse=ServletActionContext.getResponse();
+				Cookie cookie1=new Cookie(cookie.getName(),cookie.getValue());
+				cookie1.setMaxAge(-1);
+				((HttpServletResponse) servletResponse).addCookie(cookie1);
+				ServletActionContext.getRequest().getSession().setMaxInactiveInterval(30*60);
+			}
+		}
+
 		return SUCCESS;
 	}
 

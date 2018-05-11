@@ -16,4 +16,6 @@ public interface PostDAO {
     public void updatePost(Post post);
     public void deletePost(Post post);
     public List getPostsByUserId(int userid,String order);
+    public List getSearchResult(String keyWord,int currentPage,int totalItemsPerPage, String order);
+    public int getSearchResultNum(String keyWord,String order);
 }

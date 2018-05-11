@@ -28,6 +28,9 @@ public class PostAction extends ActionSupport {
     private List<File> files;
     private String order="asc";
     private Collection collection;
+    private String searchKeyWord;
+    private List posts;
+    private String search_order="desc";
 
     public Collection getCollection() {
         return collection;
@@ -149,6 +152,30 @@ public class PostAction extends ActionSupport {
         this.order = order;
     }
 
+    public String getSearchKeyWord() {
+        return searchKeyWord;
+    }
+
+    public void setSearchKeyWord(String searchKeyWord) {
+        this.searchKeyWord = searchKeyWord;
+    }
+
+    public List getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List posts) {
+        this.posts = posts;
+    }
+
+    public String getSearch_order() {
+        return search_order;
+    }
+
+    public void setSearch_order(String search_order) {
+        this.search_order = search_order;
+    }
+
     public String browserPost() throws Exception {
         if(postid==0)
             return ERROR;
@@ -214,6 +241,18 @@ public class PostAction extends ActionSupport {
     {
         post=postService.getPostById(postid);
         postService.deletePost(post);
+        return SUCCESS;
+    }
+
+    public String searchPosts() throws Exception
+    {
+        //读取web.xml获取ShowPostsPerPageNum参数
+        ServletContext servletContext =ServletActionContext.getServletContext();
+        final int ShowSearchResultsPerPageNum=Integer.valueOf(servletContext.getInitParameter("ShowSearchResultsPerPageNum"));
+        Map request=(Map)ActionContext.getContext().get("request");
+        posts=postService.getSearchResults(searchKeyWord,page,ShowSearchResultsPerPageNum,search_order);
+        Pager pager=new Pager(page,ShowSearchResultsPerPageNum,postService.getSearchResultNum(searchKeyWord,search_order));
+        request.put("pager",pager);
         return SUCCESS;
     }
 

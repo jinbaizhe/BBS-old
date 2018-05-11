@@ -160,4 +160,14 @@ public class PostServiceImpl implements PostService {
     public List getPostsByUserId(int userid) {
         return postDAO.getPostsByUserId(userid,"sendTime desc");
     }
+
+    @Override
+    public List getSearchResults(String keyWord,int currentPage,int totalItemsPerPage, String order) {
+        return postDAO.getSearchResult(keyWord,currentPage,totalItemsPerPage,order);
+    }
+
+    @Override
+    public int getSearchResultNum(String keyWord, String order) {
+        return postDAO.getSearchResultNum(keyWord,order);
+    }
 }

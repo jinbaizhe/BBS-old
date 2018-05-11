@@ -88,11 +88,9 @@
 
                     <s:if test='#request.pager.isFirstPage!=true'>
                         <li class="page-item">
-                            <div class="page-link">
-                                <a class="page-link" href="subforum.action?sfid=<s:property value="subForum.id"></s:property>&page=1">
-                                    首页
-                                </a>
-                            </div>
+                            <a class="page-link" href="subforum.action?sfid=<s:property value="subForum.id"></s:property>&page=1">
+                                首页
+                            </a>
                         </li>
                         <li class="page-item">
                             <a class="page-link" href="subforum.action?sfid=<s:property value="subForum.id"></s:property>&page=<s:property value="#request.pager.getCurrentPage-1"></s:property>" aria-label="Previous">

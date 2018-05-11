@@ -14,5 +14,6 @@ public interface PostService {
     public int getPostsNumBySubForumId(int subForumId);
     public List getPostsByUserId(int userid);
     public void updatePostAllAttr(Post post);
-
+    public List getSearchResults(String keyWord,int currentPage,int totalItemsPerPage,String order);
+    public int getSearchResultNum(String keyWord,String order);
 }

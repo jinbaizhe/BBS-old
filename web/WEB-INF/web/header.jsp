@@ -26,6 +26,18 @@
                 </li>
             </ul>
             <ul class="navbar-nav navbar-right">
+                <li class="nav-item mx-sm-5">
+                    <form class="form-inline my-sm-0" action="searchPosts.action" method="get">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="searchKeyWord" placeholder="搜索帖子">
+                            <span class="input-group-append">
+                                <input class="btn btn-primary" type="submit" value="搜索">
+                                </input>
+                            </span>
+                        </div>
+                    </form>
+                </li>
+
                 <s:if test="#session.user.getUsername()!=null">
                     <li class="nav-item">
                         <li class="nav-item dropdown">

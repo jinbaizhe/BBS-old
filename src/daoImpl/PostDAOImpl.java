@@ -86,4 +86,22 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
 //        session.close();
         return posts;
     }
+
+    @Override
+    public List getSearchResult(String keyWord,int currentPage,int totalItemsPerPage, String order) {
+        Session session=getSession();
+        Query query=session.createQuery("from Post p where p.title like '%"+keyWord+"%' order by p.sendTime "+order);
+        query.setFirstResult((currentPage-1)*totalItemsPerPage);
+        query.setMaxResults(totalItemsPerPage);
+        List posts=query.list();
+        return posts;
+    }
+
+    @Override
+    public int getSearchResultNum(String keyWord, String order) {
+        Session session=getSession();
+        Query query=session.createQuery("from Post p where p.title like '%"+keyWord+"%' order by p.sendTime "+order);
+        List posts=query.list();
+        return posts.size();
+    }
 }

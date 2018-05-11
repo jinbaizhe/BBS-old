@@ -59,6 +59,9 @@
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
+        <action name="searchPosts" class="postAction" method="searchPosts">
+            <result name="success">/WEB-INF/web/search.jsp</result>
+        </action>
 
 
         <action name="commitFollowpost" class="followpostAction" method="commitAddFollowpostNeedUserLogin">
