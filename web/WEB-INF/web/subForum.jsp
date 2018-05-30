@@ -24,6 +24,7 @@
             </ol>
         </div>
     </div>
+
     <div class="row">
         <div class="col-sm-12">
             <h3><s:property value="subForum.name"></s:property></h3>

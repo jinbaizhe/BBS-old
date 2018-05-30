@@ -21,4 +21,5 @@ public interface UserService {
     public void createCollection(Collection collection);
     public void deleteCollection(int userid, int postid);
     public Collection getCollection(int userid, int postid);
+    public User getUserByUsername(String username);
 }

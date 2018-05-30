@@ -17,15 +17,12 @@ public class PostAction extends ActionSupport {
     private PostService postService;
     private SubForumService subForumService;
     private FollowpostService followpostService;
-    private PictureService pictureService;
     private UserService userService;
     private Post post;
     private int subforumid;
     private SubForum subForum;
     private List followposts;
-    private List pictures;
     private int page=1;
-    private List<File> files;
     private String order="asc";
     private Collection collection;
     private String searchKeyWord;
@@ -88,28 +85,12 @@ public class PostAction extends ActionSupport {
         this.followpostService = followpostService;
     }
 
-    public PictureService getPictureService() {
-        return pictureService;
-    }
-
-    public void setPictureService(PictureService pictureService) {
-        this.pictureService = pictureService;
-    }
-
     public List getFollowposts() {
         return followposts;
     }
 
     public void setFollowposts(List followposts) {
         this.followposts = followposts;
-    }
-
-    public List getPictures() {
-        return pictures;
-    }
-
-    public void setPictures(List pictures) {
-        this.pictures = pictures;
     }
 
     public int getPage() {
@@ -134,14 +115,6 @@ public class PostAction extends ActionSupport {
 
     public void setSubforumid(int subforumid) {
         this.subforumid = subforumid;
-    }
-
-    public List<File> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<File> files) {
-        this.files = files;
     }
 
     public String getOrder() {
@@ -187,7 +160,6 @@ public class PostAction extends ActionSupport {
         final int ShowFollowpostsPerPageNum=Integer.valueOf(servletContext.getInitParameter("ShowFollowpostsPerPageNum"));
 
         followposts=followpostService.getFollowpostsByPostId(postid,page, ShowFollowpostsPerPageNum,order);
-        pictures=pictureService.getPicturesByPostId(post.getId());
         Map request=(Map)ActionContext.getContext().get("request");
 
         //读取web.xml获取ShowPostsPerPageNum参数
@@ -219,7 +191,7 @@ public class PostAction extends ActionSupport {
         Map session=ActionContext.getContext().getSession();
         post.setUser((User)session.get("user"));
 
-        postService.createPost(post,files);
+        postService.createPost(post);
 
         return SUCCESS;
     }

@@ -17,6 +17,8 @@
       <root url="jar://$PROJECT_DIR$/lib/extra/jedis-2.9.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/extra/spring-data-redis-1.8.3.RELEASE.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/extra/spring-data-commons-1.13.3.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/struts2-json-plugin-2.5.14.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/extra/javax.mail.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

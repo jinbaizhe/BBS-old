@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserService {
         user.setStatus(0);
         user.setType(0);
         user.setRegisterTime(Timestamp.valueOf(Util.getCurrentDateTime()));
+        String key= "1234567890abcdefghijklmnopqrstuvwxyz";
+        String value="";
+        for(int i=0;i<20;i++)
+            value+=key.charAt( (int)( Math.random()*key.length() ) );
+        user.setActiveKey(value);
         Session session=userDAO.getSession();
         Transaction transaction=session.beginTransaction();
         try{
@@ -98,6 +103,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserInfo(User user) {
         User temp_user=userDAO.getUser(user.getId());
+        if(!user.getEmail().equals(temp_user.getEmail()))
+            temp_user.setStatus(0);
         temp_user.setEmail(user.getEmail());
         temp_user.setInfo(user.getInfo());
         temp_user.setSex(user.getSex());
@@ -151,5 +158,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Collection getCollection(int userid, int postid) {
         return collectionDAO.getCollection(userid,postid);
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
     }
 }

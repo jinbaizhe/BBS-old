@@ -24,7 +24,7 @@
             </div>
             <div class="my-sm-5">
                 <h5 class="text-center">
-                    <a href="/login.action">跳转至登录页面</a>
+                    <a href="/user/login.action">跳转至登录页面</a>
                 </h5>
             </div>
             <div class="my-sm-5">

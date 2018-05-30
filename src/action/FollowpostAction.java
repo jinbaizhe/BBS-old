@@ -2,17 +2,11 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.ServletActionContext;
 import service.FollowpostService;
 import service.PictureService;
 import service.PostService;
 import vo.Followpost;
-import vo.Picture;
 import vo.User;
-
-import java.io.File;
-import java.nio.file.Files;
-import java.util.List;
 
 public class FollowpostAction extends ActionSupport {
     private Followpost followpost;
@@ -20,8 +14,6 @@ public class FollowpostAction extends ActionSupport {
     private PostService postService;
     private int postid;
     private int followpostid;
-    private List<File> files;
-    private PictureService pictureService;
 
     public Followpost getFollowpost() {
         return followpost;
@@ -63,27 +55,11 @@ public class FollowpostAction extends ActionSupport {
         this.followpostid = followpostid;
     }
 
-    public List<File> getFiles() {
-        return files;
-    }
-
-    public void setFiles(List<File> files) {
-        this.files = files;
-    }
-
-    public PictureService getPictureService() {
-        return pictureService;
-    }
-
-    public void setPictureService(PictureService pictureService) {
-        this.pictureService = pictureService;
-    }
-
     public String commitAddFollowpostNeedUserLogin() throws Exception
     {
         followpost.setPost(postService.getPostById(postid));
         followpost.setUser((User)ActionContext.getContext().getSession().get("user"));
-        followpostService.createFollowpost(followpost,files);
+        followpostService.createFollowpost(followpost);
         return SUCCESS;
     }
 

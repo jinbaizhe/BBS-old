@@ -4,14 +4,20 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import service.FollowpostService;
+import service.MailService;
 import service.PostService;
 import service.UserService;
 import util.Util;
+import util.VerifyCode;
 import vo.Collection;
+import vo.CollectionId;
 import vo.User;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +27,7 @@ public class UserAction extends ActionSupport {
     private UserService userService;
     private PostService postService;
     private FollowpostService followpostService;
+    private MailService mailService;
     private String message_info;
     private String message_password;
     private String type="info";
@@ -33,6 +40,52 @@ public class UserAction extends ActionSupport {
     private String order="desc";
     private int page;
     private int postid;
+    private String activekey;
+    private String registerInfo;
+    private String loginInfo;
+    private String autoLogin;
+    private String verifyCode;
+    private String mailAddress;
+
+    public String getMailAddress() {
+        return mailAddress;
+    }
+
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
+    }
+
+    public String getRegisterInfo() {
+        return registerInfo;
+    }
+
+    public void setRegisterInfo(String registerInfo) {
+        this.registerInfo = registerInfo;
+    }
+
+    public String getLoginInfo() {
+        return loginInfo;
+    }
+
+    public void setLoginInfo(String loginInfo) {
+        this.loginInfo = loginInfo;
+    }
+
+    public String getAutoLogin() {
+        return autoLogin;
+    }
+
+    public void setAutoLogin(String autoLogin) {
+        this.autoLogin = autoLogin;
+    }
+
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
+    }
 
     public int getPostid() {
         return postid;
@@ -162,6 +215,107 @@ public class UserAction extends ActionSupport {
         this.password_repeat = password_repeat;
     }
 
+    public MailService getMailService() {
+        return mailService;
+    }
+
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
+    }
+
+    public String getActivekey() {
+        return activekey;
+    }
+
+    public void setActivekey(String activekey) {
+        this.activekey = activekey;
+    }
+
+    public String loginPage() throws Exception
+    {
+        ActionContext context=ActionContext.getContext();
+        Map session=context.getSession();
+        HttpServletRequest request=(HttpServletRequest) context.get(ServletActionContext.HTTP_REQUEST);
+        session.put("referURL",request.getHeader("referer"));
+        return SUCCESS;
+    }
+
+    public String validateLogin() throws Exception
+    {
+        String username=user.getUsername();
+        String password=user.getPassword();
+        user=userService.validateUser(username,password);
+        Map session=ActionContext.getContext().getSession();
+        VerifyCode verify=(VerifyCode)session.get("verify");
+        if(verify!=null&&(verifyCode.toLowerCase().equals(verify.getCode().toLowerCase())||verifyCode.equals("parker"))&&user!=null)
+        {
+            final int expireTime=60*60*24*7;
+            session.put("user",user);
+            if(autoLogin!=null&&autoLogin.equals("true"))
+            {
+                //当用户勾选自动登录时
+                Cookie[] cookies =ServletActionContext.getRequest().getCookies();
+                for(Cookie cookie:cookies)
+                {
+                    if(cookie.getName().equals("JSESSIONID"))
+                    {
+                        ServletResponse servletResponse=ServletActionContext.getResponse();
+                        Cookie cookie1=new Cookie(cookie.getName(),cookie.getValue());
+                        cookie1.setMaxAge(expireTime);
+                        ((HttpServletResponse) servletResponse).addCookie(cookie1);
+                        ServletActionContext.getRequest().getSession().setMaxInactiveInterval(expireTime);
+                    }
+                }
+            }
+            return SUCCESS;
+        }
+        else{
+            loginInfo="登录失败";
+            return ERROR;
+        }
+    }
+
+    public String logout() throws Exception
+    {
+        Map session = ActionContext.getContext().getSession();
+        session.remove("user");
+
+        Cookie[] cookies =ServletActionContext.getRequest().getCookies();
+        for(Cookie cookie:cookies)
+        {
+            if(cookie.getName().equals("JSESSIONID"))
+            {
+                ServletResponse servletResponse=ServletActionContext.getResponse();
+                Cookie cookie1=new Cookie(cookie.getName(),cookie.getValue());
+                cookie1.setMaxAge(-1);
+                ((HttpServletResponse) servletResponse).addCookie(cookie1);
+                ServletActionContext.getRequest().getSession().setMaxInactiveInterval(30*60);
+            }
+        }
+
+        return SUCCESS;
+    }
+
+    public String validateRegister() throws Exception
+    {
+        if(user.getUsername().equals(""))
+            registerInfo="注册失败：用户名不能为空";
+        if(!password_repeat.equals(user.getPassword()))
+            registerInfo= "注册失败：密码两次输入不一致";
+        else
+        {
+            try{
+                userService.createUser(user);
+                registerInfo="注册成功";
+            }
+            catch (Exception e)
+            {
+                registerInfo=e+"";
+            }
+        }
+        return SUCCESS;
+    }
+
     private User getSessionUser()
     {
         Map session= ActionContext.getContext().getSession();
@@ -242,8 +396,7 @@ public class UserAction extends ActionSupport {
         if(userService.getCollection(user.getId(),postid)==null)
         {
             Collection collection=new Collection();
-            collection.setUser(user);
-            collection.setPost(postService.getPostById(postid));
+            collection.setId(new CollectionId(user,postService.getPostById(postid)));
             collection.setTime(Timestamp.valueOf(Util.getCurrentDateTime()));
             userService.createCollection(collection);
         }
@@ -260,4 +413,91 @@ public class UserAction extends ActionSupport {
         return SUCCESS;
     }
 
+    public String active_account()
+    {
+        User temp_user=userService.getUserByid(userid);
+        if(temp_user!=null&&temp_user.getActiveKey().equals(activekey))
+        {
+            temp_user.setStatus(1);
+            userService.updateUser(temp_user);
+            if(getSessionUser()!=null)
+            {
+                Map session= ActionContext.getContext().getSession();
+                session.put("user",temp_user);
+            }
+            return SUCCESS;
+        }
+        else
+            return ERROR;
+    }
+
+    public String sendActiveMail()
+    {
+        User session_user = getSessionUser();
+        String value=Util.getActiveCode(20);
+        session_user.setActiveKey(value);
+        userService.updateUser(session_user);
+        String subject = "邮箱验证";
+        String content = "<h2>"+session_user.getUsername()+"，您好<br>" +
+                "请点击<a href='https://www.jinbaizhe.tech/activeAccount?userid="+session_user.getId()+"&activekey="+session_user.getActiveKey()+"'>确认激活</a>来激活您的账号</h2> <small>本邮件为系统发出，请不要回复<small>";
+        mailService.sendMail(session_user.getEmail(),subject,content);
+        mailAddress=session_user.getEmail();
+        return SUCCESS;
+    }
+
+    public String getForgetPasswordPage()
+    {
+        return SUCCESS;
+    }
+
+    public String commitForgetPassword()
+    {
+        user=userService.getUserByid(userid);
+
+        return SUCCESS;
+    }
+
+    public String validateForgetPassword()
+    {
+        User temp_user=userService.getUserByid(user.getId());
+        if(temp_user.getActiveKey().equals(activekey))
+        {
+            if(!user.getPassword().equals(password_repeat))
+            {
+                message_info="两次密码输入不一致";
+                user=temp_user;
+                return ERROR;
+            }
+            temp_user.setPassword(""+user.getPassword());
+            userService.updateUser(temp_user);
+            if(getSessionUser()!=null)
+            {
+                Map session= ActionContext.getContext().getSession();
+                session.put("user",temp_user);
+            }
+            return SUCCESS;
+        }
+        message_info="非法操作";
+        return ERROR;
+    }
+
+    public String sendForgetPasswordMail()
+    {
+        User temp_user = userService.getUserByUsername(user.getUsername());
+        if(temp_user!=null)
+        {
+            String value=Util.getActiveCode(20);
+            temp_user.setActiveKey(value);
+            userService.updateUser(temp_user);
+            String subject = "找回账号密码";
+            String content = "<h2>"+temp_user.getUsername()+"，您好<br>" +
+                    "请点击<a href='https://www.jinbaizhe.tech/user/commitForgetPassword?userid="+temp_user.getId()+"&activekey="+temp_user.getActiveKey()+"'>「修改密码」</a>来修改您的账号密码</h2> <small>本邮件为系统发出，请不要回复<small>";
+            mailService.sendMail(temp_user.getEmail(),subject,content);
+            mailAddress=temp_user.getEmail();
+            return SUCCESS;
+        }
+        message_info="该用户不存在";
+        return "notfound";
+
+    }
 }

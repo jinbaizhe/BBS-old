@@ -11,4 +11,13 @@ public class Util {
         return f.format(calendar.getTime());
     }
 
+    public static String getActiveCode(int num)
+    {
+        String key= "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder value = new StringBuilder();
+        for(int i=0;i<num;i++)
+            value.append(key.charAt( (int)( Math.random()*key.length() ) ));
+        return value.toString();
+    }
+
 }

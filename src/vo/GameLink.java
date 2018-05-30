@@ -1,69 +1,73 @@
 package vo;
 
-import javax.persistence.*;
-import java.util.Objects;
+/**
+ * GameLink entity. @author MyEclipse Persistence Tools
+ */
 
-@Entity
-@Table(name = "game_link", schema = "bbs", catalog = "")
-public class GameLink {
-    private int id;
-    private String info;
-    private Integer orderNum;
-    private Game game;
+public class GameLink implements java.io.Serializable {
 
-    @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
+	// Fields
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	private Integer id;
+	private Game game;
+	private String info;
+	private Integer orderNum;
+	private String note;
 
-    @Basic
-    @Column(name = "info")
-    public String getInfo() {
-        return info;
-    }
+	// Constructors
 
-    public void setInfo(String info) {
-        this.info = info;
-    }
+	/** default constructor */
+	public GameLink() {
+	}
 
-    @Basic
-    @Column(name = "order_num")
-    public Integer getOrderNum() {
-        return orderNum;
-    }
+	/** full constructor */
+	public GameLink(Game game, String info, Integer orderNum, String note) {
+		this.game = game;
+		this.info = info;
+		this.orderNum = orderNum;
+		this.note = note;
+	}
 
-    public void setOrderNum(Integer orderNum) {
-        this.orderNum = orderNum;
-    }
+	// Property accessors
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GameLink gameLink = (GameLink) o;
-        return id == gameLink.id &&
-                Objects.equals(info, gameLink.info) &&
-                Objects.equals(orderNum, gameLink.orderNum);
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
-    @Override
-    public int hashCode() {
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-        return Objects.hash(id, info, orderNum);
-    }
+	public Game getGame() {
+		return this.game;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "game_id", referencedColumnName = "id")
-    public Game getGame() {
-        return game;
-    }
+	public void setGame(Game game) {
+		this.game = game;
+	}
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
+	public String getInfo() {
+		return this.info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public Integer getOrderNum() {
+		return this.orderNum;
+	}
+
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
+
+	public String getNote() {
+		return this.note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
 }

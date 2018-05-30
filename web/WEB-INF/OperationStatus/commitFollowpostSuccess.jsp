@@ -25,7 +25,7 @@
             </div>
             <div class="my-sm-5">
                 <h5 class="text-center">
-                    <a href="post.action?postid=<s:property value="postid"></s:property>">返回帖子</a>
+                    <a href="/post.action?postid=<s:property value="postid"></s:property>">返回帖子</a>
                 </h5>
             </div>
         </div>

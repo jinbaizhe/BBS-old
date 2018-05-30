@@ -1,103 +1,85 @@
 package vo;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
-import java.util.Set;
 
-@Entity
-public class Followpost {
-    private int id;
-    private String content;
-    private Timestamp sendTime;
-    private Timestamp updateTime;
-    private Post post;
-    private User user;
-    private Set<FollowpostPicture> followpostPictures;
+/**
+ * Followpost entity. @author MyEclipse Persistence Tools
+ */
 
-    @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
+public class Followpost implements java.io.Serializable {
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	// Fields
 
-    @Basic
-    @Column(name = "content")
-    public String getContent() {
-        return content;
-    }
+	private Integer id;
+	private User user;
+	private Post post;
+	private String content;
+	private Timestamp sendTime;
+	private Timestamp updateTime;
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	// Constructors
 
-    @Basic
-    @Column(name = "send_time")
-    public Timestamp getSendTime() {
-        return sendTime;
-    }
+	/** default constructor */
+	public Followpost() {
+	}
 
-    public void setSendTime(Timestamp sendTime) {
-        this.sendTime = sendTime;
-    }
+	/** full constructor */
+	public Followpost(User user, Post post, String content, Timestamp sendTime, Timestamp updateTime) {
+		this.user = user;
+		this.post = post;
+		this.content = content;
+		this.sendTime = sendTime;
+		this.updateTime = updateTime;
+	}
 
-    @Basic
-    @Column(name = "update_time")
-    public Timestamp getUpdateTime() {
-        return updateTime;
-    }
+	// Property accessors
 
-    public void setUpdateTime(Timestamp updateTime) {
-        this.updateTime = updateTime;
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Followpost that = (Followpost) o;
-        return id == that.id &&
-                Objects.equals(content, that.content) &&
-                Objects.equals(sendTime, that.sendTime) &&
-                Objects.equals(updateTime, that.updateTime);
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    @Override
-    public int hashCode() {
+	public User getUser() {
+		return this.user;
+	}
 
-        return Objects.hash(id, content, sendTime, updateTime);
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id")
-    public Post getPost() {
-        return post;
-    }
+	public Post getPost() {
+		return this.post;
+	}
 
-    public void setPost(Post post) {
-        this.post = post;
-    }
+	public void setPost(Post post) {
+		this.post = post;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public User getUser() {
-        return user;
-    }
+	public String getContent() {
+		return this.content;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    @OneToMany(mappedBy = "followpost")
-    public Set<FollowpostPicture> getFollowpostPictures() {
-        return followpostPictures;
-    }
+	public Timestamp getSendTime() {
+		return this.sendTime;
+	}
 
-    public void setFollowpostPictures(Set<FollowpostPicture> followpostPictures) {
-        this.followpostPictures = followpostPictures;
-    }
+	public void setSendTime(Timestamp sendTime) {
+		this.sendTime = sendTime;
+	}
+
+	public Timestamp getUpdateTime() {
+		return this.updateTime;
+	}
+
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+
 }

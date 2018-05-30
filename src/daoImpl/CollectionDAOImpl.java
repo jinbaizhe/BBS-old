@@ -12,7 +12,7 @@ public class CollectionDAOImpl extends BaseDAO<Collection> implements Collection
     @Override
     public List getCollectionsByUserId(int userid,int currentPage,int totalItemsPerPage,String order) {
         Session session=getSession();
-        String sql="from Collection c where c.user.id=? order by c.time "+order;
+        String sql="from Collection c where c.id.user.id=? order by c.time "+order;
         Query query=session.createQuery(sql);
         query.setParameter(0,userid);
         query.setFirstResult((currentPage-1)*totalItemsPerPage);
@@ -33,7 +33,7 @@ public class CollectionDAOImpl extends BaseDAO<Collection> implements Collection
     @Override
     public void deleteCollection(int userid, int postid) {
         Session session=getSession();
-        String sql="delete from Collection c where c.user.id=? and c.post.id=? ";
+        String sql="delete from Collection c where c.id.user.id=? and c.id.post.id=? ";
         Query query=session.createQuery(sql);
         query.setParameter(0,userid);
         query.setParameter(1,postid);
@@ -43,7 +43,7 @@ public class CollectionDAOImpl extends BaseDAO<Collection> implements Collection
     @Override
     public Collection getCollection(int userid, int postid) {
         Session session=getSession();
-        String sql="from Collection c where c.user.id=? and c.post.id=? ";
+        String sql="from Collection c where c.id.user.id=? and c.id.post.id=? ";
         Query query=session.createQuery(sql);
         query.setParameter(0,userid);
         query.setParameter(1,postid);

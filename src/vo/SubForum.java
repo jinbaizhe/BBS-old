@@ -1,93 +1,87 @@
 package vo;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "sub_forum", schema = "bbs", catalog = "")
-public class SubForum {
-    private int id;
-    private String name;
-    private String info;
-    private Timestamp createTime;
-    private Set<Post> posts;
-    private MainForum mainForum;
+/**
+ * SubForum entity. @author MyEclipse Persistence Tools
+ */
 
-    @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
+public class SubForum implements java.io.Serializable {
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	// Fields
 
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
+	private Integer id;
+	private MainForum mainForum;
+	private String name;
+	private String info;
+	private Timestamp createTime;
+	private Set posts = new HashSet(0);
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	// Constructors
 
-    @Basic
-    @Column(name = "info")
-    public String getInfo() {
-        return info;
-    }
+	/** default constructor */
+	public SubForum() {
+	}
 
-    public void setInfo(String info) {
-        this.info = info;
-    }
+	/** full constructor */
+	public SubForum(MainForum mainForum, String name, String info, Timestamp createTime, Set posts) {
+		this.mainForum = mainForum;
+		this.name = name;
+		this.info = info;
+		this.createTime = createTime;
+		this.posts = posts;
+	}
 
-    @Basic
-    @Column(name = "create_time")
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
+	// Property accessors
 
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SubForum subForum = (SubForum) o;
-        return id == subForum.id &&
-                Objects.equals(name, subForum.name) &&
-                Objects.equals(info, subForum.info) &&
-                Objects.equals(createTime, subForum.createTime);
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    @Override
-    public int hashCode() {
+	public MainForum getMainForum() {
+		return this.mainForum;
+	}
 
-        return Objects.hash(id, name, info, createTime);
-    }
+	public void setMainForum(MainForum mainForum) {
+		this.mainForum = mainForum;
+	}
 
-    @OneToMany(mappedBy = "subForum")
-    public Set<Post> getPosts() {
-        return posts;
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "main_forum_id", referencedColumnName = "id")
-    public MainForum getMainForum() {
-        return mainForum;
-    }
+	public String getInfo() {
+		return this.info;
+	}
 
-    public void setMainForum(MainForum mainForum) {
-        this.mainForum = mainForum;
-    }
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public Timestamp getCreateTime() {
+		return this.createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
+	public Set getPosts() {
+		return this.posts;
+	}
+
+	public void setPosts(Set posts) {
+		this.posts = posts;
+	}
+
 }

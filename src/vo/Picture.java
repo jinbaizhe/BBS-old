@@ -1,89 +1,67 @@
 package vo;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-public class Picture {
-    private int id;
-    private String picture;
-    private Timestamp uploadTime;
-    private Set<FollowpostPicture> followpostPictures;
-    private Set<PostPicture> postPictures;
-    private Set<User> users;
+/**
+ * Picture entity. @author MyEclipse Persistence Tools
+ */
 
-    @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
+public class Picture implements java.io.Serializable {
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	// Fields
 
-    @Basic
-    @Column(name = "picture")
-    public String getPicture() {
-        return picture;
-    }
+	private Integer id;
+	private String picture;
+	private Timestamp uploadTime;
+	private Set users = new HashSet(0);
 
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
+	// Constructors
 
-    @Basic
-    @Column(name = "upload_time")
-    public Timestamp getUploadTime() {
-        return uploadTime;
-    }
+	/** default constructor */
+	public Picture() {
+	}
 
-    public void setUploadTime(Timestamp uploadTime) {
-        this.uploadTime = uploadTime;
-    }
+	/** full constructor */
+	public Picture(String picture, Timestamp uploadTime, Set users) {
+		this.picture = picture;
+		this.uploadTime = uploadTime;
+		this.users = users;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Picture picture1 = (Picture) o;
-        return id == picture1.id &&
-                Objects.equals(picture, picture1.picture) &&
-                Objects.equals(uploadTime, picture1.uploadTime);
-    }
+	// Property accessors
 
-    @Override
-    public int hashCode() {
+	public Integer getId() {
+		return this.id;
+	}
 
-        return Objects.hash(id, picture, uploadTime);
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    @OneToMany(mappedBy = "picture")
-    public Set<FollowpostPicture> getFollowpostPictures() {
-        return followpostPictures;
-    }
+	public String getPicture() {
+		return this.picture;
+	}
 
-    public void setFollowpostPictures(Set<FollowpostPicture> followpostPictures) {
-        this.followpostPictures = followpostPictures;
-    }
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 
-    @OneToMany(mappedBy = "picture")
-    public Set<PostPicture> getPostPictures() {
-        return postPictures;
-    }
+	public Timestamp getUploadTime() {
+		return this.uploadTime;
+	}
 
-    public void setPostPictures(Set<PostPicture> postPictures) {
-        this.postPictures = postPictures;
-    }
+	public void setUploadTime(Timestamp uploadTime) {
+		this.uploadTime = uploadTime;
+	}
 
-    @OneToMany(mappedBy = "picture")
-    public Set<User> getUsers() {
-        return users;
-    }
+	public Set getUsers() {
+		return this.users;
+	}
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+	public void setUsers(Set users) {
+		this.users = users;
+	}
+
 }

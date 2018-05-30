@@ -1,184 +1,199 @@
 package vo;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-public class User {
-    private int id;
-    private String username;
-    private String password;
-    private String info;
-    private String sex;
-    private String email;
-    private Integer status;
-    private Integer type;
-    private Integer level;
-    private Timestamp registerTime;
-    private Set<Collection> collections;
-    private Set<Followpost> followposts;
-    private Set<Post> posts;
-    private Picture picture;
+/**
+ * User entity. @author MyEclipse Persistence Tools
+ */
 
-    @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
+public class User implements java.io.Serializable {
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	// Fields
 
-    @Basic
-    @Column(name = "username")
-    public String getUsername() {
-        return username;
-    }
+	private Integer id;
+	private Picture picture;
+	private String username;
+	private String password;
+	private String info;
+	private String sex;
+	private String email;
+	private Integer status;
+	private Integer type;
+	private Integer level;
+	private Timestamp registerTime;
+	private String activeKey;
+	private Set followposts = new HashSet(0);
+	private Set posts = new HashSet(0);
+	private Set messages = new HashSet(0);
+	private Set logs = new HashSet(0);
+	private Set collections = new HashSet(0);
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	// Constructors
 
-    @Basic
-    @Column(name = "password")
-    public String getPassword() {
-        return password;
-    }
+	/** default constructor */
+	public User() {
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	/** full constructor */
+	public User(Picture picture, String username, String password, String info, String sex, String email,
+			Integer status, Integer type, Integer level, Timestamp registerTime, String activeKey, Set followposts,
+			Set posts, Set messages, Set logs, Set collections) {
+		this.picture = picture;
+		this.username = username;
+		this.password = password;
+		this.info = info;
+		this.sex = sex;
+		this.email = email;
+		this.status = status;
+		this.type = type;
+		this.level = level;
+		this.registerTime = registerTime;
+		this.activeKey = activeKey;
+		this.followposts = followposts;
+		this.posts = posts;
+		this.messages = messages;
+		this.logs = logs;
+		this.collections = collections;
+	}
 
-    @Basic
-    @Column(name = "info")
-    public String getInfo() {
-        return info;
-    }
+	// Property accessors
 
-    public void setInfo(String info) {
-        this.info = info;
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
-    @Basic
-    @Column(name = "sex")
-    public String getSex() {
-        return sex;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+	public Picture getPicture() {
+		return this.picture;
+	}
 
-    @Basic
-    @Column(name = "email")
-    public String getEmail() {
-        return email;
-    }
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getUsername() {
+		return this.username;
+	}
 
-    @Basic
-    @Column(name = "status")
-    public Integer getStatus() {
-        return status;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public String getPassword() {
+		return this.password;
+	}
 
-    @Basic
-    @Column(name = "type")
-    public Integer getType() {
-        return type;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
+	public String getInfo() {
+		return this.info;
+	}
 
-    @Basic
-    @Column(name = "level")
-    public Integer getLevel() {
-        return level;
-    }
+	public void setInfo(String info) {
+		this.info = info;
+	}
 
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
+	public String getSex() {
+		return this.sex;
+	}
 
-    @Basic
-    @Column(name = "register_time")
-    public Timestamp getRegisterTime() {
-        return registerTime;
-    }
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
-    public void setRegisterTime(Timestamp registerTime) {
-        this.registerTime = registerTime;
-    }
+	public String getEmail() {
+		return this.email;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(info, user.info) &&
-                Objects.equals(sex, user.sex) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(status, user.status) &&
-                Objects.equals(type, user.type) &&
-                Objects.equals(level, user.level) &&
-                Objects.equals(registerTime, user.registerTime);
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    @Override
-    public int hashCode() {
+	public Integer getStatus() {
+		return this.status;
+	}
 
-        return Objects.hash(id, username, password, info, sex, email, status, type, level, registerTime);
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    @OneToMany(mappedBy = "user")
-    public Set<Collection> getCollections() {
-        return collections;
-    }
+	public Integer getType() {
+		return this.type;
+	}
 
-    public void setCollections(Set<Collection> collections) {
-        this.collections = collections;
-    }
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
-    @OneToMany(mappedBy = "user")
-    public Set<Followpost> getFollowposts() {
-        return followposts;
-    }
+	public Integer getLevel() {
+		return this.level;
+	}
 
-    public void setFollowposts(Set<Followpost> followposts) {
-        this.followposts = followposts;
-    }
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
 
-    @OneToMany(mappedBy = "user")
-    public Set<Post> getPosts() {
-        return posts;
-    }
+	public Timestamp getRegisterTime() {
+		return this.registerTime;
+	}
 
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
-    }
+	public void setRegisterTime(Timestamp registerTime) {
+		this.registerTime = registerTime;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "picture_id", referencedColumnName = "id")
-    public Picture getPicture() {
-        return picture;
-    }
+	public String getActiveKey() {
+		return this.activeKey;
+	}
 
-    public void setPicture(Picture picture) {
-        this.picture = picture;
-    }
+	public void setActiveKey(String activeKey) {
+		this.activeKey = activeKey;
+	}
+
+	public Set getFollowposts() {
+		return this.followposts;
+	}
+
+	public void setFollowposts(Set followposts) {
+		this.followposts = followposts;
+	}
+
+	public Set getPosts() {
+		return this.posts;
+	}
+
+	public void setPosts(Set posts) {
+		this.posts = posts;
+	}
+
+	public Set getMessages() {
+		return this.messages;
+	}
+
+	public void setMessages(Set messages) {
+		this.messages = messages;
+	}
+
+	public Set getLogs() {
+		return this.logs;
+	}
+
+	public void setLogs(Set logs) {
+		this.logs = logs;
+	}
+
+	public Set getCollections() {
+		return this.collections;
+	}
+
+	public void setCollections(Set collections) {
+		this.collections = collections;
+	}
+
 }

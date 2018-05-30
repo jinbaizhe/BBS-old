@@ -9,12 +9,10 @@
     </bean>
     <bean id="postService" class="serviceImpl.PostServiceImpl">
         <property name="postDAO" ref="postDAO"></property>
-        <property name="postPictureDAO" ref="postPictureDAO"></property>
         <property name="pictureDAO" ref="pictureDAO"></property>
     </bean>
     <bean id="followpostService" class="serviceImpl.FollowpostServiceImpl">
         <property name="followpostDAO" ref="followpostDAO"></property>
-        <property name="followpostPictureDAO" ref="followpostPictureDAO"></property>
         <property name="pictureDAO" ref="pictureDAO"></property>
     </bean>
     <bean id="mainForumService" class="serviceImpl.MainForumServiceImpl">
@@ -25,11 +23,11 @@
     </bean>
     <bean id="pictureService" class="serviceImpl.PictureServiceImpl">
         <property name="pictureDAO" ref="pictureDAO"></property>
-        <property name="postPictureDAO" ref="postPictureDAO"></property>
-        <property name="followpostPictureDAO" ref="followpostPictureDAO"></property>
     </bean>
     <bean id="nbaSteamService" class="serviceImpl.NBAStreamServiceImpl">
         <property name="gameDAO" ref="gameDAO"></property>
         <property name="gameLinkDAO" ref="gameLinkDAO"></property>
     </bean>
+
+    <bean id="mailService" class="serviceImpl.MailServiceImpl"></bean>
 </beans>

@@ -40,15 +40,16 @@
 
                 <value>classpath:vo/Collection.hbm.xml</value>
                 <value>classpath:vo/Followpost.hbm.xml</value>
-                <value>classpath:vo/FollowpostPicture.hbm.xml</value>
                 <value>classpath:vo/Game.hbm.xml</value>
                 <value>classpath:vo/GameLink.hbm.xml</value>
                 <value>classpath:vo/MainForum.hbm.xml</value>
                 <value>classpath:vo/Picture.hbm.xml</value>
                 <value>classpath:vo/Post.hbm.xml</value>
-                <value>classpath:vo/PostPicture.hbm.xml</value>
                 <value>classpath:vo/SubForum.hbm.xml</value>
                 <value>classpath:vo/User.hbm.xml</value>
+                <value>classpath:vo/Log.hbm.xml</value>
+                <value>classpath:vo/Message.hbm.xml</value>
+
             </list>
         </property>
         <property name="annotatedClasses">
@@ -56,15 +57,15 @@
 
                 <value>vo.Collection</value>
                 <value>vo.Followpost</value>
-                <value>vo.FollowpostPicture</value>
                 <value>vo.Game</value>
                 <value>vo.GameLink</value>
                 <value>vo.MainForum</value>
                 <value>vo.Picture</value>
                 <value>vo.Post</value>
-                <value>vo.PostPicture</value>
                 <value>vo.SubForum</value>
                 <value>vo.User</value>
+                <value>vo.Log</value>
+                <value>vo.Message</value>
             </list>
         </property>
     </bean>

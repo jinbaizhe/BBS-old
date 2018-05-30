@@ -13,8 +13,6 @@
     <bean id="postDAO" class="daoImpl.PostDAOImpl" parent="baseDAO"></bean>
     <bean id="followpostDAO" class="daoImpl.FollowpostDAOImpl" parent="baseDAO"></bean>
     <bean id="pictureDAO" class="daoImpl.PictureDAOImpl" parent="baseDAO"></bean>
-    <bean id="postPictureDAO" class="daoImpl.PostPictureDAOImpl" parent="baseDAO"></bean>
-    <bean id="followpostPictureDAO" class="daoImpl.FollowpostPictureDAOImpl" parent="baseDAO"></bean>
     <bean id="collectionDAO" class="daoImpl.CollectionDAOImpl" parent="baseDAO"></bean>
     <bean id="gameDAO" class="daoImpl.GameDAOImpl" parent="baseDAO"></bean>
     <bean id="gameLinkDAO" class="daoImpl.GameLinkDAOImpl" parent="baseDAO"></bean>

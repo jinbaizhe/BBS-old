@@ -69,12 +69,11 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
     @Override
     public int getPostsNumBySubForumId(int subForumId) {
         Session session=getSession();
-        String sql="from Post p where p.subForum.id=?";
+        String sql="select count(*) from Post p where p.subForum.id=?";
         Query query=session.createQuery(sql);
         query.setParameter(0,subForumId);
-        int size=query.list().size();
 //        session.close();
-        return size;
+        return ((Long)query.list().get(0)).intValue();
     }
 
     @Override
@@ -90,7 +89,7 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
     @Override
     public List getSearchResult(String keyWord,int currentPage,int totalItemsPerPage, String order) {
         Session session=getSession();
-        Query query=session.createQuery("from Post p where p.title like '%"+keyWord+"%' order by p.sendTime "+order);
+        Query query=session.createQuery("from Post p where p.title like '%"+keyWord+"%' or p.content like '%"+keyWord+"%' order by p.sendTime "+order);
         query.setFirstResult((currentPage-1)*totalItemsPerPage);
         query.setMaxResults(totalItemsPerPage);
         List posts=query.list();
@@ -100,8 +99,7 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
     @Override
     public int getSearchResultNum(String keyWord, String order) {
         Session session=getSession();
-        Query query=session.createQuery("from Post p where p.title like '%"+keyWord+"%' order by p.sendTime "+order);
-        List posts=query.list();
-        return posts.size();
+        Query query=session.createQuery("select count(*) from Post p where p.title like '%"+keyWord+"%' order by p.sendTime "+order);
+        return ((Long)query.list().get(0)).intValue();
     }
 }

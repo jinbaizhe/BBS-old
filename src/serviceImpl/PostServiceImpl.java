@@ -2,26 +2,16 @@ package serviceImpl;
 
 import dao.PictureDAO;
 import dao.PostDAO;
-import dao.PostPictureDAO;
-import org.apache.struts2.ServletActionContext;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import service.PostService;
 import util.Util;
-import vo.Picture;
 import vo.Post;
-import vo.PostPicture;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.sql.Timestamp;
 import java.util.List;
 
 public class PostServiceImpl implements PostService {
     private PostDAO postDAO;
-    private PostPictureDAO postPictureDAO;
     private PictureDAO pictureDAO;
 
     public PictureDAO getPictureDAO() {
@@ -30,14 +20,6 @@ public class PostServiceImpl implements PostService {
 
     public void setPictureDAO(PictureDAO pictureDAO) {
         this.pictureDAO = pictureDAO;
-    }
-
-    public PostPictureDAO getPostPictureDAO() {
-        return postPictureDAO;
-    }
-
-    public void setPostPictureDAO(PostPictureDAO postPictureDAO) {
-        this.postPictureDAO = postPictureDAO;
     }
 
     public PostDAO getPostDAO() {
@@ -54,7 +36,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void createPost(Post post, List<File> files) {
+    public void createPost(Post post) {
         post.setSendTime(Timestamp.valueOf(Util.getCurrentDateTime()));
         post.setTop(0);
         post.setType(0);
@@ -65,27 +47,6 @@ public class PostServiceImpl implements PostService {
         session.beginTransaction();//事务开始
         try {
             postDAO.createPost(post);
-            String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload/");
-            if(files!=null)
-            {
-                for(File source_file:files)
-                {
-                    File dest_file=new File(path+post.hashCode()+""+source_file.hashCode()+".jpg");
-                    try {
-                        Files.copy(source_file.toPath(),dest_file.toPath());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    source_file.delete();
-                    Picture picture=new Picture();
-                    picture.setPicture(dest_file.getName());
-                    pictureDAO.createPicture(picture);
-                    PostPicture postPicture=new PostPicture();
-                    postPicture.setPicture(picture);
-                    postPicture.setPost(post);
-                    postPictureDAO.createPostPicture(postPicture);
-                }
-            }
             session.flush();
             session.getTransaction().commit();//事务提交
         }

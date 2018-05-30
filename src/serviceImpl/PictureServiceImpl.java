@@ -1,21 +1,17 @@
 package serviceImpl;
 
-import dao.FollowpostPictureDAO;
 import dao.PictureDAO;
-import dao.PostPictureDAO;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import service.PictureService;
-import util.Util;
 import vo.*;
-
-import java.sql.Timestamp;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Calendar;
 
 public class PictureServiceImpl implements PictureService {
     private PictureDAO pictureDAO;
-    private PostPictureDAO postPictureDAO;
-    private FollowpostPictureDAO followpostPictureDAO;
 
     public PictureDAO getPictureDAO() {
         return pictureDAO;
@@ -25,61 +21,9 @@ public class PictureServiceImpl implements PictureService {
         this.pictureDAO = pictureDAO;
     }
 
-    public PostPictureDAO getPostPictureDAO() {
-        return postPictureDAO;
-    }
-
-    public void setPostPictureDAO(PostPictureDAO postPictureDAO) {
-        this.postPictureDAO = postPictureDAO;
-    }
-
-    public FollowpostPictureDAO getFollowpostPictureDAO() {
-        return followpostPictureDAO;
-    }
-
-    public void setFollowpostPictureDAO(FollowpostPictureDAO followpostPictureDAO) {
-        this.followpostPictureDAO = followpostPictureDAO;
-    }
-
     public void deletePicture(Picture picture)
     {
         pictureDAO.deletePicture(picture);
-    }
-
-    @Override
-    public void deletePictureFromPost(Picture picture, Post post) {
-        PostPicture postPicture=new PostPicture();
-        postPicture.setPicture(picture);
-        postPicture.setPost(post);
-        Session session=postPictureDAO.getSession();
-        Transaction transaction=session.beginTransaction();
-        try{
-            postPictureDAO.deletePostPicture(postPicture);
-            session.flush();
-            transaction.commit();
-        }catch (Exception e)
-        {
-            transaction.rollback();
-            throw e;
-        }
-    }
-
-    @Override
-    public void deletePictureFromFollowpost(Picture picture, Followpost followpost) {
-        FollowpostPicture followpostPicture=new FollowpostPicture();
-        followpostPicture.setPicture(picture);
-        followpostPicture.setFollowpost(followpost);
-        Session session=postPictureDAO.getSession();
-        Transaction transaction=session.beginTransaction();
-        try{
-            followpostPictureDAO.deleteFollowpostPicture(followpostPicture);
-            session.flush();
-            transaction.commit();
-        }catch (Exception e)
-        {
-            transaction.rollback();
-            throw e;
-        }
     }
 
     @Override
@@ -88,12 +32,28 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
-    public List getPicturesByPostId(int id) {
-        return pictureDAO.getPicturesByPostId(id);
-    }
+    public Picture uploadPicture(File file,String uploadFileName,String uploadContentType) {
+        String path = ServletActionContext.getServletContext().getRealPath("/WEB-INF/upload/");
+        Calendar calendar=Calendar.getInstance();
+        if(file!=null)
+        {
+            File dest_file=new File(path+calendar.getTimeInMillis()+file.hashCode()+".jpg");
+            try {
+                Files.copy(file.toPath(),dest_file.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            file.delete();
+            Picture picture=new Picture();
+            picture.setPicture(dest_file.getName());
 
-    @Override
-    public List getPicturesByFollowpostId(int id) {
-        return pictureDAO.getPicturesByFollowpostId(id);
+            Session session = pictureDAO.getSession();
+            session.beginTransaction();//事务开始
+            pictureDAO.createPicture(picture);
+            session.flush();
+            session.getTransaction().commit();//事务提交
+            return picture;
+        }
+        return null;
     }
 }

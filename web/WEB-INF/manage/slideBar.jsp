@@ -17,6 +17,7 @@
                     <li>
                         <a href="/manage/mainforum.action">版块管理</a>
                     </li>
+                    <!--
                     <li>
                         <a href="#">公告管理</a>
                     </li>
@@ -26,6 +27,7 @@
                     <li>
                         <a href="#">查看最近访客</a>
                     </li>
+                    -->
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
@@ -35,7 +37,7 @@
                     <span class="nav-link-text">用户管理</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="userManage">
-                <s:if test="#session.user.type==2">
+                <s:if test="#session.user.type>=2">
                     <li>
                         <a href="/manage/user.action">用户设置</a>
                     </li>

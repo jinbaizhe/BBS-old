@@ -24,65 +24,105 @@
                     <h1>关于</h1>
                 </div>
                 <div class="my-sm-5">
-                    <h3>历史更新</h3>
-                    <p class="my-sm-3" style="text-align: left">
-                        <h5>版本：0.2.2</h5>
-                        1.添加账号自动登录的功能。<br>
-                        2.添加搜索帖子的功能。<br>
-                        3.修正部分分页导航的显示效果。<br>
-                    </p>
-                    <p class="my-sm-3" style="text-align: left">
-                        <h5>版本：0.2.1</h5>
-                        1.修复在IE11下无法加载CSS文件的问题。<br>
-                    </p>
-                    <p class="my-sm-3" style="text-align: left">
-                        <h5>版本：0.2.0</h5>
-                        1.添加验证码功能。<br>
-                        2.添加收藏帖子功能。<br>
-                        3.完善个人中心页面。<br>
-                        4.添加查看他人资料页面。<br>
-                        5.修复仍旧显示失效的直播链接的问题。<br>
-                    </p>
-                    <p class="my-sm-3" style="text-align: left">
-                        <h5>版本：0.1.4</h5>
-                        1.修复查看直播链接时页面无法显示的问题。<br>
-                        2.更新后台Python爬虫脚本，支持表情字符。<br>
-                    </p>
-                    <p class="my-sm-3" style="text-align: left">
-                        <h5>版本：0.1.3</h5>
-                        1.使用事务管理。<br>
-                        2.修复用户发帖、回帖时无法附带图片的问题。<br>
-                        3.修复帖子图片显示错误问题。<br>
-                        4.修复用户无法修改密码的问题。<br>
-                        5.修复用户更新个人信息成功但页面却仍显示旧信息的问题。<br>
-                        6.修复某一用户名已被注册但其他用户仍可注册该用户名的问题。<br>
-                        7.添加提示操作失败页面。<br>
-                    </p>
-                    <p class="my-sm-3" style="text-align: left">
-                        <h5>版本：0.1.2</h5>
-                        1.调整首页版块显示效果。<br>
-                        2.添加显示回帖楼层号的功能。<br>
-                        3.修复查看帖子时回帖数量不正确的问题。<br>
-                    </p>
-                    <p class="my-sm-3" style="text-align: left">
-                        <h5>版本：0.1.1</h5>
-                        1.修复部分管理权限问题。<br>
-                        2.修复部分链接地址错误。<br>
-                        3.修复部分帖子无法显示问题。<br>
-                        4.修复版块管理显示页面问题。<br>
-                        5.添加部分网页标题。<br>
-                        6.将参数整合进web.xml中。<br>
-                    </p>
+                    <h2>技术栈</h2>
+                    <ul>
+                        <li>JDK8</li>
+                        <li>Struts2-2.5.14.1</li>
+                        <li>Spring-4.3.14</li>
+                        <li>Hibernate-5.2.14</li>
+                        <li>MySQL</li>
+                        <li>Tomcat8.5</li>
+                        <li>Bootstrap4</li>
+                    </ul>
+                    <h2>特性</h2>
 
-                    <p class="my-sm-3" style="text-align: left">
+                </div>
+                <div class="my-sm-5">
+                    <h3>历史更新</h3>
+                    <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.3.0</h5>
+                        <ol>
+                            <li>添加找回账号密码功能。</li>
+                            <li>添加邮箱验证功能。</li>
+                            <li>修改帖子图片的上传方式。</li>
+                            <li>添加用户设置账号头像功能。</li>
+                            <li>其它细节改动。</li>
+                        </ol>
+                    </div>
+                    <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.2.2</h5>
+                        <ol>
+                            <li>添加账号自动登录的功能。</li>
+                            <li>添加搜索帖子的功能。</li>
+                            <li>修正部分分页导航的显示效果。</li>
+                        </ol>
+                    </div>
+                    <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.2.1</h5>
+                        <ol>
+                            <li>修复在IE11下无法加载CSS文件的问题。（无效）</li>
+                        </ol>
+                    </div>
+                    <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.2.0</h5>
+                        <ol>
+                            <li>添加验证码功能。</li>
+                            <li>添加收藏帖子功能。</li>
+                            <li>完善个人中心页面。</li>
+                            <li>添加查看他人资料页面。</li>
+                            <li>修复仍旧显示失效的直播链接的问题。</li>
+                        </ol>
+                    </div>
+                    <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.1.4</h5>
+                        <ol>
+                            <li>修复查看直播链接时页面无法显示的问题。</li>
+                            <li>更新后台Python爬虫脚本，支持表情字符。</li>
+                        </ol>
+                    </div>
+                    <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.1.3</h5>
+                        <ol>
+                            <li>使用事务管理。</li>
+                            <li>修复用户发帖、回帖时无法附带图片的问题。</li>
+                            <li>修复帖子图片显示错误问题。</li>
+                            <li>修复用户无法修改密码的问题。</li>
+                            <li>修复用户更新个人信息成功但页面却仍显示旧信息的问题。</li>
+                            <li>修复某一用户名已被注册但其他用户仍可注册该用户名的问题。</li>
+                            <li>添加提示操作失败页面。</li>
+                        </ol>
+                    </div>
+                    <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.1.2</h5>
+                        <ol>
+                            <li>调整首页版块显示效果。</li>
+                            <li>添加显示回帖楼层号的功能。</li>
+                            <li>修复查看帖子时回帖数量不正确的问题。</li>
+                        </ol>
+                    </div>
+                    <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.1.1</h5>
+                        <ol>
+                            <li>修复部分管理权限问题。</li>
+                            <li>修复部分链接地址错误。</li>
+                            <li>修复部分帖子无法显示问题。</li>
+                            <li>修复版块管理显示页面问题。</li>
+                            <li>添加部分网页标题。</li>
+                            <li>将参数整合进web.xml中。</li>
+                        </ol>
+                    </div>
+
+                    <div class="my-sm-3" style="text-align: left">
                         <h5>版本：0.1.0</h5>
-                        1.新增可通过排序查看帖子、回帖功能。<br>
-                        2.添加设置、撤销管理员功能。<br>
-                        3.添加置顶、高亮帖子功能。<br>
-                        4.修复用户修改个人信息后无法及时更新session中相关个人信息的问题。<br>
-                        5.修改部分AOP切点。<br>
-                        6.修改部分权限的验证方式。<br>
-                    </p>
+                        <ol>
+                            <li>新增可通过排序查看帖子、回帖功能。</li>
+                            <li>添加设置、撤销管理员功能。</li>
+                            <li>添加置顶、高亮帖子功能。</li>
+                            <li>修复用户修改个人信息后无法及时更新session中相关个人信息的问题。</li>
+                            <li>修改部分AOP切点。</li>
+                            <li>修改部分权限的验证方式。</li>
+                        </ol>
+                    </div>
                 </div>
                 <div class="my-sm-5 text-center">
                     <h5>Powered by Parker</h5>

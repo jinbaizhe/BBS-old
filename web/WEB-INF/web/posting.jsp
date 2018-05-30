@@ -46,12 +46,8 @@
                         <script>
                             // Replace the <textarea id="editor1"> with a CKEditor
                             // instance, using default configuration.
-                            CKEDITOR.replace( 'editor1' );
+                            CKEDITOR.replace( 'editor1');
                         </script>
-                    </li>
-                    <li class="list-group-item">
-                        <input type="button" class="btn btn-primary" value="添加图片" onclick="addOne()" id="addBut">
-                        <div id="filediv"></div>
                     </li>
 
                     <li class="list-group-item">

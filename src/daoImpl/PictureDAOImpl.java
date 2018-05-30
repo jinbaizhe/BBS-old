@@ -38,7 +38,7 @@ public class PictureDAOImpl extends BaseDAO<Picture> implements PictureDAO {
     @Override
     public List getPicturesByPostId(int id) {
         Session session=getSession();
-        Query query=session.createQuery("select pp.picture from PostPicture pp where pp.post.id=?");
+        Query query=session.createQuery("select pp.id.picture from PostPicture pp where pp.id.picture.id=?");
         query.setParameter(0,id);
         List pictures=query.list();
 //        session.close();
@@ -48,7 +48,7 @@ public class PictureDAOImpl extends BaseDAO<Picture> implements PictureDAO {
     @Override
     public List getPicturesByFollowpostId(int id) {
         Session session=getSession();
-        Query query=session.createQuery("select fp.picture from FollowpostPicture fp where fp.followpost.id=?");
+        Query query=session.createQuery("select fp.id.picture from FollowpostPicture fp where fp.id.followpost.id=?");
         query.setParameter(0,id);
         List pictures=query.list();
 //        session.close();

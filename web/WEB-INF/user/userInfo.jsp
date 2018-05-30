@@ -67,6 +67,16 @@
                                     <p class="text-danger"><s:property value="message_info"></s:property></p>
                                 </div>
                                 <div class="form-group">
+                                    <s:if test='user.picture.id!=""'>
+                                        <img  alt="" class="img-responsive img-circle" src="/getPicture.action?id=<s:property value="user.picture.id"></s:property>"
+                                              style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
+                                    </s:if>
+                                    <s:else>
+                                        <img  alt="" class="img-responsive img-circle" src="/static/default.jpg"
+                                              style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
+                                    </s:else>
+                                </div>
+                                <div class="form-group">
                                     <label>用户名</label>
                                     <input type=text class="form-control" name="user.username" placeholder="请输入用户名" value="<s:property value="user.username"></s:property>" readonly>
                                     <!--<small class="form-text text-muted" name=""></small>-->
@@ -74,6 +84,11 @@
                                 <div class="form-group">
                                     <label>用户类型</label>
                                     <input type="text" class="form-control" name="user.type" readonly value="<s:property value="user.type"></s:property>">
+                                    <!--<small class="form-text text-muted" name=""></small>-->
+                                </div>
+                                <div class="form-group">
+                                    <label>账号状态</label>
+                                    <input type="text" class="form-control" name="user.status" readonly value="<s:property value="user.status"></s:property>">
                                     <!--<small class="form-text text-muted" name=""></small>-->
                                 </div>
                                 <div class="form-group">

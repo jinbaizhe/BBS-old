@@ -24,7 +24,7 @@
             </div>
             <div class="my-sm-5">
                 <h5 class="text-center">
-                    <a href="subforum.action?sfid=<s:property value="subforumid"></s:property>">返回当前版块</a>
+                    <a href="/subforum.action?sfid=<s:property value="subforumid"></s:property>">返回当前版块</a>
                 </h5>
             </div>
         </div>

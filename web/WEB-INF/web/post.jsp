@@ -58,10 +58,16 @@
                 <div class="post-head">
                     <div class="text-center">
                         <div>
-                            <a href="/user/userInfo.action?userid=<s:property value="post.user.id"></s:property>">
+                            <s:if test='post.user.picture.id!=""'>
+                                <a href="/user/userInfo.action?userid=<s:property value="post.user.id"></s:property>">
+                                    <img  alt="" class="img-responsive img-circle" src="/getPicture.action?id=<s:property value="post.user.picture.id"></s:property>"
+                                          style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
+                                </a>
+                            </s:if>
+                            <s:else>
                                 <img  alt="" class="img-responsive img-circle" src="/static/default.jpg"
                                       style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
-                            </a>
+                            </s:else>
                         </div>
                         <div>
                             <span class="badge" style="background: #f1c40f;margin-top: 5px">发帖者:<s:property value="post.user.username"></s:property></span>
@@ -128,9 +134,6 @@
                     </div>
                     <div style="margin: 20px">
                         ${post.content}
-                        <s:iterator value="pictures" var="picture">
-                            <img src="getPicture.action?id=<s:property value="#picture.id"></s:property>" width="200" height="150" alt="无法显示图片">
-                        </s:iterator>
                     </div>
                 </div>
             </div>
@@ -143,10 +146,16 @@
                     <div class="reply-head">
                         <div class="text-center">
                             <div>
-                                <a href="/user/userInfo.action?userid=<s:property value="#followpost.user.id"></s:property>">
+                                <s:if test='#followpost.user.picture.id!=""'>
+                                    <a href="/user/userInfo.action?userid=<s:property value="#followpost.user.id"></s:property>">
+                                        <img  alt="" class="img-responsive img-circle" src="/getPicture.action?id=<s:property value="#followpost.user.picture.id"></s:property>"
+                                              style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
+                                    </a>
+                                </s:if>
+                                <s:else>
                                     <img  alt="" class="img-responsive img-circle" src="/static/default.jpg"
                                           style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
-                                </a>
+                                </s:else>
                             </div>
                             <div>
                                 <span class="badge" style="background: #f1c40f;margin-top: 5px">回帖者:<s:property value="#followpost.user.username"></s:property></span>
@@ -251,10 +260,6 @@
                             // instance, using default configuration.
                             CKEDITOR.replace( 'editor1' );
                         </script>
-                    </div>
-                    <div class="my-sm-2">
-                        <input type="button" class="btn btn-primary" value="添加图片" onclick="addOne()" id="addBut">
-                        <div id="filediv"></div>
                     </div>
                     <div class="my-sm-2" style="float:right;">
                         <input type="hidden" name="postid" value="<s:property value="post.id"></s:property>">

@@ -27,7 +27,7 @@
             </ul>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item mx-sm-5">
-                    <form class="form-inline my-sm-0" action="searchPosts.action" method="get">
+                    <form class="form-inline my-sm-0" action="/searchPosts.action" method="get">
                         <div class="input-group">
                             <input class="form-control" type="text" name="searchKeyWord" placeholder="搜索帖子">
                             <span class="input-group-append">
@@ -44,7 +44,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">欢迎您，${sessionScope.user.getUsername()}</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/user/setting.action">个人中心</a>
-                                <a class="dropdown-item" href="/logout.action"><span class="fa fa-fw fa-sign-out"></span>退出</a>
+                                <a class="dropdown-item" href="/user/logout.action"><span class="fa fa-fw fa-sign-out"></span>退出</a>
                                 <s:if test="#session.user.getType()>=1">
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/manage/index.action">后台管理</a>
@@ -55,10 +55,10 @@
                 </s:if>
                 <s:else>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login.action"><span class="fa fa-fw fa-sign-in"></span>登录</a>
+                        <a class="nav-link" href="/user/login.action"><span class="fa fa-fw fa-sign-in"></span>登录</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register.action">注册</a>
+                        <a class="nav-link" href="/user/register.action">注册</a>
                     </li>
                 </s:else>
             </ul>

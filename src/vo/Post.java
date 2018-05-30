@@ -1,171 +1,148 @@
 package vo;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-public class Post {
-    private int id;
-    private String title;
-    private String content;
-    private Timestamp sendTime;
-    private Timestamp updateTime;
-    private Integer type;
-    private Integer top;
-    private Integer viewNum;
-    private Set<Collection> collections;
-    private Set<Followpost> followposts;
-    private User user;
-    private SubForum subForum;
-    private Set<PostPicture> postPictures;
+/**
+ * Post entity. @author MyEclipse Persistence Tools
+ */
 
-    @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
+public class Post implements java.io.Serializable {
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	// Fields
 
-    @Basic
-    @Column(name = "title")
-    public String getTitle() {
-        return title;
-    }
+	private Integer id;
+	private User user;
+	private SubForum subForum;
+	private String title;
+	private String content;
+	private Timestamp sendTime;
+	private Timestamp updateTime;
+	private Integer type;
+	private Integer top;
+	private Integer viewNum;
+	private Set followposts = new HashSet(0);
+	private Set collections = new HashSet(0);
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	// Constructors
 
-    @Basic
-    @Column(name = "content")
-    public String getContent() {
-        return content;
-    }
+	/** default constructor */
+	public Post() {
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	/** full constructor */
+	public Post(User user, SubForum subForum, String title, String content, Timestamp sendTime, Timestamp updateTime,
+			Integer type, Integer top, Integer viewNum, Set followposts, Set collections) {
+		this.user = user;
+		this.subForum = subForum;
+		this.title = title;
+		this.content = content;
+		this.sendTime = sendTime;
+		this.updateTime = updateTime;
+		this.type = type;
+		this.top = top;
+		this.viewNum = viewNum;
+		this.followposts = followposts;
+		this.collections = collections;
+	}
 
-    @Basic
-    @Column(name = "send_time")
-    public Timestamp getSendTime() {
-        return sendTime;
-    }
+	// Property accessors
 
-    public void setSendTime(Timestamp sendTime) {
-        this.sendTime = sendTime;
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
-    @Basic
-    @Column(name = "update_time")
-    public Timestamp getUpdateTime() {
-        return updateTime;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setUpdateTime(Timestamp updateTime) {
-        this.updateTime = updateTime;
-    }
+	public User getUser() {
+		return this.user;
+	}
 
-    @Basic
-    @Column(name = "type")
-    public Integer getType() {
-        return type;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
+	public SubForum getSubForum() {
+		return this.subForum;
+	}
 
-    @Basic
-    @Column(name = "top")
-    public Integer getTop() {
-        return top;
-    }
+	public void setSubForum(SubForum subForum) {
+		this.subForum = subForum;
+	}
 
-    public void setTop(Integer top) {
-        this.top = top;
-    }
+	public String getTitle() {
+		return this.title;
+	}
 
-    @Basic
-    @Column(name = "view_num")
-    public Integer getViewNum() {
-        return viewNum;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setViewNum(Integer viewNum) {
-        this.viewNum = viewNum;
-    }
+	public String getContent() {
+		return this.content;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Post post = (Post) o;
-        return id == post.id &&
-                Objects.equals(title, post.title) &&
-                Objects.equals(content, post.content) &&
-                Objects.equals(sendTime, post.sendTime) &&
-                Objects.equals(updateTime, post.updateTime) &&
-                Objects.equals(type, post.type) &&
-                Objects.equals(top, post.top) &&
-                Objects.equals(viewNum, post.viewNum);
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    @Override
-    public int hashCode() {
+	public Timestamp getSendTime() {
+		return this.sendTime;
+	}
 
-        return Objects.hash(id, title, content, sendTime, updateTime, type, top, viewNum);
-    }
+	public void setSendTime(Timestamp sendTime) {
+		this.sendTime = sendTime;
+	}
 
-    @OneToMany(mappedBy = "post")
-    public Set<Collection> getCollections() {
-        return collections;
-    }
+	public Timestamp getUpdateTime() {
+		return this.updateTime;
+	}
 
-    public void setCollections(Set<Collection> collections) {
-        this.collections = collections;
-    }
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
 
-    @OneToMany(mappedBy = "post")
-    public Set<Followpost> getFollowposts() {
-        return followposts;
-    }
+	public Integer getType() {
+		return this.type;
+	}
 
-    public void setFollowposts(Set<Followpost> followposts) {
-        this.followposts = followposts;
-    }
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    public User getUser() {
-        return user;
-    }
+	public Integer getTop() {
+		return this.top;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setTop(Integer top) {
+		this.top = top;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "sub_forum_id", referencedColumnName = "id")
-    public SubForum getSubForum() {
-        return subForum;
-    }
+	public Integer getViewNum() {
+		return this.viewNum;
+	}
 
-    public void setSubForum(SubForum subForum) {
-        this.subForum = subForum;
-    }
+	public void setViewNum(Integer viewNum) {
+		this.viewNum = viewNum;
+	}
 
-    @OneToMany(mappedBy = "post")
-    public Set<PostPicture> getPostPictures() {
-        return postPictures;
-    }
+	public Set getFollowposts() {
+		return this.followposts;
+	}
 
-    public void setPostPictures(Set<PostPicture> postPictures) {
-        this.postPictures = postPictures;
-    }
+	public void setFollowposts(Set followposts) {
+		this.followposts = followposts;
+	}
+
+	public Set getCollections() {
+		return this.collections;
+	}
+
+	public void setCollections(Set collections) {
+		this.collections = collections;
+	}
+
 }

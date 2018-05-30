@@ -9,22 +9,6 @@
     <constant name="struts.multipart.maxSize" value="10485760"></constant>
     
     <package name="default" extends="struts-default" namespace="/">
-        <action name="login" class="loginAction" method="loginPage">
-            <result name="success">/WEB-INF/web/login.jsp</result>
-        </action>
-        <action name="validateLogin" class="loginAction" method="validateLogin">
-            <result name="success">WEB-INF/OperationStatus/loginSuccess.jsp</result>
-            <result name="error">/WEB-INF/web/login.jsp</result>
-        </action>
-        <action name="register" class="loginAction">
-            <result>/WEB-INF/web/register.jsp</result>
-        </action>
-        <action name="validateRegister" class="loginAction" method="validateRegister">
-            <result name="success">/WEB-INF/web/register.jsp</result>
-        </action>
-        <action name="logout" class="loginAction" method="logout">
-            <result name="success">/WEB-INF/web/login.jsp</result>
-        </action>
         <action name="mainforum" class="mainForumAction" method="browserMainForum">
             <result name="all">/WEB-INF/web/allMainForum.jsp</result>
             <result name="sub">/WEB-INF/web/mainForum.jsp</result>
@@ -88,15 +72,6 @@
             <result type="stream">
                 <param name="contentType">image/jpeg</param>
                 <param name="inputName">attrInputStream</param>
-                <param name="contentDisposition">attachment;filename="${filename}"</param>
-                <param name="bufferSize">4096</param>
-            </result>
-        </action>
-
-        <action name="getVerifyCode" class="pictureAction" method="getVerifyCode">
-            <result type="stream">
-                <param name="contentType">image/jpeg</param>
-                <param name="inputName">verifyCodeInputStream</param>
                 <param name="contentDisposition">attachment;filename="${filename}"</param>
                 <param name="bufferSize">4096</param>
             </result>
@@ -231,6 +206,30 @@
     </package>
 
     <package name="user" extends="struts-default" namespace="/user">
+        <action name="login" class="userAction" method="loginPage">
+            <result name="success">/WEB-INF/user/login.jsp</result>
+        </action>
+        <action name="validateLogin" class="userAction" method="validateLogin">
+            <result name="success">/WEB-INF/OperationStatus/loginSuccess.jsp</result>
+            <result name="error">/WEB-INF/user/login.jsp</result>
+        </action>
+        <action name="register" class="userAction">
+            <result>/WEB-INF/user/register.jsp</result>
+        </action>
+        <action name="validateRegister" class="userAction" method="validateRegister">
+            <result name="success">/WEB-INF/user/register.jsp</result>
+        </action>
+        <action name="logout" class="userAction" method="logout">
+            <result name="success">/WEB-INF/user/login.jsp</result>
+        </action>
+        <action name="getVerifyCode" class="pictureAction" method="getVerifyCode">
+            <result type="stream">
+                <param name="contentType">image/jpeg</param>
+                <param name="inputName">verifyCodeInputStream</param>
+                <param name="contentDisposition">attachment;filename="${filename}"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
         <action name="userInfo" class="userAction" method="getUserInfoPage">
             <result name="success">/WEB-INF/user/userInfo.jsp</result>
         </action>
@@ -254,6 +253,33 @@
             <result name="success">/WEB-INF/OperationStatus/operationSuccess.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
         </action>
+
+        <action name="activeAccount" class="userAction" method="active_account">
+            <result name="success">/WEB-INF/OperationStatus/operationSuccess.jsp</result>
+            <result name="error">/WEB-INF/OperationStatus/operationFailed.jsp</result>
+        </action>
+        <action name="sendActiveMail" class="userAction" method="sendActiveMail">
+            <result name="success">/WEB-INF/OperationStatus/sendMailSuccess.jsp</result>
+        </action>
+
+        <action name="forgetPassword" class="userAction" method="getForgetPasswordPage">
+            <result name="success">/WEB-INF/user/forgetPassword.jsp</result>
+        </action>
+        <action name="sendForgetPasswordMail" class="userAction" method="sendForgetPasswordMail">
+            <result name="success">/WEB-INF/OperationStatus/sendMailSuccess.jsp</result>
+            <result name="notfound">/WEB-INF/user/forgetPassword.jsp</result>
+        </action>
+        <action name="commitForgetPassword" class="userAction" method="commitForgetPassword">
+            <result name="success">/WEB-INF/user/commitForgetPassword.jsp</result>
+        </action>
+        <action name="validateForgetPassword" class="userAction" method="validateForgetPassword">
+            <result name="success">/WEB-INF/OperationStatus/updateForgetPasswordSuccess.jsp</result>
+            <result name="error">/WEB-INF/user/commitForgetPassword.jsp</result>
+        </action>
+
+        <action name="uploadAvatar" class="uploadFileAction" method="uploadAvatar">
+            <result name="success" type="redirectAction">setting?type=avatar</result>
+        </action>
     </package>
 
     <package name="nbastream" extends="struts-default" namespace="/nbastream">
@@ -262,6 +288,14 @@
         </action>
         <action name="gameLink" class="nbaStreamAction" method="getAllGameLinksByGameIdPage">
             <result name="success">/WEB-INF/nbastream/gameLink.jsp</result>
+        </action>
+    </package>
+
+    <package name="json" extends="json-default">
+        <action name="uploadPicture" class="uploadFileAction" method="uploadImage">
+            <result type="json">
+                <param name="root">jsonData</param>
+            </result>
         </action>
     </package>
 </struts>

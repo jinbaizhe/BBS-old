@@ -1,81 +1,97 @@
 package vo;
 
-import javax.persistence.*;
-import java.sql.Date;
-import java.util.Objects;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-public class Game {
-    private int id;
-    private String home;
-    private String away;
-    private Date date;
-    private Set<GameLink> gameLinks;
+/**
+ * Game entity. @author MyEclipse Persistence Tools
+ */
 
-    @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
+public class Game implements java.io.Serializable {
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	// Fields
 
-    @Basic
-    @Column(name = "home")
-    public String getHome() {
-        return home;
-    }
+	private Integer id;
+	private String home;
+	private String away;
+	private Date date;
+	private String url;
+	private String note;
+	private Set gameLinks = new HashSet(0);
 
-    public void setHome(String home) {
-        this.home = home;
-    }
+	// Constructors
 
-    @Basic
-    @Column(name = "away")
-    public String getAway() {
-        return away;
-    }
+	/** default constructor */
+	public Game() {
+	}
 
-    public void setAway(String away) {
-        this.away = away;
-    }
+	/** full constructor */
+	public Game(String home, String away, Date date, String url, String note, Set gameLinks) {
+		this.home = home;
+		this.away = away;
+		this.date = date;
+		this.url = url;
+		this.note = note;
+		this.gameLinks = gameLinks;
+	}
 
-    @Basic
-    @Column(name = "date")
-    public Date getDate() {
-        return date;
-    }
+	// Property accessors
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public Integer getId() {
+		return this.id;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Game game = (Game) o;
-        return id == game.id &&
-                Objects.equals(home, game.home) &&
-                Objects.equals(away, game.away) &&
-                Objects.equals(date, game.date);
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    @Override
-    public int hashCode() {
+	public String getHome() {
+		return this.home;
+	}
 
-        return Objects.hash(id, home, away, date);
-    }
+	public void setHome(String home) {
+		this.home = home;
+	}
 
-    @OneToMany(mappedBy = "game")
-    public Set<GameLink> getGameLinks() {
-        return gameLinks;
-    }
+	public String getAway() {
+		return this.away;
+	}
 
-    public void setGameLinks(Set<GameLink> gameLinks) {
-        this.gameLinks = gameLinks;
-    }
+	public void setAway(String away) {
+		this.away = away;
+	}
+
+	public Date getDate() {
+		return this.date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getUrl() {
+		return this.url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getNote() {
+		return this.note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public Set getGameLinks() {
+		return this.gameLinks;
+	}
+
+	public void setGameLinks(Set gameLinks) {
+		this.gameLinks = gameLinks;
+	}
+
 }

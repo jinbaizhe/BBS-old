@@ -22,6 +22,14 @@
                 </s:else>
                     修改资料
                 </a>
+                <s:if test="type=='avatar'">
+                    <a class="nav-link active" id="v-pills-avatar-tab" data-toggle="pill" href="#v-pills-avatar" role="tab" aria-controls="v-pills-avatar" aria-selected="true">
+                </s:if>
+                <s:else>
+                    <a class="nav-link" id="v-pills-avatar-tab" data-toggle="pill" href="#v-pills-avatar" role="tab" aria-controls="v-pills-avatar" aria-selected="false">
+                </s:else>
+                    修改头像
+                    </a>
                 <s:if test="type=='password'">
                     <a class="nav-link active" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="true">
                 </s:if>
@@ -86,6 +94,11 @@
                                     <!--<small class="form-text text-muted" name=""></small>-->
                                 </div>
                                 <div class="form-group">
+                                    <label>账号状态</label>
+                                    <input type="text" class="form-control" name="user.status" readonly value="<s:property value="user.status"></s:property>">
+                                    <!--<small class="form-text text-muted" name=""></small>-->
+                                </div>
+                                <div class="form-group">
                                     <label>性别</label>
                                     <s:if test='user.sex=="男"'>
                                         <input type="radio" class="" name="user.sex" value="男" checked>男
@@ -100,6 +113,12 @@
                                 <div class="form-group">
                                     <label>邮箱</label>
                                     <input type="email" class="form-control" name="user.email" placeholder="请输入邮箱" value="<s:property value="user.email"></s:property>">
+                                    <s:if test="#session.user.getStatus==0">
+                                        <a href="www.jinbaizhe.tech/user/sendActiveMail.action">验证邮箱</a>
+                                    </s:if>
+                                    <s:else>
+                                        <small>邮箱已验证</small>
+                                    </s:else>
                                     <!--<small class="form-text text-muted" name=""></small>-->
                                 </div>
 
@@ -115,6 +134,41 @@
                         </div>
                     </div>
                 </div>
+
+                <s:if test="type=='avatar'">
+                    <div class="tab-pane fade show active" id="v-pills-avatar" role="tabpanel" aria-labelledby="v-pills-avatar-tab">
+                </s:if>
+                <s:else>
+                    <div class="tab-pane fade show" id="v-pills-avatar" role="tabpanel" aria-labelledby="v-pills-avatar-tab">
+                </s:else>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <form action="/user/uploadAvatar.action" method="post" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <s:if test='#session.user.picture.id!=""'>
+                                    <img  alt="" class="img-responsive img-circle" src="/getPicture.action?id=<s:property value="#session.user.picture.id"></s:property>"
+                                          style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
+                                </s:if>
+                                <s:else>
+                                    <img  alt="" class="img-responsive img-circle" src="/static/default.jpg"
+                                          style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
+                                </s:else>
+
+                            </div>
+                            <div class="form-group">
+                                <label>选择本地图片：</label>
+                                <input type="file" class="form-control" name="upload">
+                                <!--<small class="form-text text-muted" name=""></small>-->
+                            </div>
+
+                            <div class="form-group text-center mt-sm-4">
+                                <input class="btn btn-primary btn-block" type="submit" value="上传">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                    </div>
 
                 <s:if test="type=='password'">
                     <div class="tab-pane fade show active" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
@@ -218,10 +272,10 @@
                                 <s:iterator value="collections" var="collection">
                                     <div class="card my-sm-3">
                                         <div class="card-body">
-                                            <h5 class="card-title">帖子标题：<a href="/post.action?postid=<s:property value="#collection.post.id"></s:property>"><s:property value="#collection.post.title"></s:property></a></h5>
+                                            <h5 class="card-title">帖子标题：<a href="/post.action?postid=<s:property value="#collection.id.post.id"></s:property>"><s:property value="#collection.id.post.title"></s:property></a></h5>
                                             <p class="card-text">
                                                 <span>收藏时间：<s:date format="yyyy-MM-dd hh:mm:ss" name="#collection.time"></s:date></span>
-                                                <a href="/user/unstarPost.action?postid=<s:property value="#collection.post.id"></s:property>" class="btn btn-primary float-right">取消收藏</a>
+                                                <a href="/user/unstarPost.action?postid=<s:property value="#collection.id.post.id"></s:property>" class="btn btn-primary float-right">取消收藏</a>
                                             </p>
                                         </div>
                                     </div>

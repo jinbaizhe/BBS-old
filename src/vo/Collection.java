@@ -1,68 +1,51 @@
 package vo;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
 
-@Entity
-public class Collection {
-    private int id;
-    private Timestamp time;
-    private User user;
-    private Post post;
+/**
+ * Collection entity. @author MyEclipse Persistence Tools
+ */
 
-    @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
+public class Collection implements java.io.Serializable {
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	// Fields
 
-    @Basic
-    @Column(name = "time")
-    public Timestamp getTime() {
-        return time;
-    }
+	private CollectionId id;
+	private Timestamp time;
 
-    public void setTime(Timestamp time) {
-        this.time = time;
-    }
+	// Constructors
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Collection that = (Collection) o;
-        return id == that.id &&
-                Objects.equals(time, that.time);
-    }
+	/** default constructor */
+	public Collection() {
+	}
 
-    @Override
-    public int hashCode() {
+	/** minimal constructor */
+	public Collection(CollectionId id) {
+		this.id = id;
+	}
 
-        return Objects.hash(id, time);
-    }
+	/** full constructor */
+	public Collection(CollectionId id, Timestamp time) {
+		this.id = id;
+		this.time = time;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    public User getUser() {
-        return user;
-    }
+	// Property accessors
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public CollectionId getId() {
+		return this.id;
+	}
 
-    @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id", nullable = false)
-    public Post getPost() {
-        return post;
-    }
+	public void setId(CollectionId id) {
+		this.id = id;
+	}
 
-    public void setPost(Post post) {
-        this.post = post;
-    }
+	public Timestamp getTime() {
+		return this.time;
+	}
+
+	public void setTime(Timestamp time) {
+		this.time = time;
+	}
+
 }

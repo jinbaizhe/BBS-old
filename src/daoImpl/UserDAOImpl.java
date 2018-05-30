@@ -90,4 +90,16 @@ public class UserDAOImpl extends BaseDAO<User> implements UserDAO {
         return user;
     }
 
+    @Override
+    public User getUserByUsername(String username) {
+        Session session=getSession();
+        Query query=session.createQuery("from User u where u.username=?");
+        query.setParameter(0,username);
+        List users=query.list();
+//        session.close();
+        User user=null;
+        if(users.size()!=0)
+            user=(User)users.get(0);
+        return user;
+    }
 }

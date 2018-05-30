@@ -54,12 +54,11 @@ public class FollowpostDAOImpl extends BaseDAO<Followpost> implements Followpost
     @Override
     public int getFollowpostsNumByPostId(int postId) {
         Session session=getSession();
-        String sql="from Followpost f where f.post.id=?";
+        String sql="select count(f.id) from Followpost f where f.post.id=?";
         Query query=session.createQuery(sql);
         query.setParameter(0,postId);
-        int size=query.list().size();
 //        session.close();
-        return size;
+        return ((Long)query.list().get(0)).intValue();
     }
 
     @Override
