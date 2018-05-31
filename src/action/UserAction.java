@@ -300,7 +300,7 @@ public class UserAction extends ActionSupport {
     {
         if(user.getUsername().equals(""))
             registerInfo="注册失败：用户名不能为空";
-        if(!password_repeat.equals(user.getPassword()))
+        else if(!password_repeat.equals(user.getPassword()))
             registerInfo= "注册失败：密码两次输入不一致";
         else
         {

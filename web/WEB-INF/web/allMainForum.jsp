@@ -12,18 +12,18 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-        <s:iterator value="forums" var="mainforum">
+        <s:iterator value="mainForumMap" var="item">
             <div class="card mb-sm-4">
                 <h5 class="card-header bg-dark text-white">
-                    <s:property value="#mainforum.name"></s:property>
-                    <small><s:property value="#mainforum.info"></s:property></small>
-                    <a class="float-right" href="mainforum.action?mfid=<s:property value="#mainforum.id"></s:property>">
+                    <s:property value="#item.key.name"></s:property>
+                    <small><s:property value="#item.key.info"></s:property></small>
+                    <a class="float-right" href="mainforum.action?mfid=<s:property value="#item.key.id"></s:property>">
                         更多
                     </a>
                 </h5>
                 <table class="table table-hover" style="margin-bottom: 0px">
                     <tbody>
-                        <s:if test="#mainforum.subForums.size==0">
+                        <s:if test="#item.value.size==0">
                         <tr>
                             <td>
                                 <div class="text-center">
@@ -33,7 +33,7 @@
                         </tr>
                         </s:if>
                         <s:else>
-                            <s:iterator value="#mainforum.subForums" var="subforum" status="st">
+                            <s:iterator value="#item.value" var="subforum" status="st">
                                 <s:if test="#st.index<5">
                                     <tr>
                                         <td>

@@ -3,7 +3,6 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import service.FollowpostService;
-import service.PictureService;
 import service.PostService;
 import vo.Followpost;
 import vo.User;
@@ -57,6 +56,8 @@ public class FollowpostAction extends ActionSupport {
 
     public String commitAddFollowpostNeedUserLogin() throws Exception
     {
+        if(followpost.getContent().equals(""))
+            return ERROR;
         followpost.setPost(postService.getPostById(postid));
         followpost.setUser((User)ActionContext.getContext().getSession().get("user"));
         followpostService.createFollowpost(followpost);

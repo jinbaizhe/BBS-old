@@ -4,16 +4,14 @@ import com.opensymphony.xwork2.ActionSupport;
 import service.MainForumService;
 import service.SubForumService;
 import vo.MainForum;
-
 import java.util.*;
 
 public class MainForumAction extends ActionSupport {
     private MainForumService mainForumService;
     private SubForumService subForumService;
-    private List forums;
     private int page;
     private int mfid;
-    private MainForum mainForum;
+    private Map mainForumMap=new LinkedHashMap();
 
     public MainForumService getMainForumService() {
         return mainForumService;
@@ -39,14 +37,6 @@ public class MainForumAction extends ActionSupport {
         this.mfid = mfid;
     }
 
-    public List getForums() {
-        return forums;
-    }
-
-    public void setForums(List forums) {
-        this.forums = forums;
-    }
-
     public int getPage() {
         return page;
     }
@@ -55,24 +45,28 @@ public class MainForumAction extends ActionSupport {
         this.page = page;
     }
 
-    public MainForum getMainForum() {
-        return mainForum;
+    public Map getMainForumMap() {
+        return mainForumMap;
     }
 
-    public void setMainForum(MainForum mainForum) {
-        this.mainForum = mainForum;
+    public void setMainForumMap(Map mainForumMap) {
+        this.mainForumMap = mainForumMap;
     }
 
     public String browserMainForum()
     {
         if(mfid!=0)
         {
-            forums=subForumService.getSubForumsByMainForumId(mfid);
-            mainForum=mainForumService.getMainForumById(mfid);
+            mainForumMap.put(mainForumService.getMainForumById(mfid),subForumService.getSubForumsByMainForumId(mfid));
             return "sub";
         }
         else {
-            forums=mainForumService.getAllMainForums();
+            List<MainForum> mainForums=mainForumService.getAllMainForums();
+            for(MainForum mainForum:mainForums)
+            {
+                int mainForumId=mainForum.getId();
+                mainForumMap.put(mainForum,subForumService.getSubForumsByMainForumId(mainForumId));
+            }
             return "all";
         }
     }

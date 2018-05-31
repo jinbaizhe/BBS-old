@@ -23,7 +23,7 @@
 
         <div class="row">
             <div class="col-sm-3">
-                <a class="btn btn-primary" href="/manage/addmainforum.action">增加版块</a>
+                <a class="btn btn-primary" href="/manage/addmainforum.action">增加主版块</a>
             </div>
         </div>
 

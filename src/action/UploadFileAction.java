@@ -2,7 +2,6 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import org.apache.struts2.ServletActionContext;
 import service.PictureService;
 import service.UserService;
 import vo.Picture;

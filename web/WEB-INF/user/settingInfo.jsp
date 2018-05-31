@@ -99,6 +99,11 @@
                                     <!--<small class="form-text text-muted" name=""></small>-->
                                 </div>
                                 <div class="form-group">
+                                    <label>论坛等级</label>
+                                    <input type="text" class="form-control" name="user.status" readonly value="<s:property value="user.level"></s:property>">
+                                    <!--<small class="form-text text-muted" name=""></small>-->
+                                </div>
+                                <div class="form-group">
                                     <label>性别</label>
                                     <s:if test='user.sex=="男"'>
                                         <input type="radio" class="" name="user.sex" value="男" checked>男

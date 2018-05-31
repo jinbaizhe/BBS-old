@@ -21,6 +21,9 @@
                 <li class="breadcrumb-item">
                     <a href="mainforum.action?mfid=<s:property value="subForum.mainForum.id"></s:property>"><s:property value="subForum.mainForum.name"></s:property></a>
                 </li>
+                <li class="breadcrumb-item active">
+                    <s:property value="subForum.name"></s:property>
+                </li>
             </ol>
         </div>
     </div>

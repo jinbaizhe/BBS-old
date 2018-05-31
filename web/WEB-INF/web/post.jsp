@@ -31,8 +31,11 @@
                     <li class="breadcrumb-item">
                         <a href="mainforum.action?mfid=<s:property value="post.subForum.mainForum.id"></s:property>"><s:property value="post.subForum.mainForum.name"></s:property></a>
                     </li>
-                    <li class="breadcrumb-item active">
+                    <li class="breadcrumb-item">
                         <a href="subforum.action?sfid=<s:property value="post.subForum.id"></s:property>"><s:property value="post.subForum.name"></s:property></a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <s:property value="post.title"></s:property>
                     </li>
                 </ol>
             </div>
@@ -58,16 +61,17 @@
                 <div class="post-head">
                     <div class="text-center">
                         <div>
-                            <s:if test='post.user.picture.id!=""'>
-                                <a href="/user/userInfo.action?userid=<s:property value="post.user.id"></s:property>">
-                                    <img  alt="" class="img-responsive img-circle" src="/getPicture.action?id=<s:property value="post.user.picture.id"></s:property>"
+                            <a href="/user/userInfo.action?userid=<s:property value="post.user.id"></s:property>">
+                                <s:if test='post.user.picture.id!=""'>
+                                        <img  alt="" class="img-responsive img-circle" src="/getPicture.action?id=<s:property value="post.user.picture.id"></s:property>"
+                                              style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
+
+                                </s:if>
+                                <s:else>
+                                    <img  alt="" class="img-responsive img-circle" src="/static/default.jpg"
                                           style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
-                                </a>
-                            </s:if>
-                            <s:else>
-                                <img  alt="" class="img-responsive img-circle" src="/static/default.jpg"
-                                      style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
-                            </s:else>
+                                </s:else>
+                            </a>
                         </div>
                         <div>
                             <span class="badge" style="background: #f1c40f;margin-top: 5px">发帖者:<s:property value="post.user.username"></s:property></span>
@@ -111,7 +115,7 @@
                             </s:else>
 
 
-                            <s:if test="#session.user.type==1">
+                            <s:if test="#session.user.type>=1">
                                 <s:if test="post.top==0">
                                     <a style="float:right;margin-right: 20px;" href="/manage/setTop?postid=<s:property value="post.id"></s:property>">置顶</a>
                                 </s:if>
@@ -120,7 +124,7 @@
                                 </s:else>
                             </s:if>
 
-                            <s:if test="#session.user.type==1">
+                            <s:if test="#session.user.type>=1">
                                 <s:if test="post.type==0">
                                     <a style="float:right;margin-right: 20px;" href="/manage/setPostEssential?postid=<s:property value="post.id"></s:property>">精华</a>
                                 </s:if>
@@ -146,16 +150,18 @@
                     <div class="reply-head">
                         <div class="text-center">
                             <div>
-                                <s:if test='#followpost.user.picture.id!=""'>
-                                    <a href="/user/userInfo.action?userid=<s:property value="#followpost.user.id"></s:property>">
-                                        <img  alt="" class="img-responsive img-circle" src="/getPicture.action?id=<s:property value="#followpost.user.picture.id"></s:property>"
+                                <a href="/user/userInfo.action?userid=<s:property value="#followpost.user.id"></s:property>">
+                                    <s:if test='#followpost.user.picture.id!=""'>
+
+                                            <img  alt="" class="img-responsive img-circle" src="/getPicture.action?id=<s:property value="#followpost.user.picture.id"></s:property>"
+                                                  style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
+
+                                    </s:if>
+                                    <s:else>
+                                        <img  alt="" class="img-responsive img-circle" src="/static/default.jpg"
                                               style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
-                                    </a>
-                                </s:if>
-                                <s:else>
-                                    <img  alt="" class="img-responsive img-circle" src="/static/default.jpg"
-                                          style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
-                                </s:else>
+                                    </s:else>
+                                </a>
                             </div>
                             <div>
                                 <span class="badge" style="background: #f1c40f;margin-top: 5px">回帖者:<s:property value="#followpost.user.username"></s:property></span>

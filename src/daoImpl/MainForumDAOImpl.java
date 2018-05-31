@@ -14,7 +14,7 @@ public class MainForumDAOImpl extends BaseDAO<MainForum> implements MainForumDAO
     @Override
     public List getAllMainForums() {
         Session session=getSession();
-        String sql="from MainForum mf order by createTime";
+        String sql="from MainForum mf order by mf.subForums.size desc";
         Query query=session.createQuery(sql);
         List mainForums=query.list();
 //        session.close();

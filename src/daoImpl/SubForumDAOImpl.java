@@ -12,7 +12,7 @@ public class SubForumDAOImpl extends BaseDAO<SubForum> implements SubForumDAO {
     @Override
     public List getSubForumsByMainForumId(int mainForumId) {
         Session session=getSession();
-        String sql="from SubForum sf where sf.mainForum.id=?";
+        String sql="from SubForum sf where sf.mainForum.id=? order by sf.posts.size desc";
         Query query=session.createQuery(sql);
         query.setParameter(0,mainForumId);
         List subForums=query.list();

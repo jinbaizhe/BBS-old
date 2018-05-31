@@ -7,7 +7,6 @@ import service.*;
 import util.Pager;
 import vo.*;
 import javax.servlet.ServletContext;
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -185,7 +184,7 @@ public class PostAction extends ActionSupport {
 
     public String commitAddPostNeedUserLogin() throws Exception
     {
-        if(post==null)
+        if(post==null||post.getTitle().equals("")||post.getContent().equals(""))
             return ERROR;
         post.setSubForum(subForumService.getSubForumById(subforumid));
         Map session=ActionContext.getContext().getSession();
