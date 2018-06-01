@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4 border" style="border: grey;border-radius: 15px;padding: 20px;margin-left: auto;margin-right: auto;">
-            <form action="/user/validateLogin.action" method="post">
+            <form action="/validateLogin.action" method="post">
                 <div class="form-group">
                     <div class="text-danger text-center">
                         <h5>
@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <label>验证码</label>
-                        <img src="getVerifyCode.action" width="100" height="30" alt="无法显示验证码">
+                        <img src="/getVerifyCode.action" width="100" height="30" alt="无法显示验证码">
                         <input type="text" class="form-control" name="verifyCode" placeholder="请输入左侧验证码">
                     </div>
                     <!--<small class="form-text text-muted" name=""></small>-->
@@ -48,8 +48,8 @@
                 </div>
 
                 <div class="form-group">
-                    <a class="float-sm-left" href="/user/forgetPassword.action">忘记密码?</a>
-                    <a class="float-sm-right" href="/user/register.action">立即注册</a>
+                    <a class="float-sm-left" href="/forgetPassword.action">忘记密码?</a>
+                    <a class="float-sm-right" href="/register.action">立即注册</a>
                 </div>
             </form>
         </div>

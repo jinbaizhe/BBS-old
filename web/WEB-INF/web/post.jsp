@@ -61,7 +61,7 @@
                 <div class="post-head">
                     <div class="text-center">
                         <div>
-                            <a href="/user/userInfo.action?userid=<s:property value="post.user.id"></s:property>">
+                            <a href="/userInfo.action?userid=<s:property value="post.user.id"></s:property>">
                                 <s:if test='post.user.picture.id!=""'>
                                         <img  alt="" class="img-responsive img-circle" src="/getPicture.action?id=<s:property value="post.user.picture.id"></s:property>"
                                               style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
@@ -100,18 +100,18 @@
                                 <span class="badge" style="background: #ff6927;width: 50px;">楼主</span>
                             </strong>
                             <s:if test="post.user.id==#session.user.id||#session.user.type==1">
-                                <a style="float:right;margin-right: 20px;" href="deletePost.action?postid=<s:property value="post.id"></s:property>">删除</a>
+                                <a style="float:right;margin-right: 20px;" href="/deletePost.action?postid=<s:property value="post.id"></s:property>">删除</a>
                             </s:if>
                             <s:if test="post.user.id==#session.user.id">
-                                <a style="float:right;margin-right: 20px;" href="updatePost?postid=<s:property value="post.id"></s:property>">编辑</a>
+                                <a style="float:right;margin-right: 20px;" href="/updatePost?postid=<s:property value="post.id"></s:property>">编辑</a>
                             </s:if>
 
 
                             <s:if test="collection!=null">
-                                <a style="float:right;margin-right: 20px;" href="/user/unstarPost.action?postid=<s:property value="post.id"></s:property>">取消收藏</a>
+                                <a style="float:right;margin-right: 20px;" href="/unstarPost.action?postid=<s:property value="post.id"></s:property>">取消收藏</a>
                             </s:if>
                             <s:else>
-                                <a style="float:right;margin-right: 20px;" href="/user/starPost.action?postid=<s:property value="post.id"></s:property>">收藏</a>
+                                <a style="float:right;margin-right: 20px;" href="/starPost.action?postid=<s:property value="post.id"></s:property>">收藏</a>
                             </s:else>
 
 

@@ -93,7 +93,7 @@
                                 </div>
                             <div class="form-group">
                                 <label>论坛等级</label>
-                                <input type="text" class="form-control" name="user.status" readonly value="<s:property value="user.level"></s:property>">
+                                <input type="text" class="form-control" name="user.level" readonly value="<s:property value="user.level"></s:property>">
                                 <!--<small class="form-text text-muted" name=""></small>-->
                             </div>
                                 <div class="form-group">

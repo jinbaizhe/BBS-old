@@ -37,7 +37,6 @@
         </property>
         <property name="mappingLocations">
             <list>
-
                 <value>classpath:vo/Collection.hbm.xml</value>
                 <value>classpath:vo/Followpost.hbm.xml</value>
                 <value>classpath:vo/Game.hbm.xml</value>
@@ -54,7 +53,6 @@
         </property>
         <property name="annotatedClasses">
             <list>
-
                 <value>vo.Collection</value>
                 <value>vo.Followpost</value>
                 <value>vo.Game</value>

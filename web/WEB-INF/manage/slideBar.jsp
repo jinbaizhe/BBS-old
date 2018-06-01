@@ -53,8 +53,8 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="userSetting">
                     <li>
-                        <a href="/user/setting.action?type=info">修改个人信息</a>
-                        <a href="/user/setting.action?type=password">修改密码</a>
+                        <a href="/setting.action?type=info">修改个人信息</a>
+                        <a href="/setting.action?type=password">修改密码</a>
                     </li>
                 </ul>
             </li>

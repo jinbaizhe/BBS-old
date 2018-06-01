@@ -40,6 +40,15 @@
                 <div class="my-sm-5">
                     <h3>历史更新</h3>
                     <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.3.2</h5>
+                        <ol>
+                            <li>修复记住密码功能失效的问题。</li>
+                            <li>修复不选择图片上传路径时点上传会变成默认头像的问题。</li>
+                            <li>修复更新个人信息失败的问题。</li>
+                            <li>修复NBA直播无法显示当天比赛的问题。</li>
+                        </ol>
+                    </div>
+                    <div class="my-sm-3" style="text-align: left">
                         <h5>版本：0.3.1</h5>
                         <ol>
                             <li>修复无法查看他人信息的问题。</li>

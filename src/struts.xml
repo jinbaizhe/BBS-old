@@ -85,37 +85,37 @@
     </package>
 
     <package name="manage" extends="struts-default" namespace="/manage">
-        <action name="index" class="action.manage.MainForumAction" method="getIndexPageNeedUserLoginNeedManageLogin">
+        <action name="index" class="manageMainForumAction" method="getIndexPageNeedUserLoginNeedManageLogin">
             <result name="success">/WEB-INF/manage/index.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="mainforum" class="action.manage.MainForumAction" method="getAllMainForumPageNeedUserLoginNeedManageLogin">
+        <action name="mainforum" class="manageMainForumAction" method="getAllMainForumPageNeedUserLoginNeedManageLogin">
             <result name="success">/WEB-INF/manage/mainForum.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="deletemainforum" class="action.manage.MainForumAction" method="commitDeleteMainForumNeedUserLoginNeedManageLogin">
+        <action name="deletemainforum" class="manageMainForumAction" method="commitDeleteMainForumNeedUserLoginNeedManageLogin">
             <result name="success" type="redirectAction">mainforum</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="addmainforum" class="action.manage.MainForumAction">
+        <action name="addmainforum" class="manageMainForumAction">
             <result name="success">/WEB-INF/manage/addMainForum.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="updatemainforum" class="action.manage.MainForumAction" method="getUpdateMainForumPageNeedUserLoginNeedManageLogin">
+        <action name="updatemainforum" class="manageMainForumAction" method="getUpdateMainForumPageNeedUserLoginNeedManageLogin">
             <result name="success">/WEB-INF/manage/updateMainForum.jsp</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="commitaddmainforum" class="action.manage.MainForumAction" method="commitAddMainForumNeedUserLoginNeedManageLogin">
+        <action name="commitaddmainforum" class="manageMainForumAction" method="commitAddMainForumNeedUserLoginNeedManageLogin">
             <result name="success" type="redirectAction">mainforum</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
         </action>
-        <action name="commitupdatemainforum" class="action.manage.MainForumAction" method="commitUpdateMainForumNeedUserLoginNeedManageLogin">
+        <action name="commitupdatemainforum" class="manageMainForumAction" method="commitUpdateMainForumNeedUserLoginNeedManageLogin">
             <result name="success" type="redirectAction">mainforum</result>
             <result name="notlogin">/WEB-INF/OperationStatus/requireLogin.jsp</result>
             <result name="reject">/WEB-INF/OperationStatus/requirePermission.jsp</result>
@@ -207,7 +207,7 @@
 
     </package>
 
-    <package name="user" extends="struts-default" namespace="/user">
+    <package name="user" extends="struts-default" namespace="/">
         <action name="login" class="userAction" method="loginPage">
             <result name="success">/WEB-INF/user/login.jsp</result>
         </action>

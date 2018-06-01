@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4 border" style="border: grey;border-radius: 15px;padding: 20px;margin-left: auto;margin-right: auto;">
-            <form action="/user/validateForgetPassword.action" method="post">
+            <form action="/validateForgetPassword.action" method="post">
                 <div class="form-group">
                     <div class="text-danger text-center">
                         <h5>

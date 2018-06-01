@@ -491,7 +491,7 @@ public class UserAction extends ActionSupport {
             userService.updateUser(temp_user);
             String subject = "找回账号密码";
             String content = "<h2>"+temp_user.getUsername()+"，您好<br>" +
-                    "请点击<a href='https://www.jinbaizhe.tech/user/commitForgetPassword?userid="+temp_user.getId()+"&activekey="+temp_user.getActiveKey()+"'>「修改密码」</a>来修改您的账号密码</h2> <small>本邮件为系统发出，请不要回复<small>";
+                    "请点击<a href='https://www.jinbaizhe.tech/commitForgetPassword?userid="+temp_user.getId()+"&activekey="+temp_user.getActiveKey()+"'>「修改密码」</a>来修改您的账号密码</h2> <small>本邮件为系统发出，请不要回复<small>";
             mailService.sendMail(temp_user.getEmail(),subject,content);
             mailAddress=temp_user.getEmail();
             return SUCCESS;

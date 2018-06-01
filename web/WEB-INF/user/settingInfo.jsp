@@ -79,7 +79,7 @@
                 </s:else>
                     <div class="row">
                         <div class="col-sm-6">
-                            <form action="updateUserInfo.action" method="post">
+                            <form action="/updateUserInfo.action" method="post">
                                 <div class="form-group">
                                     <p class="text-danger"><s:property value="message_info"></s:property></p>
                                 </div>
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>论坛等级</label>
-                                    <input type="text" class="form-control" name="user.status" readonly value="<s:property value="user.level"></s:property>">
+                                    <input type="text" class="form-control" name="user.level" readonly value="<s:property value="user.level"></s:property>">
                                     <!--<small class="form-text text-muted" name=""></small>-->
                                 </div>
                                 <div class="form-group">
@@ -119,7 +119,7 @@
                                     <label>邮箱</label>
                                     <input type="email" class="form-control" name="user.email" placeholder="请输入邮箱" value="<s:property value="user.email"></s:property>">
                                     <s:if test="#session.user.getStatus==0">
-                                        <a href="www.jinbaizhe.tech/user/sendActiveMail.action">验证邮箱</a>
+                                        <a href="www.jinbaizhe.tech/sendActiveMail.action">验证邮箱</a>
                                     </s:if>
                                     <s:else>
                                         <small>邮箱已验证</small>
@@ -148,7 +148,7 @@
                 </s:else>
                 <div class="row">
                     <div class="col-sm-6">
-                        <form action="/user/uploadAvatar.action" method="post" enctype="multipart/form-data">
+                        <form action="/uploadAvatar.action" method="post" enctype="multipart/form-data">
 
                             <div class="form-group">
                                 <s:if test='#session.user.picture.id!=""'>
@@ -183,7 +183,7 @@
                 </s:else>
                     <div class="row">
                         <div class="col-sm-6">
-                            <form action="updateUserPassword.action" method="post">
+                            <form action="/updateUserPassword.action" method="post">
 
                                 <div class="form-group">
                                     <p class="text-danger"><s:property value="message_password"></s:property></p>

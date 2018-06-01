@@ -85,11 +85,14 @@ public class UploadFileAction extends ActionSupport {
     }
     public String uploadAvatar()
     {
-        //暂未要求登录后才能上传头像！
-        Picture picture=pictureService.uploadPicture(upload,uploadFileName,uploadContentType);
-        User temp_user=getSessionUser();
-        temp_user.setPicture(picture);
-        userService.updateUser(temp_user);
+        if(upload!=null)
+        {
+            //暂未要求登录后才能上传头像！
+            Picture picture=pictureService.uploadPicture(upload,uploadFileName,uploadContentType);
+            User temp_user=getSessionUser();
+            temp_user.setPicture(picture);
+            userService.updateUser(temp_user);
+        }
         return SUCCESS;
     }
 }

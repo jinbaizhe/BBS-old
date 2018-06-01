@@ -36,7 +36,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-4 border my-sm-3" style="border: grey;border-radius: 15px;padding: 20px;margin-left: auto;margin-right: auto;">
-            <form method="post" action="/user/validateRegister.action" id="form1">
+            <form method="post" action="/validateRegister.action" id="form1">
                 <div class="form-group">
                     <div class="text-danger text-center">
                         <h5>
@@ -79,7 +79,7 @@
                 </div>
 
                 <input class="btn btn-primary btn-block mt-sm-4" type="submit" value="注册">
-                <a href="/user/login.action" class="mt-sm-3 float-right">已有账号,直接登录</a>
+                <a href="/login.action" class="mt-sm-3 float-right">已有账号,直接登录</a>
             </form>
         </div>
     </div>
