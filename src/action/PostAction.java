@@ -27,6 +27,7 @@ public class PostAction extends ActionSupport {
     private String searchKeyWord;
     private List posts;
     private String search_order="desc";
+    private String search_info;
 
     public Collection getCollection() {
         return collection;
@@ -148,6 +149,14 @@ public class PostAction extends ActionSupport {
         this.search_order = search_order;
     }
 
+    public String getSearch_info() {
+        return search_info;
+    }
+
+    public void setSearch_info(String search_info) {
+        this.search_info = search_info;
+    }
+
     public String browserPost() throws Exception {
         if(postid==0)
             return ERROR;
@@ -220,6 +229,11 @@ public class PostAction extends ActionSupport {
         //读取web.xml获取ShowPostsPerPageNum参数
         ServletContext servletContext =ServletActionContext.getServletContext();
         final int ShowSearchResultsPerPageNum=Integer.valueOf(servletContext.getInitParameter("ShowSearchResultsPerPageNum"));
+        if(searchKeyWord.equals(""))
+        {
+            search_info="请输入关键字";
+            return SUCCESS;
+        }
         Map request=(Map)ActionContext.getContext().get("request");
         posts=postService.getSearchResults(searchKeyWord,page,ShowSearchResultsPerPageNum,search_order);
         Pager pager=new Pager(page,ShowSearchResultsPerPageNum,postService.getSearchResultNum(searchKeyWord,search_order));

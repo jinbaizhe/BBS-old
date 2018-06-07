@@ -41,4 +41,9 @@ public class NBAStreamServiceImpl implements NBAStreamService {
     public Game getGameById(int id) {
         return gameDAO.getGameById(id);
     }
+
+    @Override
+    public List getOldGames(int num) {
+        return gameDAO.getOldGames(num);
+    }
 }

@@ -81,6 +81,7 @@ def updateDB():
                                 datefmt='%Y-%m-%d %H:%M:%S',
                                 filename=system_os+file_dir+'/GameThread.'+s+'.log',
                                 filemode='a')
+            #logging.info('FileName:'+system_os+file_dir+'/GameThread.'+s+'.log')
             conn = mysql.connector.connect(host='localhost', user='test', password='parker123456', database='bbs')
             cursor = conn.cursor()
             cursor.execute("set names utf8mb4;")
@@ -103,6 +104,7 @@ def updateDB():
                     game_links = currentAllGame.getGameInfo(url)
                     time.sleep(10)
                     repeat_count+=1
+                game_links = game_links[1:]
                 logging.info("执行成功，"+"获取到比赛（"+away_team+" VS "+home_team +"）共"+ str(len(game_links)) + "条直播链接")
                 if len(game_links) > 0:
                     cursor.execute(

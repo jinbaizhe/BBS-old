@@ -9,6 +9,7 @@ import java.util.List;
 public class NBAGameAction extends ActionSupport {
     private List games;
     private List gameLinks;
+    private List old_games;
     private int page;
     private int gameid;
     private Game game;
@@ -62,9 +63,18 @@ public class NBAGameAction extends ActionSupport {
         this.game = game;
     }
 
+    public List getOld_games() {
+        return old_games;
+    }
+
+    public void setOld_games(List old_games) {
+        this.old_games = old_games;
+    }
+
     public String getAllGamesPage()
     {
         games=nbaStreamService.getAllGames();
+        old_games=nbaStreamService.getOldGames(5);
         return SUCCESS;
     }
 

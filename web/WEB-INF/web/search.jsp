@@ -20,6 +20,7 @@
     <div class="row">
         <div class="col-sm-6" style="margin-left: auto;margin-right: auto">
             <h3>搜索关键字：<strong><s:property value="searchKeyWord"></s:property></strong></h3>
+            <h4 class="my-sm-4 text-center text-danger"><s:property value="search_info"></s:property></h4>
             <s:if test="posts.size==0">
                 <h4 class="my-sm-4 text-center">无搜索结果</h4>
             </s:if>

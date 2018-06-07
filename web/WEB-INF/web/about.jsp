@@ -40,6 +40,13 @@
                 <div class="my-sm-5">
                     <h3>历史更新</h3>
                     <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.3.3</h5>
+                        <ol>
+                            <li>调整NBA直播页面的显示效果。</li>
+                            <li>修复搜索时搜索关键字可以为空的问题。</li>
+                        </ol>
+                    </div>
+                    <div class="my-sm-3" style="text-align: left">
                         <h5>版本：0.3.2</h5>
                         <ol>
                             <li>修复记住密码功能失效的问题。</li>

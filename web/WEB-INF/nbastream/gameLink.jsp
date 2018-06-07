@@ -13,9 +13,14 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-10" style="margin-left: auto;margin-right: auto">
-            <h2 class="text-center"><strong><s:property value="game.away"></s:property></strong>&nbsp;VS&nbsp;<strong><s:property value="game.home"></s:property></strong></h2>
+            <h2 class="text-center">
+                <s:date name="game.date" format="yyyy-MM-dd"></s:date>：
+                <strong><s:property value="game.away"></s:property></strong>
+                &nbsp;VS&nbsp;
+                <strong><s:property value="game.home"></s:property></strong>
+            </h2>
             <s:if test="gameLinks.size==0">
-                <h2 style="text-align: center">暂无今日直播信息</h2>
+                <h2 style="text-align: center">暂无该场比赛的直播信息</h2>
                 <h3 style="text-align: center">比赛前一小时左右更新直播链接</h3>
             </s:if>
             <s:iterator value="gameLinks" var="gameLink">

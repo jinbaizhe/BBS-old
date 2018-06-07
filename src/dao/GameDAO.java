@@ -11,4 +11,5 @@ public interface GameDAO {
     public SessionFactory getSessionFactory();
     public List getAllGames();
     public Game getGameById(int id);
+    public List getOldGames(int num);
 }

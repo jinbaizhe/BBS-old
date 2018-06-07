@@ -45,4 +45,15 @@ public class GameDAOImpl extends BaseDAO<Game> implements GameDAO{
 //        session.close();
         return game;
     }
+
+    @Override
+    public List getOldGames(int num) {
+        Session session=getSession();
+        Query query=session.createQuery("from Game g order by g.date desc");
+        query.setFirstResult(0);
+        query.setMaxResults(num);
+        List list=query.list();
+//        session.close();
+        return list;
+    }
 }
