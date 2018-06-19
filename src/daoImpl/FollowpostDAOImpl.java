@@ -4,12 +4,17 @@ import dao.BaseDAO;
 import dao.FollowpostDAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import vo.Followpost;
-
 import java.util.List;
 
+@Repository("followpostDAO")
 public class FollowpostDAOImpl extends BaseDAO<Followpost> implements FollowpostDAO{
     @Override
+    @Transactional(readOnly = true)
     public Followpost getFollowpostById(int id) {
         Session session=getSession();
         String sql="from Followpost f where f.id=?";
@@ -24,6 +29,7 @@ public class FollowpostDAOImpl extends BaseDAO<Followpost> implements Followpost
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List getFollowpostsByPostId(int postId,int currentPage,int totalItemsPerPage,String order) {
         Session session=getSession();
         String sql="from Followpost f where f.post.id=? order by "+order;
@@ -37,21 +43,25 @@ public class FollowpostDAOImpl extends BaseDAO<Followpost> implements Followpost
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void createFollowpost(Followpost followpost) {
         create(followpost);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void updateFollowpost(Followpost followpost) {
         update(followpost);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void deleteFollowpost(Followpost followpost) {
         delete(followpost);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public int getFollowpostsNumByPostId(int postId) {
         Session session=getSession();
         String sql="select count(f.id) from Followpost f where f.post.id=?";
@@ -62,6 +72,7 @@ public class FollowpostDAOImpl extends BaseDAO<Followpost> implements Followpost
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List getFollowpostsByUserId(int userid,String order) {
         Session session=getSession();
         Query query=session.createQuery("from Followpost f where f.user.id=? order by "+order);

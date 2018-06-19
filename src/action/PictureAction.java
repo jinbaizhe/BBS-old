@@ -3,14 +3,19 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.PictureService;
 import util.VerifyCode;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
 import java.io.*;
 import java.util.Map;
-
+@Controller("pictureAction")
+@Scope("prototype")
 public class PictureAction extends ActionSupport{
+    @Autowired
     private PictureService pictureService;
     private int id;
     private String filename;
@@ -48,7 +53,6 @@ public class PictureAction extends ActionSupport{
         String path="/WEB-INF/upload/";
         return ServletActionContext.getServletContext().getResourceAsStream(path+filename);
     }
-
 
     public String getVerifyCode()
     {

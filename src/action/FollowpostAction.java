@@ -2,14 +2,20 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.FollowpostService;
 import service.PostService;
 import vo.Followpost;
 import vo.User;
-
+@Controller("followpostAction")
+@Scope("prototype")
 public class FollowpostAction extends ActionSupport {
     private Followpost followpost;
+    @Autowired
     private FollowpostService followpostService;
+    @Autowired
     private PostService postService;
     private int postid;
     private int followpostid;

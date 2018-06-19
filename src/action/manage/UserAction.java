@@ -3,15 +3,20 @@ package action.manage;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.UserService;
 import util.Pager;
 import vo.User;
 import javax.servlet.ServletContext;
 import java.util.List;
 import java.util.Map;
-
+@Controller("manageUserAction")
+@Scope("prototype")
 public class UserAction extends ActionSupport {
     private List users;
+    @Autowired
     private UserService userService;
     private int page=1;
     private int userid;

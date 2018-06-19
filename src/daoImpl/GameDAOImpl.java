@@ -2,19 +2,20 @@ package daoImpl;
 
 import dao.BaseDAO;
 import dao.GameDAO;
-import javafx.scene.input.DataFormat;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import vo.Game;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+@Repository("gameDAO")
 public class GameDAOImpl extends BaseDAO<Game> implements GameDAO{
     @Override
+    @Transactional(readOnly = true)
     public List getAllGames() {
         Session session=getSession();
         Query query=session.createQuery("from Game g where g.date= ?");
@@ -33,6 +34,7 @@ public class GameDAOImpl extends BaseDAO<Game> implements GameDAO{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Game getGameById(int id)
     {
         Session session=getSession();
@@ -47,6 +49,7 @@ public class GameDAOImpl extends BaseDAO<Game> implements GameDAO{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List getOldGames(int num) {
         Session session=getSession();
         Query query=session.createQuery("from Game g order by g.date desc");

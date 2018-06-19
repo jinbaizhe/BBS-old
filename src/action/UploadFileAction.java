@@ -2,6 +2,9 @@ package action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.PictureService;
 import service.UserService;
 import vo.Picture;
@@ -11,14 +14,18 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@Controller("uploadFileAction")
+@Scope("prototype")
 public class UploadFileAction extends ActionSupport {
+    @Autowired
     private PictureService pictureService;
+    @Autowired
+    private UserService userService;
     private File upload;  //文件
     private String uploadContentType;  //文件类型
     private String uploadFileName;   //文件名
     private Map jsonData;
-    private UserService userService;
+
 
     public UserService getUserService() {
         return userService;

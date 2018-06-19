@@ -3,6 +3,9 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.*;
 import util.Pager;
 import vo.*;
@@ -10,12 +13,17 @@ import javax.servlet.ServletContext;
 import java.util.List;
 import java.util.Map;
 
-
+@Controller("postAction")
+@Scope("prototype")
 public class PostAction extends ActionSupport {
     private int postid;
+    @Autowired
     private PostService postService;
+    @Autowired
     private SubForumService subForumService;
+    @Autowired
     private FollowpostService followpostService;
+    @Autowired
     private UserService userService;
     private Post post;
     private int subforumid;
@@ -198,9 +206,7 @@ public class PostAction extends ActionSupport {
         post.setSubForum(subForumService.getSubForumById(subforumid));
         Map session=ActionContext.getContext().getSession();
         post.setUser((User)session.get("user"));
-
         postService.createPost(post);
-
         return SUCCESS;
     }
 
@@ -240,5 +246,4 @@ public class PostAction extends ActionSupport {
         request.put("pager",pager);
         return SUCCESS;
     }
-
 }

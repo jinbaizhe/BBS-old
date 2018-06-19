@@ -3,6 +3,9 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.PostService;
 import service.SubForumService;
 import util.Pager;
@@ -11,10 +14,12 @@ import javax.servlet.ServletContext;
 import java.util.List;
 import java.util.Map;
 
-
+@Controller("subForumAction")
+@Scope("prototype")
 public class SubForumAction extends ActionSupport {
-
+    @Autowired
     private PostService postService;
+    @Autowired
     private SubForumService subForumService;
     private int page=1;
     private int sfid;

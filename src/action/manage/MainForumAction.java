@@ -1,12 +1,17 @@
 package action.manage;
 
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.MainForumService;
 import vo.MainForum;
 
 import java.util.List;
-
+@Controller("manageMainForumAction")
+@Scope("prototype")
 public class MainForumAction extends ActionSupport {
+    @Autowired
     private MainForumService mainForumService;
     private List mainForums;
     private MainForum mainForum;

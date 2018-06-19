@@ -3,10 +3,12 @@ package dao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-
 public class BaseDAO<T> {
+    @Autowired
     private SessionFactory sessionFactory;
 
     public SessionFactory getSessionFactory() {

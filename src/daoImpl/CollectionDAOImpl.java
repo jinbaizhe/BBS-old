@@ -4,12 +4,17 @@ import dao.BaseDAO;
 import dao.CollectionDAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import vo.Collection;
-
 import java.util.List;
 
+@Repository("collectionDAO")
 public class CollectionDAOImpl extends BaseDAO<Collection> implements CollectionDAO {
     @Override
+    @Transactional(readOnly = true)
     public List getCollectionsByUserId(int userid,int currentPage,int totalItemsPerPage,String order) {
         Session session=getSession();
         String sql="from Collection c where c.id.user.id=? order by c.time "+order;
@@ -21,16 +26,19 @@ public class CollectionDAOImpl extends BaseDAO<Collection> implements Collection
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List getCollectionsByPostId(int postid) {
         return null;
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void createCollection(Collection collection) {
         create(collection);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void deleteCollection(int userid, int postid) {
         Session session=getSession();
         String sql="delete from Collection c where c.id.user.id=? and c.id.post.id=? ";
@@ -41,6 +49,7 @@ public class CollectionDAOImpl extends BaseDAO<Collection> implements Collection
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Collection getCollection(int userid, int postid) {
         Session session=getSession();
         String sql="from Collection c where c.id.user.id=? and c.id.post.id=? ";

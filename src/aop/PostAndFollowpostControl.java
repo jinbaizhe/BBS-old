@@ -3,6 +3,7 @@ package aop;
 import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.ServletActionContext;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import service.FollowpostService;
 import service.PostService;
 import vo.User;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 public class PostAndFollowpostControl {
+    @Autowired
     private PostService postService;
+    @Autowired
     private FollowpostService followpostService;
     public PostService getPostService() {
         return postService;

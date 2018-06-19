@@ -4,9 +4,14 @@ import dao.BaseDAO;
 import dao.PostDAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import vo.Post;
 import java.util.List;
 
+@Repository("postDAO")
 public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
     private Post post;
 
@@ -52,21 +57,25 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void createPost(Post post) {
         create(post);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void updatePost(Post post) {
         update(post);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void deletePost(Post post) {
         delete(post);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public int getPostsNumBySubForumId(int subForumId) {
         Session session=getSession();
         String sql="select count(*) from Post p where p.subForum.id=?";
@@ -77,6 +86,7 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List getPostsByUserId(int userid,String order) {
         Session session=getSession();
         Query query=session.createQuery("from Post p where p.user.id=? order by "+order);
@@ -87,6 +97,7 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List getSearchResult(String keyWord,int currentPage,int totalItemsPerPage, String order) {
         Session session=getSession();
         Query query=session.createQuery("from Post p where p.title like '%"+keyWord+"%' or p.content like '%"+keyWord+"%' order by p.sendTime "+order);
@@ -97,6 +108,7 @@ public class PostDAOImpl extends BaseDAO<Post> implements PostDAO {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public int getSearchResultNum(String keyWord, String order) {
         Session session=getSession();
         Query query=session.createQuery("select count(*) from Post p where p.title like '%"+keyWord+"%' order by p.sendTime "+order);

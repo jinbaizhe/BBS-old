@@ -3,14 +3,15 @@ package serviceImpl;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 import service.MailService;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
+@Component("mailService")
 public class MailServiceImpl implements MailService {
     @Override
     public JavaMailSenderImpl createMailSender() {

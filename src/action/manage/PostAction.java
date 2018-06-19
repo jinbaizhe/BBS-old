@@ -1,10 +1,15 @@
 package action.manage;
 
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.PostService;
 import vo.Post;
-
+@Controller("managePostAction")
+@Scope("prototype")
 public class PostAction extends ActionSupport {
+    @Autowired
     private PostService postService;
     private int postid;
 

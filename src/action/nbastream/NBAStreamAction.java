@@ -1,18 +1,23 @@
 package action.nbastream;
 
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.NBAStreamService;
 import vo.Game;
 
 import java.util.List;
-
-public class NBAGameAction extends ActionSupport {
+@Controller("nbaStreamAction")
+@Scope("prototype")
+public class NBAStreamAction extends ActionSupport {
     private List games;
     private List gameLinks;
     private List old_games;
     private int page;
     private int gameid;
     private Game game;
+    @Autowired
     private NBAStreamService nbaStreamService;
 
     public NBAStreamService getNbaStreamService() {

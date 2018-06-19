@@ -3,13 +3,19 @@ package aop;
 import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.ServletActionContext;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import service.UserService;
 import vo.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
-
+@Component("superAdminAspect")
+@Aspect
 public class SuperAdminAspect {
+    @Autowired
     private UserService userService;
 
     public UserService getUserService() {
@@ -20,6 +26,7 @@ public class SuperAdminAspect {
         this.userService = userService;
     }
 
+    @Around("execution(* action.manage.*.*NeedSuperAdmin*(..))")
     public String around(ProceedingJoinPoint jp) throws Throwable
     {
         ActionContext context=ActionContext.getContext();

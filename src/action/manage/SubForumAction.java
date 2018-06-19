@@ -1,6 +1,9 @@
 package action.manage;
 
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.MainForumService;
 import service.SubForumService;
 import sun.applet.Main;
@@ -8,9 +11,12 @@ import vo.MainForum;
 import vo.SubForum;
 
 import java.util.List;
-
+@Controller("manageSubForumAction")
+@Scope("prototype")
 public class SubForumAction extends ActionSupport {
+    @Autowired
     private SubForumService subForumService;
+    @Autowired
     private MainForumService mainForumService;
     private int mfid;
     private int sfid;

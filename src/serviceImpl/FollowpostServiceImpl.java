@@ -2,21 +2,28 @@ package serviceImpl;
 
 import dao.FollowpostDAO;
 import dao.PictureDAO;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import service.FollowpostService;
 import util.Util;
 import vo.Followpost;
 import java.sql.Timestamp;
 import java.util.List;
 
+@Component("followpostService")
 public class FollowpostServiceImpl implements FollowpostService {
+    @Autowired
     private FollowpostDAO followpostDAO;
+    @Autowired
     private PictureDAO pictureDAO;
 
     public PictureDAO getPictureDAO() {
         return pictureDAO;
     }
+
 
     public void setPictureDAO(PictureDAO pictureDAO) {
         this.pictureDAO = pictureDAO;
@@ -25,6 +32,7 @@ public class FollowpostServiceImpl implements FollowpostService {
     public FollowpostDAO getFollowpostDAO() {
         return followpostDAO;
     }
+
 
     public void setFollowpostDAO(FollowpostDAO followpostDAO) {
         this.followpostDAO = followpostDAO;
@@ -42,63 +50,36 @@ public class FollowpostServiceImpl implements FollowpostService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void createFollowpost(Followpost followpost) {
         followpost.setSendTime(Timestamp.valueOf(Util.getCurrentDateTime()));
         followpost.setUpdateTime(Timestamp.valueOf(Util.getCurrentDateTime()));
-
-        Session session = followpostDAO.getSession();
-        session.beginTransaction();//事务开始
-        try{
-            followpostDAO.createFollowpost(followpost);
-            session.flush();
-            session.getTransaction().commit();//事务提交
-        }
-        catch (Exception e)
-        {
-            session.getTransaction().rollback();
-            throw e;
-        }
+        followpostDAO.createFollowpost(followpost);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void updateFollowpost(Followpost followpost) {
         Followpost temp_followpost=followpostDAO.getFollowpostById(followpost.getId());
         temp_followpost.setUpdateTime(Timestamp.valueOf(Util.getCurrentDateTime()));
         temp_followpost.setContent(followpost.getContent());
-        Session session=followpostDAO.getSession();
-        Transaction transaction=session.beginTransaction();
-        try{
-            followpostDAO.updateFollowpost(temp_followpost);
-            session.flush();
-            transaction.commit();
-        }catch (Exception e)
-        {
-            transaction.rollback();
-            throw e;
-        }
+        followpostDAO.updateFollowpost(temp_followpost);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void deleteFollowpost(Followpost followpost) {
-        Session session=followpostDAO.getSession();
-        Transaction transaction=session.beginTransaction();
-        try{
-            followpostDAO.deleteFollowpost(followpost);
-            session.flush();
-            transaction.commit();
-        }catch (Exception e)
-        {
-            transaction.rollback();
-            throw e;
-        }
+        followpostDAO.deleteFollowpost(followpost);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public int getFollowpostsNumByPostId(int postId) {
         return followpostDAO.getFollowpostsNumByPostId(postId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List getFollowpostsByUserId(int userid) {
         return followpostDAO.getFollowpostsByUserId(userid,"sendTime desc");
     }

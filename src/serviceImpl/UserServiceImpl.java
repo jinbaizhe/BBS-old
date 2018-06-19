@@ -2,16 +2,20 @@ package serviceImpl;
 
 import dao.CollectionDAO;
 import dao.UserDAO;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import service.UserService;
+import util.AESEncrypt;
 import util.Util;
 import vo.Collection;
 import vo.User;
-
 import java.sql.Timestamp;
 import java.util.List;
 
+@Component("userService")
 public class UserServiceImpl implements UserService {
     private UserDAO userDAO;
     private CollectionDAO collectionDAO;
@@ -20,6 +24,7 @@ public class UserServiceImpl implements UserService {
         return userDAO;
     }
 
+    @Autowired
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
@@ -28,72 +33,57 @@ public class UserServiceImpl implements UserService {
         return collectionDAO;
     }
 
+    @Autowired
     public void setCollectionDAO(CollectionDAO collectionDAO) {
         this.collectionDAO = collectionDAO;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User validateUser(String username, String password) {
         return userDAO.validateUser(username, password);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void createUser(User user) throws Exception {
+        if(userDAO.isExistUser(user.getUsername()))
+            throw new Exception("用户名已被注册");
         user.setLevel(0);
         user.setStatus(0);
         user.setType(0);
         user.setRegisterTime(Timestamp.valueOf(Util.getCurrentDateTime()));
-        String key= "1234567890abcdefghijklmnopqrstuvwxyz";
-        String value="";
-        for(int i=0;i<20;i++)
-            value+=key.charAt( (int)( Math.random()*key.length() ) );
+        String value=AESEncrypt.encrypt(user.getUsername()).substring(0,20);
         user.setActiveKey(value);
-        Session session=userDAO.getSession();
-        Transaction transaction=session.beginTransaction();
-        try{
-            if(userDAO.isExistUser(user.getUsername()))
-                throw new Exception("用户名已被注册");
-            userDAO.createUser(user);
-            session.flush();
-            transaction.commit();
-        }catch (Exception e)
-        {
-            transaction.rollback();
-            throw e;
-        }
+        userDAO.createUser(user);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void updateUser(User user) {
-        Session session=userDAO.getSession();
-        Transaction transaction=session.beginTransaction();
-        try{
-            userDAO.updateUser(user);
-            session.flush();
-            transaction.commit();
-        }catch (Exception e)
-        {
-            transaction.rollback();
-            throw e;
-        }
+        userDAO.updateUser(user);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean isExistUser(String username) {
         return userDAO.isExistUser(username);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List getAllUsersExceptSelf(User user,int currentPage,int totalItemsPerPage) {
         return userDAO.getAllUsersExceptSuperAdmin(user,currentPage,totalItemsPerPage);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public int getAllUsersNumExceptSelf(User user) {
         return userDAO.getAllUsersExceptSuperAdmin(user).size();
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void updateUserPassword(User user) {
         User temp_user=userDAO.getUser(user.getId());
         temp_user.setPassword(user.getPassword());
@@ -101,6 +91,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void updateUserInfo(User user) {
         User temp_user=userDAO.getUser(user.getId());
         if(!user.getEmail().equals(temp_user.getEmail()))
@@ -113,6 +104,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void setAdmin(int userid) {
         User temp_user=userDAO.getUser(userid);
         temp_user.setType(1);
@@ -120,6 +112,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void unsetAdmin(int userid) {
         User temp_user=userDAO.getUser(userid);
         temp_user.setType(0);
@@ -127,40 +120,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getUserByid(int userid) {
         return userDAO.getUser(userid);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List getCollectionsByUserId(int userid, int currentPage, int totalItemsPerPage, String order) {
         return collectionDAO.getCollectionsByUserId(userid,currentPage,totalItemsPerPage,order) ;
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void createCollection(Collection collection) {
-        Session session=userDAO.getSession();
-        Transaction transaction=session.beginTransaction();
         collectionDAO.createCollection(collection);
-        session.flush();
-        transaction.commit();
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void deleteCollection(int userid, int postid)
     {
-        Session session=userDAO.getSession();
-        Transaction transaction=session.beginTransaction();
         collectionDAO.deleteCollection(userid,postid);
-        session.flush();
-        transaction.commit();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Collection getCollection(int userid, int postid) {
         return collectionDAO.getCollection(userid,postid);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getUserByUsername(String username) {
         return userDAO.getUserByUsername(username);
     }

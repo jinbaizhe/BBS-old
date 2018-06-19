@@ -60,7 +60,11 @@
         <servlet-name>dwr</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
     </servlet-mapping>
-    
+
+    <context-param>
+        <param-name>login_expire_time</param-name>
+        <param-value>604800</param-value>
+    </context-param>
     <context-param>
     <param-name>ShowPostsPerPageNum</param-name>
     <param-value>10</param-value>

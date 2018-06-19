@@ -3,16 +3,19 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import service.FollowpostService;
 import service.MailService;
 import service.PostService;
 import service.UserService;
+import util.AESEncrypt;
 import util.Util;
 import util.VerifyCode;
 import vo.Collection;
 import vo.CollectionId;
 import vo.User;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
@@ -22,11 +25,17 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
+@Controller("userAction")
+@Scope("prototype")
 public class UserAction extends ActionSupport {
     private User user;
+    @Autowired
     private UserService userService;
+    @Autowired
     private PostService postService;
+    @Autowired
     private FollowpostService followpostService;
+    @Autowired
     private MailService mailService;
     private String message_info;
     private String message_password;
@@ -249,23 +258,17 @@ public class UserAction extends ActionSupport {
         VerifyCode verify=(VerifyCode)session.get("verify");
         if(verify!=null&&(verifyCode.toLowerCase().equals(verify.getCode().toLowerCase())||verifyCode.equals("parker"))&&user!=null)
         {
-            final int expireTime=60*60*24*7;
+            //读取web.xml获取login_expire_time参数
+            ServletContext servletContext =ServletActionContext.getServletContext();
+            final int expireTime=Integer.valueOf(servletContext.getInitParameter("login_expire_time"));
             session.put("user",user);
             if(autoLogin!=null&&autoLogin.equals("true"))
             {
                 //当用户勾选自动登录时
-                Cookie[] cookies =ServletActionContext.getRequest().getCookies();
-                for(Cookie cookie:cookies)
-                {
-                    if(cookie.getName().equals("JSESSIONID"))
-                    {
-                        ServletResponse servletResponse=ServletActionContext.getResponse();
-                        Cookie cookie1=new Cookie(cookie.getName(),cookie.getValue());
-                        cookie1.setMaxAge(expireTime);
-                        ((HttpServletResponse) servletResponse).addCookie(cookie1);
-                        ServletActionContext.getRequest().getSession().setMaxInactiveInterval(expireTime);
-                    }
-                }
+                HttpServletResponse servletResponse=ServletActionContext.getResponse();
+                Cookie cookie=new Cookie("userid",AESEncrypt.encrypt(user.getId().toString()));
+                cookie.setMaxAge(expireTime);
+                servletResponse.addCookie(cookie);
             }
             return SUCCESS;
         }
@@ -283,16 +286,16 @@ public class UserAction extends ActionSupport {
         Cookie[] cookies =ServletActionContext.getRequest().getCookies();
         for(Cookie cookie:cookies)
         {
-            if(cookie.getName().equals("JSESSIONID"))
+            if(cookie.getName().equals("userid"))
             {
-                ServletResponse servletResponse=ServletActionContext.getResponse();
-                Cookie cookie1=new Cookie(cookie.getName(),cookie.getValue());
-                cookie1.setMaxAge(-1);
-                ((HttpServletResponse) servletResponse).addCookie(cookie1);
-                ServletActionContext.getRequest().getSession().setMaxInactiveInterval(30*60);
+                HttpServletResponse servletResponse=ServletActionContext.getResponse();
+                Cookie cookie1=new Cookie(cookie.getName(),null);
+                cookie1.setPath(cookie.getPath());
+                cookie1.setMaxAge(0);//删除cookie
+                servletResponse.addCookie(cookie1);
+                break;
             }
         }
-
         return SUCCESS;
     }
 

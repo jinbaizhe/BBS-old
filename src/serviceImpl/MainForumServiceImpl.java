@@ -1,15 +1,18 @@
 package serviceImpl;
 
 import dao.MainForumDAO;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import service.MainForumService;
 import util.Util;
 import vo.MainForum;
-
 import java.sql.Timestamp;
 import java.util.List;
 
+@Component("mainForumService")
 public class MainForumServiceImpl implements MainForumService {
     private MainForumDAO mainForumDAO;
 
@@ -17,67 +20,42 @@ public class MainForumServiceImpl implements MainForumService {
         return mainForumDAO;
     }
 
+    @Autowired
     public void setMainForumDAO(MainForumDAO mainForumDAO) {
         this.mainForumDAO = mainForumDAO;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List getAllMainForums() {
         return mainForumDAO.getAllMainForums();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MainForum getMainForumById(int id) {
         return mainForumDAO.getMainForumById(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void addMainForum(MainForum mainForum) {
         mainForum.setCreateTime(Timestamp.valueOf(Util.getCurrentDateTime()));
-        Session session=mainForumDAO.getSession();
-        Transaction transaction=session.beginTransaction();
-        try{
-            mainForumDAO.addMainForum(mainForum);
-            session.flush();
-            transaction.commit();
-        }catch (Exception e)
-        {
-            transaction.rollback();
-            throw e;
-        }
+        mainForumDAO.addMainForum(mainForum);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void updateMainForum(MainForum mainForum) {
         MainForum temp_mainForum=getMainForumById(mainForum.getId());
         temp_mainForum.setName(mainForum.getName());
         temp_mainForum.setInfo(mainForum.getInfo());
-
-        Session session=mainForumDAO.getSession();
-        Transaction transaction=session.beginTransaction();
-        try{
-            mainForumDAO.updateMainForum(temp_mainForum);
-            session.flush();
-            transaction.commit();
-        }catch (Exception e)
-        {
-            transaction.rollback();
-            throw e;
-        }
+        mainForumDAO.updateMainForum(temp_mainForum);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void deleteMainForum(MainForum mainForum) {
-        Session session=mainForumDAO.getSession();
-        Transaction transaction=session.beginTransaction();
-        try{
-            mainForumDAO.deleteMainForum(mainForum);
-            session.flush();
-            transaction.commit();
-        }catch (Exception e)
-        {
-            transaction.rollback();
-            throw e;
-        }
+        mainForumDAO.deleteMainForum(mainForum);
     }
 }

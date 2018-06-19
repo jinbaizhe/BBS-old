@@ -4,14 +4,19 @@ import dao.BaseDAO;
 import dao.MainForumDAO;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import util.Util;
 import vo.MainForum;
-
 import java.sql.Timestamp;
 import java.util.List;
 
+@Repository("mainForumDAO")
 public class MainForumDAOImpl extends BaseDAO<MainForum> implements MainForumDAO {
     @Override
+    @Transactional(readOnly = true)
     public List getAllMainForums() {
         Session session=getSession();
         String sql="from MainForum mf order by mf.subForums.size desc";
@@ -22,6 +27,7 @@ public class MainForumDAOImpl extends BaseDAO<MainForum> implements MainForumDAO
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MainForum getMainForumById(int id) {
         Session session=getSession();
         String sql="from MainForum mf where mf.id=?";
@@ -36,17 +42,20 @@ public class MainForumDAOImpl extends BaseDAO<MainForum> implements MainForumDAO
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void addMainForum(MainForum mainForum) {
         mainForum.setCreateTime(Timestamp.valueOf(Util.getCurrentDateTime()));
         create(mainForum);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void updateMainForum(MainForum mainForum) {
         update(mainForum);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.READ_COMMITTED)
     public void deleteMainForum(MainForum mainForum) {
         delete(mainForum);
     }

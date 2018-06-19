@@ -40,6 +40,12 @@
                 <div class="my-sm-5">
                     <h3>历史更新</h3>
                     <div class="my-sm-3" style="text-align: left">
+                        <h5>版本：0.4.0</h5>
+                        <ol>
+                            <li>改用注解配置方式</li>
+                        </ol>
+                    </div>
+                    <div class="my-sm-3" style="text-align: left">
                         <h5>版本：0.3.3</h5>
                         <ol>
                             <li>调整NBA直播页面的显示效果。</li>
