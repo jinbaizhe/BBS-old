@@ -2,6 +2,27 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="topicContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer" destroy-method="destroy">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <property name="taskExecutor">
+            <bean class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+                <property name="corePoolSize" value="3"></property>
+            </bean>
+        </property>
+        <!--消息监听Map-->
+        <property name="messageListeners">
+            <map>
+                <entry key-ref="redisMsgListener">
+                    <bean class="org.springframework.data.redis.listener.ChannelTopic">
+                        <constructor-arg value="chat"></constructor-arg>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="redisMsgListener" class="test.RedisMessageListener">
+        <property name="redisTemplate" ref="redisTemplate"></property>
+    </bean>
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxIdle" value="50"></property>
         <property name="maxTotal" value="100"></property>
@@ -20,4 +41,5 @@
         <property name="keySerializer" ref="stringRedisSerializer"></property>
         <property name="valueSerializer" ref="jdkSerializationRedisSerializer"></property>
     </bean>
+
 </beans>

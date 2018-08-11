@@ -262,14 +262,14 @@ public class UserAction extends ActionSupport {
             ServletContext servletContext =ServletActionContext.getServletContext();
             final int expireTime=Integer.valueOf(servletContext.getInitParameter("login_expire_time"));
             session.put("user",user);
+            HttpServletResponse servletResponse=ServletActionContext.getResponse();
+            Cookie cookie=new Cookie("userid",AESEncrypt.encrypt(user.getId().toString()));
             if(autoLogin!=null&&autoLogin.equals("true"))
             {
                 //当用户勾选自动登录时
-                HttpServletResponse servletResponse=ServletActionContext.getResponse();
-                Cookie cookie=new Cookie("userid",AESEncrypt.encrypt(user.getId().toString()));
                 cookie.setMaxAge(expireTime);
-                servletResponse.addCookie(cookie);
             }
+            servletResponse.addCookie(cookie);
             return SUCCESS;
         }
         else{
@@ -282,7 +282,6 @@ public class UserAction extends ActionSupport {
     {
         Map session = ActionContext.getContext().getSession();
         session.remove("user");
-
         Cookie[] cookies =ServletActionContext.getRequest().getCookies();
         for(Cookie cookie:cookies)
         {

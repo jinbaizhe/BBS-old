@@ -45,6 +45,9 @@ public class LoginAspect {
             {
                 int userid=Integer.valueOf(AESEncrypt.decrypt(cookie.getValue()));
                 user=userService.getUserByid(userid);
+                if (cookie.getMaxAge()==-1){
+                    break;
+                }
                 HttpServletResponse servletResponse=ServletActionContext.getResponse();
                 Cookie cookie1=new Cookie(cookie.getName(),cookie.getValue());
                 cookie1.setPath(cookie.getPath());

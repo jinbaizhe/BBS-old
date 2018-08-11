@@ -68,7 +68,7 @@
     </bean>
 
     <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
-    <context:component-scan base-package="daoImpl,serviceImpl,action,aop"></context:component-scan>
+    <context:component-scan base-package="daoImpl,serviceImpl,action,aop,test"></context:component-scan>
     <import resource="applicationContext-Redis.xml"/>
 
     <!-- 配置事务管理器 -->

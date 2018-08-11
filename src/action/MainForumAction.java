@@ -1,5 +1,6 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -61,6 +62,7 @@ public class MainForumAction extends ActionSupport {
 
     public String browserMainForum()
     {
+        Map session = ActionContext.getContext().getSession();
         if(mfid!=0)
         {
             mainForumMap.put(mainForumService.getMainForumById(mfid),subForumService.getSubForumsByMainForumId(mfid));
